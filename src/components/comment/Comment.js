@@ -4,11 +4,13 @@ import './Comment.css'
 
 import {Rate,Input} from 'antd'
 import axios from 'axios';
+import { useHistory } from 'react-router'
 const { TextArea } = Input;
 
 const desc = ['非常不满意', '不满意', '基本满意', '满意', '非常满意'];
 
 export default function Comment() {  
+  const history = useHistory()
   const [starValue, setStarValue] = useState(3)
   const [comment, setComment] = useState('')
   const [display, setDisplay] = useState('none')
@@ -24,7 +26,7 @@ export default function Comment() {
     setComment(e.target.value)
   }
   const commit = ()=>{
-    axios.post('http://localhost:5000/api/comment',{
+    axios.post('/api/comment',{
       idc:'320425200107050375',
       show_status:0,
       check_status:0,
@@ -32,6 +34,9 @@ export default function Comment() {
       idc_type:'居民身份证',
       score:starValue,
       item_id:'430425200107050375X51564654'
+    }).then(res=>{
+      console.log(res);
+      history.push('/testRate')
     })
   }
   return (
