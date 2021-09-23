@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# sxzx-qt
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 开始写代码前的准备
 
-## Available Scripts
+### 1. 克隆仓库并进入项目文件夹
 
-In the project directory, you can run:
+```shell
+git clone git@github.com:xxih/2021sxzx-qt.git
+cd vote-fe
+```
 
-### `npm start`
+### 2. 确保当前分支是dev分支
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```shell
+git branch          # -> *指向的就是当前分支
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# 若不为dev分支
+git checkout dev
+```
 
-### `npm test`
+### 3. 安装依赖（后续如果有人安装新模块也要重新install）
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```shell
+npm install         # -> 可以简写成npm i
+```
 
-### `npm run build`
+### 4. 目录结构
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```shell
+# vote-fe
+├─node_modules/   # 模块
+├─package.json    # 配置文件
+├─package-lock.json # 配置文件
+├─public/         # html
+└─src/
+    ├─assets/           # 图片等静态文件放在这里
+    ├─components/       # 公共组件放在这里
+    ├─router/IndexRouter.js   # Router文件
+    ├─views/            # 页面文件 主要在这里写代码
+    ├─setupProxy.js   #开发过程代理配置
+    ├─App.css         #全局样式
+    ├─App.js
+    ├─App.js           # 根组件
+    └─index.js           # 入口js文件
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 5. 开始写代码
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. 把项目跑起来。
 
-### `npm run eject`
+```shell
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+2. 自己的页面在`src/views`里面创建对应的组件，创建方法为以下二选一：
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. 创建一个文件夹，用来存放你这个页面的所有组件，假设你现在要写首页，那么你可以创建一个`home`文件夹，里面放入`Home.vue`作为页面组件，页面中用的子组件可以放在这个`home`的文件夹中。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```shell
+   # 目录结构参考
+   └─src/
+       ├─views/
+       └─home/             # 文件夹名用小写开头的驼峰式命名，组件名用大写开头的驼峰式命名。
+           ├─Home.vue      # 页面父组件
+           ├─Banner.vue    # 子组件
+   ```
 
-### Code Splitting
+2. （不推荐）如果你的这个页面只有一个组件，页面内不包含其他子组件，你可以直接创建一个**单文件组件**，即`.vue`文件，以这个组件作为`vue-router`指向的组件。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   ```shell
+   # 目录结构参考
+   └─src/
+       ├─views/
+       ├─Home.vue  # 无其他子组件可考虑用此结构
+   ```
 
-### Analyzing the Bundle Size
+1. 自己的页面组件创建完，要配置好`vue-router`才能看到页面，从而进行调试。配置文件即[`src/router/index.js`](https://git.100steps.top/100steps/vote-fe/src/branch/master/src/router/index.js)，在文件开头`import`对应的组件，然后把对象添加到`routes`那个数组，这样就可以通过`url`去调试你的组件。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   > 像根目录`/`这种可能在初始化项目的时候，项目模版中帮你写好了，你可以直接修改模版中的组件成你的组件。
 
-### Making a Progressive Web App
+### 6. 代码提交
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. add
 
-### Advanced Configuration
+   ```shell
+   # 把所有更改的文件都添加到暂存区
+   git add .
+       
+   # 如果只想把某些文件加入，可以指定对应文件，如：
+   git add src/main.js src/App.vue
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+2. commit
 
-### Deployment
+   ```shell
+   # 写清楚你这次更新的内容，如：
+   git commit -m "添加了主页面"
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+3. push
 
-### `npm run build` fails to minify
+   ```shell
+   # 提交到dev分支
+   git push origin dev
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 风格规范
+
+1. 把组件命名为多个单词，避免元素相冲突。
+
