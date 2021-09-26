@@ -26,9 +26,6 @@
   color: initial;
   font-weight: 500;
 }
-.leftColumns{
-  
-}
 .rightColumns{
   display: flex;
   flex-direction: column;

@@ -6,7 +6,6 @@
 
 ```shell
 git clone git@github.com:xxih/2021sxzx-qt.git
-cd vote-fe
 ```
 
 ### 2. 确保当前分支是dev分支
@@ -51,10 +50,6 @@ npm install         # -> 可以简写成npm i
 ```shell
 npm start
 ```
-
-
-
-
 
 2. 自己的页面在`src/views`里面创建对应的组件，创建方法为以下二选一：
 

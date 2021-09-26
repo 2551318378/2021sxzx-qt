@@ -36,7 +36,7 @@ export default function Comment() {
       item_id:'430425200107050375X51564654'
     }).then(res=>{
       console.log(res);
-      history.push('/testRate')
+      history.push('/ratePage')
     })
   }
   return (
