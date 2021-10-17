@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const devUrl = '/api' 
-const testUrl = 'localhost:5001' 
+const devUrl = 'http://localhost:5001' 
+const testUrl = 'http://8.134.73.52:5001' 
 
 let instance = axios.create({timeout:1000*12})
 instance.defaults.headers.post['Content-Type']='application/x-www-form-urlencoded'
