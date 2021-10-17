@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import style from './CommentDetail.module.css'
 import {  Comment, Tooltip, Rate  } from 'antd';
 import moment from 'moment';
-import axios from 'axios';
+import axios from '../../utils/http'
 
 
 export default function CommentDetail(props) {

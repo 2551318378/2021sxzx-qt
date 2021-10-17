@@ -1,9 +1,9 @@
 import React from 'react'
 import CommentReport from './components/comment-report/CommentReport'
 import CommentDetail from './components/comment-detail/CommentDetail'
-import './RatePage.css'
+import style from './RatePage.module.css'
 import { useEffect, useState } from 'react/cjs/react.development'
-import axios from 'axios'
+import axios from '../../utils/http'
 
 export default function RatePage() {
   const [commentInfo, setCommentInfo] = useState({})
@@ -25,7 +25,7 @@ export default function RatePage() {
     getCommentInfo()
   },[])
   return (
-    <div className='testRateContainer'>
+    <div className={style.rateContainer}>
       <CommentReport commentInfo={commentInfo}/>
       <CommentDetail commentInfo={commentInfo}></CommentDetail>
     </div>

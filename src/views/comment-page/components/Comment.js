@@ -3,7 +3,7 @@ import style from './Comment.module.css'
 import './Comment.css'
 
 import {Rate,Input} from 'antd'
-import axios from 'axios';
+import axios from '../../utils/http'
 import { useHistory } from 'react-router'
 const { TextArea } = Input;
 
