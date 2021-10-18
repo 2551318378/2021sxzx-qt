@@ -1,8 +1,7 @@
-import React from 'react'
+import React,{ useEffect, useState } from 'react'
 import CommentReport from './components/comment-report/CommentReport'
 import CommentDetail from './components/comment-detail/CommentDetail'
 import style from './RatePage.module.css'
-import { useEffect, useState } from 'react/cjs/react.development'
 import axios from '../../utils/http'
 
 export default function RatePage() {
