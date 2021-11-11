@@ -39,7 +39,8 @@ export default function CommentDetail(props) {
   }
 
   function renderComments(items){
-    return items.map((item)=>{return <Comment
+    return items.map((item)=>{
+      return <Comment
       key={item._id}
       author={<div>Han Solo</div>}
       content={
@@ -50,7 +51,7 @@ export default function CommentDetail(props) {
       }
       datetime={
         <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-          <span>{moment().fromNow()}</span>
+          <span>{moment(parseInt(item.create_time)).fromNow()}</span>
         </Tooltip>
       }
     />
