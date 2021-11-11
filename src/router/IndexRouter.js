@@ -1,8 +1,8 @@
 import React from 'react'
 import {HashRouter,Redirect,Route,Switch} from 'react-router-dom'
-import Login from '../views/login/Login'
-import CommentPage from '../views/comment-page/CommentPage'
-import RatePage from '../views/rate-page/RatePage.js'
+import Login from '../views/LoginPage/Login.js'
+import CommentPage from '../views/CommentPage/CommentPage.js'
+import RatePage from '../views/RatePage/RatePage.js'
 
 export default function IndexRouter() {
   return (
@@ -11,11 +11,7 @@ export default function IndexRouter() {
         <Route path='/login' component={Login}></Route>
         <Route path='/commentPage' component={CommentPage}></Route>
         <Route path='/ratePage' component={RatePage}></Route>
-        <Route path='/' render={()=>
-          localStorage.getItem("token")?
-          <CommentPage></CommentPage>:
-          <Redirect to="/login"></Redirect>
-        }>
+        <Route path='/' component={CommentPage}>
         </Route>
       </Switch>
     </HashRouter>

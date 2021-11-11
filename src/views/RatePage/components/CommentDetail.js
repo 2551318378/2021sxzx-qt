@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import style from './CommentDetail.module.css'
+import style from './CommentDetail.module.scss'
 import {  Comment, Tooltip, Rate  } from 'antd';
 import moment from 'moment';
-import axios from '../../../../utils/http'
+import axios from '../../../http/http'
 
-
+//这个组件是评价页面下方的评价评价列表
 export default function CommentDetail(props) {
+  //这里存放所有评论
   let [allComment,setAllComment] = useState([])
+  //对评论进行筛选
   let [renderedComments,setRenderedComment] = useState([])
+  //选择了哪些评论，0代表全部，1代表非常满意，对应score为5。以此类推
   let [chosenRadio,setChosenRadio] = useState(0)
 
   useEffect(()=>{
     async function getAllComment(){
-      let {data:{data:allComment}} = await axios.get('/api/allcomment')
+      let {data:{data:allComment}} = await axios.get('/allcomment')
       console.log(allComment);
       setAllComment(allComment)
     }
@@ -25,7 +28,6 @@ export default function CommentDetail(props) {
     }
     else{
       setRenderedComment(allComment.filter((item)=>{
-        console.log(parseInt(item.score)+chosenRadio);
         return (parseInt(item.score)+chosenRadio)===6
       }))
     }
@@ -42,7 +44,7 @@ export default function CommentDetail(props) {
       author={<div>Han Solo</div>}
       content={
         (<div>
-          <Rate value={item.score}></Rate>
+          <Rate disabled value={item.score} ></Rate>
           <p>{item.content}</p>
         </div>)
       }

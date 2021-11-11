@@ -1,6 +1,6 @@
 import { Rate } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
-import style from './CommentReport.module.css'
+import style from './CommentReport.module.scss'
 import * as echarts from 'echarts'
 
 
