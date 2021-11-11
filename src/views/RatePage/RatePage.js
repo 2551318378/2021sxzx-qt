@@ -1,14 +1,16 @@
-import React,{ useEffect, useState } from 'react'
-import CommentReport from './components/comment-report/CommentReport'
-import CommentDetail from './components/comment-detail/CommentDetail'
-import style from './RatePage.module.css'
-import axios from '../../utils/http'
+
+import React from 'react'
+import CommentReport from './components/CommentReport'
+import CommentDetail from './components/CommentDetail'
+import style from './RatePage.module.scss'
+import { useEffect, useState } from 'react/cjs/react.development'
+import axios from '../../http/http'
 
 export default function RatePage() {
   const [commentInfo, setCommentInfo] = useState({})
   useEffect(()=>{
     async function getCommentInfo(){
-      let {data:{data}} = await axios.get('/api/commentparam')
+      let {data:{data}} = await axios.get('/commentparam')
       let scoreInfo = [0,0,0,0,0]
       data.scoreInfo?.forEach((item)=>{
         scoreInfo[parseInt(item.score)-1]=item.count
@@ -19,8 +21,8 @@ export default function RatePage() {
       data.scoreInfo = scoreInfo
       data.scoreInfoRemain = scoreInfoRemain
       setCommentInfo(data)
-      console.log(data);
     }
+
     getCommentInfo()
   },[])
   return (
