@@ -44,7 +44,7 @@ export default function CommentDetail(props) {
       author={<div>Han Solo</div>}
       content={
         (<div>
-          <Rate disabled value={item.score} ></Rate>
+          <Rate className={style.rate} disabled value={item.score} ></Rate>
           <p>{item.content}</p>
         </div>)
       }

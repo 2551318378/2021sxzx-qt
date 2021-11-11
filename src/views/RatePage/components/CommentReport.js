@@ -71,7 +71,7 @@ export default function CommentReport(props) {
         <div className={style.title}>办事指南评分</div>
         <div className={style.rateContainer}>
           <div className={style.score}>{(Math.round(chartData.avgScore*10)/10).toString()}</div>
-          <div className={style.stars}><Rate disabled value={(Math.round(chartData.avgScore*10)/10).toString()}></Rate></div>
+          <div className={style.stars}><Rate className={style.rate} disabled value={(Math.round(chartData.avgScore*10)/10).toString()}></Rate></div>
         </div>
       </div>
       <div className={style.rightColumns}>
