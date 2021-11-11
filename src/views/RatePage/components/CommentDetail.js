@@ -15,7 +15,7 @@ export default function CommentDetail(props) {
 
   useEffect(()=>{
     async function getAllComment(){
-      let {data:{data:allComment}} = await axios.get('/allcomment')
+      let {data:{data:allComment}} = await axios.get('/allcomment2')
       console.log(allComment);
       setAllComment(allComment)
     }
