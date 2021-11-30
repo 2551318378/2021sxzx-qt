@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import style from './Comment.module.scss'
 
-import {Rate,Input} from 'antd'
+import {Rate,Input,message} from 'antd'
 import axios from '../../../http/http'
 import { useHistory } from 'react-router'
 const { TextArea } = Input;
@@ -10,7 +10,7 @@ const desc = ['非常不满意', '不满意', '基本满意', '满意', '非常�
 
 export default function Comment() {  
   const history = useHistory()
-  const [starValue, setStarValue] = useState(3)
+  const [starValue, setStarValue] = useState(5)
   const [comment, setComment] = useState('')
   const [display, setDisplay] = useState('none')
 
@@ -25,6 +25,8 @@ export default function Comment() {
     setComment(e.target.value)
   }
   const commit = ()=>{
+    if(comment.length>=10){
+      // console.log(comment.length>=10);
     axios.post('/comment',{
       idc:'320425200107050375',
       show_status:0,
@@ -37,6 +39,10 @@ export default function Comment() {
       console.log(res);
       history.push('/ratePage')
     })
+    }
+    else{
+      message.error('评论不能少于10个字哦')
+    }
   }
   return (
     <div className={style.container}>
@@ -46,7 +52,11 @@ export default function Comment() {
         {starValue ? <span className={style.antRateText}>{desc[starValue - 1]}</span> : ''}</div>
         <div className={style.btn} onClick={handleDisplay}>我要评议</div>
       </div>
-      <TextArea className={style.textArea} rows={6} style={{display:`${display}`}} onChange={updateComment}/>
+      <TextArea className={style.textArea} 
+        rows={6} 
+        placeholder="请描述问题或建议，帮助我们做得更好（不少于10个字，不多于200个字）" 
+        minLength={10} maxLength={200} showCount
+        style={{display:`${display}`}} onChange={updateComment}/>
       <div className={style.tips}>温馨提示：该评议只对办事指南内容是否规范、准确、清晰、合理等方面进行评议。</div>
       <div className={`${style.btn} ${style.commit}`} onClick={commit}>提交</div>
     </div>
