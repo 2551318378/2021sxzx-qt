@@ -50,7 +50,7 @@ export default function CommentDetail(props) {
         </div>)
       }
       datetime={
-        <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
+        <Tooltip title={moment(parseInt(item.create_time)).format('YYYY-MM-DD HH:mm:ss')}>
           <span>{moment(parseInt(item.create_time)).fromNow()}</span>
         </Tooltip>
       }
