@@ -23,4 +23,4 @@ jobs:
         pass: ${{ secrets.DEV_PASS }}
         connect_timeout: 10s
         local: './build/*'
-        remote: /www/wwwroot/oak/build
+        remote: /www/wwwroot/http/sxzx-qt
