@@ -1,12 +1,12 @@
-
 import React from 'react'
-import CommentReport from './components/CommentReport'
-import CommentDetail from './components/CommentDetail'
-import style from './RatePage.module.scss'
 import { useEffect, useState } from 'react'
-import axios from '../../http/http'
 
-export default function RatePage() {
+import style from './Rate.module.scss'
+import RateReport from './RateReport'
+import RateDetail from './RateDetail'
+import axios from '../../../../http/http'
+
+export default function CommentPage() {
   const [commentInfo, setCommentInfo] = useState({})
   useEffect(()=>{
     async function getCommentInfo(){
@@ -27,8 +27,8 @@ export default function RatePage() {
   },[])
   return (
     <div className={style.rateContainer}>
-      <CommentReport commentInfo={commentInfo}/>
-      <CommentDetail commentInfo={commentInfo}></CommentDetail>
+      <RateReport commentInfo={commentInfo}></RateReport>
+      <RateDetail commentInfo={commentInfo}></RateDetail>
     </div>
   )
 }

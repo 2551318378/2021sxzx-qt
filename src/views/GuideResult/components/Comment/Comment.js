@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import style from './Comment.module.scss'
 
 import {Rate,Input,message} from 'antd'
-import axios from '../../../http/http'
+import axios from '../../../../http/http'
 import { useHistory } from 'react-router'
 const { TextArea } = Input;
 
