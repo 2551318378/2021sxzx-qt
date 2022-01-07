@@ -38,6 +38,7 @@ export default function Comment() {
     setComment(e.target.value)
   }
   const commit = ()=>{
+    if(comment.length>=10){
       axios.post('/v1/comment',{
         idc:'320425200107050375',
         show_status:0,
@@ -55,6 +56,10 @@ export default function Comment() {
       .catch((res)=>{
         console.log(res);
       })
+    }
+    else{
+      message.error('评论不能少于10个字哦')
+    }
   }
 
   const fillTest = (e)=>{
