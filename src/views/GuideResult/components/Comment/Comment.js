@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useRef} from 'react'
 import { useHistory } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {Rate,Input,message,Tag} from 'antd'
 
 import style from './Comment.module.scss'
@@ -11,9 +11,7 @@ const { TextArea } = Input;
 const desc = ['非常不满意', '不满意', '基本满意', '满意', '非常满意'];
 
 export default function Comment() {  
-  const history = useHistory()
   const dispatch = useDispatch()
-  const textArea = useRef()
 
   const [starValue, setStarValue] = useState(5)
   const [comment, setComment] = useState('')
@@ -51,6 +49,8 @@ export default function Comment() {
       }).then(res=>{
         message.success('评论提交成功！')
         dispatch({type:'UPDATE'})
+        setComment('')
+        setStarValue(5)
       })
       .catch((res)=>{
         console.log(res);
@@ -59,7 +59,7 @@ export default function Comment() {
 
   const fillTest = (e)=>{
     e.preventDefault()
-    textArea.current.resizableTextArea.textArea.value += e.target.innerText
+    setComment(comment+e.target.innerText)
   }
   return (
     <div className={style.container}>
@@ -80,7 +80,7 @@ export default function Comment() {
             }
           </div>
           <TextArea 
-            ref={textArea}
+            value={comment}
             className={style.textArea} 
             rows={6} 
             placeholder="请描述问题或建议，帮助我们做得更好（不少于10个字，不多于200个字）" 
