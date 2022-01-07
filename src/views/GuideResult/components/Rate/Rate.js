@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import style from './Rate.module.scss'
 import RateReport from './RateReport'
@@ -8,6 +9,8 @@ import axios from '../../../../http/http'
 
 export default function CommentPage() {
   const [commentInfo, setCommentInfo] = useState({})
+  const update = useSelector(state => state.comment)
+
   useEffect(()=>{
     async function getCommentInfo(){
       let {data:{data}} = await axios.get('/v1/commentParam')
@@ -24,7 +27,8 @@ export default function CommentPage() {
     }
 
     getCommentInfo()
-  },[])
+    console.log(1);
+  },[update])
   return (
     <div className={style.rateContainer}>
       <RateReport commentInfo={commentInfo}></RateReport>

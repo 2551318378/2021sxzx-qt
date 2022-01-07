@@ -4,6 +4,7 @@ import Rate from './components/Rate/Rate'
 import style from './GuideResult.module.scss'
 import axios from '../../http/http'
 
+
 export default function CommentPage() {
   return (
     <div className={style.testContainer}>
