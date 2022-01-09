@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import {Rate,Input,message,Tag} from 'antd'
 
 import style from './Comment.module.scss'
-import axios from '../../../../http/http'
+import axios from '../../../../api/http'
 
 const { TextArea } = Input;
 
