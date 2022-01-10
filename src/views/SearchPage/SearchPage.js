@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import axios from "../../http/http";
+// import axios from "../../http/http";
 import style from "../SearchPage/SearchPage.module.scss";
 import SearchItem from "./components/SearchItem";
 import HotList from "./components/HotList";
@@ -11,7 +11,7 @@ import {
 
 
 } from 'antd';
-import {GetHotList, GetSearchRes, GetSearchWord} from "../../http/searchApi";
+import {GetHotList, GetSearchRes, GetSearchWord} from "../../api/searchApi";
 const { Option } = Select;
 const sortOptions = [
     { label: '智能排序', value: 'score' },
