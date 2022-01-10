@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import IndexRouter from './router/IndexRouter';
 
 function App() {
