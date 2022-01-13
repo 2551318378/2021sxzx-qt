@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './Searchbar.module.scss'
-import Logo from '../../../../assets/logo.png'
-import SearchBtn from '../../../../assets/placeholder.png'
+import Logo from '../../../assets/logo.png'
+import SearchBtn from '../../../assets/placeholder.png'
 
 export default function Searchbar() {
     return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './Footerinfo.module.scss'
-import QRcode from '../../../../assets/placeholder.png'
+import QRcode from '../../../assets/placeholder.png'
 
 export default function Footerinfo() {
     return (
