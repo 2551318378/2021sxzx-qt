@@ -1,4 +1,4 @@
-import service from "./http";
+import service from "./http-search";
 
 export function GetSearchRes(data) {
     return service.request({
