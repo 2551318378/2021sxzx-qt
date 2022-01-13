@@ -4,6 +4,7 @@ import Maincontent from './components/Maincontent/Maincontent'
 import Footerinfo from '../components/Footerinfo/Footerinfo'
 import style from './HomePage.module.scss'
 
+
 export default function Home() {
     return (
       <div className={style.container}>
