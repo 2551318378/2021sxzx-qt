@@ -3,25 +3,25 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin: 15px;
+  margin-left: 15px;
   padding: 20px 100px;
-}
 
-.title{
-  text-align: center;
-  font-weight: 400;
-  font-size: 20px;
-}
-.wordList{
-  font-size: 16px;
-  color: #555555;
+  .title{
+    text-align: center;
+    font-weight: 400;
+    font-size: 20px;
+  }
 
-
-}
-
-.wordList .wordItem{
-  margin: 10px 0;
-  cursor: pointer;
-
+  .wordList{
+    font-size: 16px;
+    color: #555555;
+    margin: 10px 0;
+    .wordList .wordItem{
+      margin: 10px 0;
+      cursor: pointer;
+    }
+  }
 
 }
+
+

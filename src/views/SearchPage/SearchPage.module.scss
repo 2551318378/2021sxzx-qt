@@ -2,36 +2,53 @@
 .SearchPageContainer{
   background-color: rgba(223, 234, 247, 1);
   width: 100%;
+  padding-left: 200px;
+  padding-right: 200px;
   display: flex;
 
   flex-direction: column;
-  align-items: center;
   margin: 0 auto;
-}
 
-.searchOptionContainer{
-  font-size: 200px;
-  display: flex;
+  .inputGroup{
+    margin-top: 30px;
+    width: 100%;
+    align-self: center;
+    max-lines: 1;
+    margin-bottom: 10px;
+    .inputTitle{
+      width: 10%;
+      font-size: 1.4em;
+      height: 40px;
+      line-height: 40px;
+    }
+    .autoComplete{
+      width: 75%;
+    }
+    .inputButton{
+      width: 15%;
+      border-top-right-radius: 25px;
+      border-end-end-radius: 25px;
+    }
+  }
+  .searchOptionContainer{
+    flex-direction: column;
+    padding: percentage($number: 0.01);
+
+    .searchOption{
+      width: percentage($number: 1.5);
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
   
-  flex-direction: column;
-  align-items: flex-start;
-  padding: percentage($number: 0.01);
-}
 
-.searchOption{
-  font-size: 200px;
-  display: flex;
   
-  flex-direction: row;
-  align-items: flex-start;
-  width: percentage($number: 1.5);
-  height: percentage($number: 1);
-  padding: percentage($number: 0.01);
-}
-
-.mainContainer{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  // padding: percentage($number: 0.01);
+  .mainContainer{
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 10px;
+    // padding: percentage($number: 0.01);
+  }
 }

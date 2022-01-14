@@ -4,13 +4,9 @@ import style from "../SearchPage/SearchPage.module.scss";
 import SearchItem from "./components/SearchItem";
 import HotList from "./components/HotList";
 import {
-    Input,
-    Radio,
-    Select,
-    AutoComplete, Button,
-
-
+    Input, Radio, Select, AutoComplete, Button,
 } from 'antd';
+
 import {GetHotList, GetSearchRes, GetSearchWord} from "../../api/searchApi";
 const { Option } = Select;
 const sortOptions = [
@@ -143,17 +139,17 @@ export default function SearchPage() {
 
         <div className={style.SearchPageContainer}>
 
-            <Input.Group compact>
-                <span>全站搜索:</span>
+            <Input.Group compact className={style.inputGroup}>
+                <span className={style.inputTitle}>全站搜索:</span>
                 <AutoComplete
-                    style={{ width: '70%' }}
+                    className={style.autoComplete}
                     placeholder="Email"
                     options={keywordList}
                     size="large"
                     onChange={inputOnChange}
                     value={inputValue}
                 />
-                <Button size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
+                <Button className={style.inputButton} size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
             </Input.Group>
             <div className={style.searchOptionContainer}>
                 <Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
@@ -164,20 +160,17 @@ export default function SearchPage() {
                              buttonStyle="solid" className={style.searchOption}/>
             </div>
             <div className={style.mainContainer}>
-                <div className="searchListContainer">
+                <div className={style.searchListContainer}>
                     {searchList.map((item)=>{
                         return(
                             <SearchItem content={item.material} link={item.link} title={item.title}></SearchItem>
                         )
                     })}
                 </div>
-                <div className="hotListContainer">
+                <div className={style.hotListContainer}>
                     <HotList wordList={hotList} handler={handleHotList}></HotList>
                 </div>
             </div>
-
-
-
         </div>
     )
 }

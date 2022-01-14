@@ -2,17 +2,17 @@
   background-color: white;
   border-radius: 10px;
   padding: 20px;
-  margin: 15px;
+  margin-bottom: 20px;
   width: 700px;
-}
-.title{
-  font-size: 20px;
-  font-color: #027DB4;
-  font-weight: 700;
+  .title{
+    font-size: 20px;
+    color: #027DB4;
+    font-weight: 700;
+  }
+  .content{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
 }
 
-.content{
-  overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
-}
