@@ -6,11 +6,16 @@ $theme_color: #0D349A;
 input {
     outline: none;
 }
+a {
+    color: black;
+    text-decoration: none;
+}
 .container { 
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     align-items: center; 
+    justify-content: space-between;
     .searchbox {
         position: relative;  
         .searchbtn {
@@ -21,21 +26,45 @@ input {
 @media screen and (min-width: 401px) {
     .container {
         height: 53px;
+        width: 1320px;
         .logo {
             height: 50px;
-            margin-left: 109px;
         }
         .homepage, .consultmenu, .provservice {
             font-size: $font_size;
-            padding: 0 70px;
-            margin: 0 15px;
+            padding: 0 50px;
+            cursor: pointer;
         }
         .homepage:hover, .consultmenu:hover, .provservice:hover {
             color: $theme_color;
             font-weight: bold;
         }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            .menu {
+                display: none;
+                position: absolute;
+                width: 172px;
+                padding-top: 10px;
+                text-align: center;
+                background-color: white;
+                p {
+                    font-size: 18px;
+                    margin-bottom: 0;
+                    padding: 10px 0;
+                    cursor: pointer;
+                }
+                p:hover {
+                    font-weight: bold;
+                    color: $theme_color;
+                }
+            }
+        }
+        .dropdown:hover .menu {
+            display: block;
+        }
         .searchbox {
-            margin-left: 90px;
             .searchinput {
                 width: 292px;
                 height: 40px;
@@ -47,6 +76,7 @@ input {
                 width: 27px;
                 right: 20px;
                 top: 7.5px;
+                cursor: pointer;
             }
         }
     }
@@ -55,15 +85,14 @@ input {
 @media screen and (max-width: 400px) {
     .container {
         height: 46px;
+        width: 355px;
         .logo {
             height: 29px;
-            margin-left: 10px;
         }
-        .homepage, .consultmenu, .provservice {
+        .homepage, .dropdown, .provservice {
             display: none;
         }
         .searchbox {
-            margin-left: 70px;
             .searchinput {
                 width: 156px;
                 height: 27px;
