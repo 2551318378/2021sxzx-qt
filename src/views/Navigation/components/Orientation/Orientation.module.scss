@@ -1,0 +1,95 @@
+$outer_bg_color: #DFEAF7;
+$desc_font_color: #0D349A;
+$separator_color: #797979;
+$inner_font_color: #7F7F7F;
+.container {
+    margin: 0 auto;
+    p {
+        font-weight: bold;
+        color: #333333;
+    }
+    .situation {
+        display: flex;
+        align-items: center;
+        .outer_div {
+            display: flex;
+            align-items: center;
+            .desc {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 401px) {
+    .container {
+        padding: 0 155px;
+        height: 295px;
+        width: 1519px;
+        p {
+            font-size: 20px;
+            margin-top: 53px;
+            margin-bottom: 45px;
+        }
+        .situation {
+            flex-direction: row;
+            justify-content: space-between;
+            .outer_div {
+                height: 108px;
+                background: $outer_bg_color;
+                border-radius: 22px;
+                flex-direction: column;
+                justify-content: center;
+                padding: 0 20px;
+                .desc {
+                    font-size: 20px;
+                    color: $desc_font_color;
+                }
+                .inner_div {
+                    height: 28px;
+                    line-height: 28px;
+                    border-radius: 11px;
+                    background: white;
+                    padding: 0 15px;
+                    margin-top: 10px;
+                }
+            }
+            label {
+                height: 1px;
+                width: 80px;
+                border-top: 1px dashed $separator_color;
+            }
+        }
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        width: 375px;
+        p {
+            font-size: 20px;
+            margin-left: 18px;
+            margin-top: 35px;
+        }
+        .situation {
+            flex-direction: column;
+            justify-content: space-between;
+            height: 350px;
+            .outer_div {
+                width: 358px;
+                height: 55px;
+                border: 2px solid $desc_font_color;
+                border-radius: 9px;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0 15px;
+                .desc {
+                    font-size: 18px;
+                }
+                .inner_div {
+                    font-size: 18px;
+                    color: $inner_font_color;
+                }
+            }
+        }
+    }
+}

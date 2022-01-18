@@ -1,6 +1,13 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
+  // app.use(
+  //   '/orientationApi',
+  //   createProxyMiddleware({
+  //     target: 'http://8.134.73.52:5001/api//v1/getRuleTree',
+  //     changeOrigin: true,
+  //   })
+  // );
   app.use(
     '/searchApi',
     createProxyMiddleware({
