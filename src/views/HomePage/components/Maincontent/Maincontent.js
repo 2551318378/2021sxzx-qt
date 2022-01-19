@@ -6,6 +6,7 @@ import shbx from '../../../../assets/社会保险1.png'
 import rcrs from '../../../../assets/人才人事1.png'
 import jycy from '../../../../assets/就业创业1.png'
 import ldbz from '../../../../assets/劳动保障1.png'
+import { Link } from 'react-router-dom'
 // parent -> classify
 // child -> specific
 
@@ -30,14 +31,18 @@ export default function Maincontent() {
                 <div className={style.slogan1}>广州人设 为您解决事项咨询最后一公里问题</div>
                 <div className={style.slogan2}>广州人设为您提供866个事项咨询，打造一站式事项咨询平台</div>
                 <div className={style.ind_or_ent}>
-                    <div className={style.individual}>
-                        <img src={IntIcon}></img>
-                        个人业务
-                    </div>
-                    <div className={style.enterprise}>
-                        <img src={EnvIcon}></img>
-                        企业业务
-                    </div>
+                    <Link to='#'>
+                        <div className={style.individual}>
+                            <img src={IntIcon}></img>
+                            个人业务
+                        </div>
+                    </Link>
+                    <Link to='#'>
+                        <div className={style.enterprise}>
+                            <img src={EnvIcon}></img>
+                            企业业务
+                        </div>
+                    </Link>
                 </div>
             </div>
             <div className={style.business_show}>
@@ -54,7 +59,7 @@ export default function Maincontent() {
                     <label></label>
                     <div onClick={handleParentClick.bind(this, 3)}
                          className={parentRuleId == 3 ? style.active : null}>
-                        事业单位业务
+                        机关事业单位业务
                     </div>
                 </div>
                 <div className={style.specific}>

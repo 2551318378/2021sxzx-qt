@@ -1,10 +1,11 @@
 import React from 'react'
 import style from './Orientation.module.scss'
+import { Link } from 'react-router-dom'
 
 export default function Orientation() {
     return (
         <div className={style.container}>
-            <p>您属于情况：</p>
+            <p className={style.p_situation}>您属于情况：</p>
             <div className={style.situation}>
                 <div className={style.outer_div}>
                     <div className={style.desc}>业务类型</div>
@@ -31,5 +32,16 @@ export default function Orientation() {
                     <div className={style.inner_div}>区级</div>
                 </div>
             </div>
+            <div className={style.select_box}>
+                <div className={style.select_item}>养老保险</div>
+                <div className={style.select_item}></div>
+                <div className={style.select_item}></div>
+                <div className={style.select_item}></div>
+            </div>
+            <Link to='/home'>
+                <div className={style.homeBtn}>
+                    回到首页
+                </div>
+            </Link>
         </div>
     )}

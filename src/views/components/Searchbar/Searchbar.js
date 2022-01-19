@@ -1,12 +1,13 @@
 import React from 'react'
-import style from './Searchbar.module.scss'
+import style from './SearchBar.module.scss'
 import Logo from '../../../assets/logo.png'
 import SearchBtn from '../../../assets/placeholder.png'
 import { Link } from 'react-router-dom'
-import IndexRouter from '../../../router/IndexRouter'
 
-export default function Searchbar() {
+export default function SearchBar() {
     return (
+        <div className={style.outer_shadow}>
+            
         <div className={style.container}>
             <img src={Logo} className={style.logo}></img>
             <Link to='/home'>
@@ -25,5 +26,8 @@ export default function Searchbar() {
                 <input type='text' placeholder='事项咨询' className={style.searchinput} maxLength='15'/>
                 <img src={SearchBtn} className={style.searchbtn}></img>
             </div>
+        </div>
+
+
         </div>
     )}  

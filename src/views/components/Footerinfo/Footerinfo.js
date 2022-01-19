@@ -1,16 +1,30 @@
 import React from 'react'
-import style from './Footerinfo.module.scss'
+import style from './FooterInfo.module.scss'
 import QRcode from '../../../assets/placeholder.png'
 import QRcode_web from '../../../assets/placeholder.png'
 import QRcode_wechat from '../../../assets/placeholder.png'
 import QRcode_app from '../../../assets/placeholder.png'
+import { Link } from 'react-router-dom'
 
-export default function Footerinfo() {
+export default function FooterInfo() {
     return (
         <div className={style.container}>
             <div className={style.contact}>
-                <div className={style.web_info}></div>
-                <div className={style.contact_us}></div>
+                <div className={style.web_info}>
+                    <p>网站信息</p>
+                    <div>
+                        <Link to='#'>网站介绍</Link>
+                        <Link to='#'>网站纠错</Link>
+                        <br></br>
+                        <Link to='#'>隐私政策</Link>
+                        <Link to='#'>服务建议</Link>
+                    </div>
+                </div>
+
+                <div className={style.contact_us}>
+                    <p>联系我们</p>
+                </div>
+
                 <div className={style.relevant_code}>
                     <div className={style.dropdown_web, style.dropdown}>
                         <div className={style.dropdown_desc}>

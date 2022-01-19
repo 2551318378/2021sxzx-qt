@@ -1,15 +1,17 @@
 import React from 'react'
-import Searchbar from '../components/Searchbar/Searchbar'
-import Footerinfo from '../components/Footerinfo/Footerinfo'
+import SearchBar from '../components/SearchBar/SearchBar'
+import FooterInfo from '../components/FooterInfo/FooterInfo'
 import Orientation from './components/Orientation/Orientation.js'
+import SlideCS from '../components/SlideCS/SlideCS'
 import style from './Navigation.module.scss'
 
 export default function Navigation() {
   return (
-    <div>
-      <Searchbar></Searchbar>
+    <div className={style.container}>
+      <SearchBar></SearchBar>
       <Orientation></Orientation>
-      <Footerinfo></Footerinfo>
+      <FooterInfo></FooterInfo>
+      <SlideCS></SlideCS>
     </div>
   )
 }

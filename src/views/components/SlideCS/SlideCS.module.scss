@@ -1,0 +1,37 @@
+.hide {
+    display: none;
+}
+@media screen and (min-width: 401px) {
+    .container {
+        width: 129px;
+        height: 129px;
+        border: 1px solid #D7D7D7;
+        border-radius: 17px;
+        background: white;
+        text-align: center;
+        position: fixed;
+        right: 30px;
+        top: 410px; 
+        .delete {
+            width: 20px;
+            margin-left: 95px;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+        .clickbox {
+            img {
+                width: 62px;
+            }
+            p {
+                color: #555555;
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .container {
+        display: none;
+    }
+}

@@ -1,16 +1,18 @@
 import React from 'react'
-import Searchbar from '../components/Searchbar/Searchbar'
+import SearchBar from '../components/SearchBar/SearchBar'
 import Maincontent from './components/Maincontent/Maincontent'
-import Footerinfo from '../components/Footerinfo/Footerinfo'
+import FooterInfo from '../components/FooterInfo/FooterInfo'
+import SlideCS from '../components/SlideCS/SlideCS'
 import style from './HomePage.module.scss'
 
 
 export default function Home() {
     return (
       <div className={style.container}>
-        <Searchbar></Searchbar>
+        <SearchBar isShadow="true"></SearchBar>
         <Maincontent></Maincontent>
-        <Footerinfo></Footerinfo>
+        <FooterInfo></FooterInfo>
+        <SlideCS></SlideCS>
       </div>
     )
   }
