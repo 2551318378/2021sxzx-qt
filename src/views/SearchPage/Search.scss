@@ -12,10 +12,11 @@
         height: 40px;
         line-height: 40px;
     }
-    .ant-select{
-        width: 75%;
-    }
 
+    .ant-input-group-compact.ant-select.ant-select-selector{
+        width: 75%;
+        border-radius: 25px;
+    }
 
     .ant-btn.ant-btn-primary{
         width: 15%;
