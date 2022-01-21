@@ -13,9 +13,12 @@
         line-height: 40px;
     }
 
-    .ant-input-group-compact.ant-select.ant-select-selector{
+    .autoComplete{
         width: 75%;
-        border-radius: 25px;
+        .ant-select-selector{
+            
+            border-radius: 25px 0px 0px 25px !important;
+        }
     }
 
     .ant-btn.ant-btn-primary{
