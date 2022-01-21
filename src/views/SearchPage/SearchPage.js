@@ -1,3 +1,4 @@
+import './Search.scss' 
 import React, {useEffect, useState} from "react";
 // import axios from "../../http/http";
 import style from "../SearchPage/SearchPage.module.scss";
@@ -139,25 +140,26 @@ export default function SearchPage() {
 
         <div className={style.SearchPageContainer}>
 
-            <Input.Group compact className={style.inputGroup}>
-                <span className={style.inputTitle}>全站搜索:</span>
+            <Input.Group compact className='inputGroup'>
+
+                <span className='inputTitle'>全站搜索:</span>
                 <AutoComplete
-                    className={style.autoComplete}
+                    className='autoComplete'
                     placeholder="Email"
                     options={keywordList}
                     size="large"
                     onChange={inputOnChange}
-                    value={inputValue}
-                />
-                <Button className={style.inputButton} size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
+                    value={inputValue}/>
+                <Button className='inputButton' size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
+
             </Input.Group>
-            <div className={style.searchOptionContainer}>
-                <Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
-                             buttonStyle="solid" className={style.searchOption}/>
-                <Radio.Group options={contentOptions} onChange={contentOnChange} value={contentValue} optionType="button"
-                             buttonStyle="solid" className={style.searchOption}/>
-                <Radio.Group options={timeOptions} onChange={timeOnChange} value={timeValue} optionType="button"
-                             buttonStyle="solid" className={style.searchOption}/>
+            <div className='searchOptionContainer'>
+                <div className='subContainer'><Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
+                             buttonStyle="solid" className='searchOption'/></div>
+                <div className='subContainer'><Radio.Group options={contentOptions} onChange={contentOnChange} value={contentValue} optionType="button"
+                             buttonStyle="solid" className='searchOption'/></div>
+                <div className='subContainer'><Radio.Group options={timeOptions} onChange={timeOnChange} value={timeValue} optionType="button"
+                             buttonStyle="solid" className='searchOption'/></div>
             </div>
             <div className={style.mainContainer}>
                 <div className={style.searchListContainer}>

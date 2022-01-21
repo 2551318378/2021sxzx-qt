@@ -1,7 +1,7 @@
 import React from 'react'
-import SearchBar from '../components/SearchBar/SearchBar'
+import SearchBar from '../components/Searchbar/Searchbar'
 import Maincontent from './components/Maincontent/Maincontent'
-import FooterInfo from '../components/FooterInfo/FooterInfo'
+import FooterInfo from '../components/Footerinfo/Footerinfo'
 import SlideCS from '../components/SlideCS/SlideCS'
 import style from './HomePage.module.scss'
 

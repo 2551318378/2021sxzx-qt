@@ -1,0 +1,38 @@
+.inputGroup{
+    padding-top: 30px;
+    padding-bottom: 10px;
+    width: 100%;
+    align-self: center;
+    max-lines: 1;
+    margin-bottom: 10px;
+
+    .inputTitle{
+        width: 10%;
+        font-size: 1.4em;
+        height: 40px;
+        line-height: 40px;
+    }
+    .ant-select{
+        width: 75%;
+    }
+
+
+    .ant-btn.ant-btn-primary{
+        width: 15%;
+        border-top-right-radius: 25px;
+        border-end-end-radius: 25px;
+    }
+}
+
+.searchOptionContainer{
+    .subContainer{
+        margin-top: 15px;
+        margin-bottom: 15px;
+        .ant-radio-group{
+            .ant-radio-button-wrapper{
+                width: 120px;
+                text-align: center;
+            }
+        }
+    }
+}
