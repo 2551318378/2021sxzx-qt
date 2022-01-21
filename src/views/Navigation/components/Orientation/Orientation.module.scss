@@ -4,7 +4,7 @@ $separator_color: #797979;
 $inner_font_color: #7F7F7F;
 .container {
     margin: 0 auto;
-    p {
+    .p_situation {
         font-weight: bold;
         color: #333333;
     }
@@ -24,9 +24,9 @@ $inner_font_color: #7F7F7F;
 @media screen and (min-width: 401px) {
     .container {
         padding: 0 155px;
-        height: 295px;
+        height: 800px;
         width: 1519px;
-        p {
+        .p_situation {
             font-size: 20px;
             margin-top: 53px;
             margin-bottom: 45px;
@@ -60,12 +60,56 @@ $inner_font_color: #7F7F7F;
                 border-top: 1px dashed $separator_color;
             }
         }
+        .select_box {
+            width: 755px;
+            height: 310px;
+            margin: 0 auto;
+            margin-top: 55px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            // 多于4个
+            // align-content: flex-start;
+            // flex-direction: row;
+            // 低于4个
+            align-content: center;
+            flex-direction: column;
+            .select_item {
+                height: 45px;
+                width: 360px;
+                border: 2px solid #7F7F7F;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                font-size: 18px;
+                color: #333333;
+                text-align: center;
+                line-height: 42px;
+            }
+
+        }
+        .homeBtn {
+            margin: 0 auto;
+            margin-top: 10px;
+            border: 2px solid #5772B8;
+            background: #5772B8;
+            border-radius: 19px;
+            width: 179px;
+            height: 65px;
+            line-height: 63px;
+            text-align: center;
+            color: white;
+            font-size: 28px;
+        }
+        .homeBtn:hover {
+            background: #0D349A;
+            border-color: #0D349A;
+        }
     }
 }
 @media screen and (max-width: 400px) {
     .container {
         width: 375px;
-        p {
+        .p_situation {
             font-size: 20px;
             margin-left: 18px;
             margin-top: 35px;
@@ -90,6 +134,12 @@ $inner_font_color: #7F7F7F;
                     color: $inner_font_color;
                 }
             }
+        }
+        .select_box {
+            display: none;
+        }
+        .homeBtn {
+            display: none;
         }
     }
 }
