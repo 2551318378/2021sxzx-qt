@@ -1,3 +1,4 @@
+import'./button.scss'
 import style from './Guide.module.scss';
 import axios from '../../../../api/http';
 import { useEffect, useState } from 'react';
@@ -55,9 +56,10 @@ export default function Guide() {
 
 	useEffect(() => { 
 		axios.get(pathname).then(res => {
-			setData(res.data.data[0]);
-            console.log(res.data.data[0])
-			setLobbyInfo(res.data.data[0].audit_catalog_lobby[0]);
+			console.log(res.data)
+			setData(res.data[0]);
+            
+			setLobbyInfo(res.data[0].audit_catalog_lobby[0]);
 		})
 	}, []);
 
@@ -72,12 +74,11 @@ export default function Guide() {
 
 	const renderLobby = (lobbyList) => {
 		if(lobbyInfo&&lobbyInfo.name){
-			return <Radio.Group className={style.lobbyGroup} name='lobbyGroup' defaultValue={lobbyInfo.name}>{
+			return <Radio.Group className='lobbyGroup' name='lobbyGroup' defaultValue={lobbyInfo.name} buttonStyle="solid">{
 				lobbyList?.map((item, index) => {
-					return <Radio.Button className={style.lobbyButton} onClick={() => { changeLobby(lobbyList, index) }} value={item?.name} key={item?.name}>{item?.name}</Radio.Button>
+					return <Radio.Button className="lobbyButton" onClick={() => { changeLobby(lobbyList, index) }} value={item?.name} key={item?.name}>{item?.name}</Radio.Button>
 				})
-			}
-			</Radio.Group>
+			}</Radio.Group>
 		}
 
 	};
