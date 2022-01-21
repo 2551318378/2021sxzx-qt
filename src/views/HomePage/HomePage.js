@@ -6,6 +6,7 @@ import SlideCS from '../components/SlideCS/SlideCS'
 import style from './HomePage.module.scss'
 
 
+
 export default function Home() {
     return (
       <div className={style.container}>

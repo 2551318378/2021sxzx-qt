@@ -11,7 +11,7 @@ export default function IndexRouter() {
     <HashRouter>
       <Switch>
         <Route path='/login' component={Login}></Route>
-        <Route path='/guideResult' component={GuideResult}></Route>
+        <Route path='/v1/taskResult' component={GuideResult}></Route>
         <Route path='/searchPage' component={SearchPage}></Route>
         <Route path='/home' component={Home}></Route>
         <Route path='/navigation' component={Navigation}></Route>
