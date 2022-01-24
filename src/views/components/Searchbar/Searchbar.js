@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './Searchbar.module.scss'
+import style from './SearchBar.module.scss'
 import Logo from '../../../assets/logo.png'
 import SearchBtn from '../../../assets/placeholder.png'
 import { Link } from 'react-router-dom'

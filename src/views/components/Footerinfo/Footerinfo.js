@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './Footerinfo.module.scss'
+import style from './FooterInfo.module.scss'
 import QRcode from '../../../assets/placeholder.png'
 import QRcode_web from '../../../assets/placeholder.png'
 import QRcode_wechat from '../../../assets/placeholder.png'
