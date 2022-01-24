@@ -1,9 +1,9 @@
 import React from 'react'
 import style from './FooterInfo.module.scss'
-import QRcode from '../../../assets/placeholder.png'
-import QRcode_web from '../../../assets/placeholder.png'
+import QRcode from '../../../assets/icon_qrcode.png'
+import QRcode_web from '../../../assets/qrcode_web.png'
 import QRcode_wechat from '../../../assets/placeholder.png'
-import QRcode_app from '../../../assets/placeholder.png'
+import QRcode_app from '../../../assets/qrcode_app.jpg'
 import { Link } from 'react-router-dom'
 
 export default function FooterInfo() {

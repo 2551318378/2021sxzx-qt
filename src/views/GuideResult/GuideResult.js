@@ -7,7 +7,7 @@ import Guide from './components/Guide/Guide.js'
 import FooterInfo from '../components/FooterInfo/FooterInfo.js'
 import SearchBar from '../components/SearchBar/SearchBar.js'
 import Orientation from './components/Orientation/Orientation.js'
-import SlideCS from '../components/SlideCS/SlideCS'
+import SlideCS from '../components/SlideCS/SlideCS.js'
 
 
 

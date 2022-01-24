@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import style from './SlideCS.module.scss'
 import { Link } from 'react-router-dom'
-import csIcon from '../../../assets/placeholder.png'
-import deleteIcon from '../../../assets/placeholder.png'
+import csIcon from '../../../assets/icon_zhinengkefu.png'
+import deleteIcon from '../../../assets/icon_deletebtn.png'
 
 export default function SlideCS() {
     const [isSiderHide, setIsSiderHide] = useState(false);
@@ -15,7 +15,6 @@ export default function SlideCS() {
                 <Link to='/intelligentCS'>
                     <div className={style.clickbox}>
                         <img src={csIcon}/>
-                        <p>智能客服</p>
                     </div>
                 </Link>
             </div>

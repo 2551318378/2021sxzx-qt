@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './SearchBar.module.scss'
 import Logo from '../../../assets/logo.png'
-import SearchBtn from '../../../assets/placeholder.png'
+import SearchBtn from '../../../assets/icon_searchbtn.png'
 import { Link } from 'react-router-dom'
 
 export default function SearchBar() {
