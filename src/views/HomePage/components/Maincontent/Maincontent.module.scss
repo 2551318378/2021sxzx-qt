@@ -119,12 +119,33 @@ $slogan2_mb_size: 8px;
                 padding: 0 163px;
                 div {
                     cursor: pointer;
-                    img {
+                    // text-align: center;
+                    .outborder {
                         width: 210px;
+                        height: 210px;
+                        border: 1px solid #D7D7D7;
+                        border-radius: 105px;
+                        
+                        div {
+                            margin: 6.5px;
+                            height: 195px;
+                            width: 195px;
+                            border-radius: 98px;
+                            background: #F1F4FB;
+                            img {
+                                width: 110px;
+                                margin: 42.5px;
+                            }
+                        }
                     }
                     p {
                         font-size: 28px;
                         margin-top: 17px;
+                    }
+                }
+                div:hover {
+                    img {
+                        transform: scale(1.2);
                     }
                 }
             }

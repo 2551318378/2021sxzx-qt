@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 import style from './Maincontent.module.scss'
 import IntIcon from '../../../../assets/icon_gerenyewu.png'
 import EnvIcon from '../../../../assets/icon_qiyeyewu.png'
-import shbx from '../../../../assets/社会保险1.png'
-import rcrs from '../../../../assets/人才人事1.png'
-import jycy from '../../../../assets/就业创业1.png'
-import ldbz from '../../../../assets/劳动保障1.png'
+import shbx from '../../../../assets/icon_shehuibaoxian.png'
+import rcrs from '../../../../assets/icon_rencairenshi.png'
+import jycy from '../../../../assets/icon_jiuyechuangye.png'
+import ldbz from '../../../../assets/icon_laodongbaozhang.png'
 import { Link } from 'react-router-dom'
 // parent -> classify
 // child -> specific
@@ -65,19 +65,35 @@ export default function Maincontent() {
                 <div className={style.specific}>
                     <div onClick={handleChildClick.bind(this, ldbz_ruleId)}
                          className={isLdbzHide ? style.hide : null}>
-                        <img src={ldbz}></img>
+                             <div className={style.outborder}>
+                                 <div>
+                                    <img src={ldbz}></img>
+                                 </div>
+                             </div>
                         <p>劳动保障</p>
                     </div>
                     <div onClick={handleChildClick.bind(this, shbx_ruleId)}>
-                        <img src={shbx}></img>
+                        <div className={style.outborder}>
+                            <div>
+                                <img src={shbx}></img>
+                            </div>
+                        </div>
                         <p>社会保险</p>
                     </div>
                     <div onClick={handleChildClick.bind(this, rsrc_ruleId)}>
-                        <img src={rcrs}></img>
+                        <div className={style.outborder}>
+                            <div>
+                                <img src={rcrs}></img>
+                            </div>
+                        </div>
                         <p>人才人事</p>
                     </div>
                     <div onClick={handleChildClick.bind(this, jycy_ruleId)}>
-                        <img src={jycy}></img>
+                        <div className={style.outborder}>
+                            <div>
+                                <img src={jycy}></img>
+                            </div>
+                        </div>
                         <p>就业创业</p>
                     </div>
                 </div>
