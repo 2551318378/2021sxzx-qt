@@ -10,7 +10,7 @@ import style from './HomePage.module.scss'
 export default function Home() {
     return (
       <div className={style.container}>
-        <SearchBar isShadow="true"></SearchBar>
+        <SearchBar></SearchBar>
         <Maincontent></Maincontent>
         <FooterInfo></FooterInfo>
         <SlideCS></SlideCS>
