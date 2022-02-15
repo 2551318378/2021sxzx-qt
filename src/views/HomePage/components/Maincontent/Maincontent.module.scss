@@ -207,10 +207,26 @@ $slogan2_mb_size: 8px;
             }
             .specific {
                 padding: 0 40px;
+                margin-top: 60px;
                 div {
-                    margin-top: 65px;
-                    img {
+                    // margin-top: 60px;
+                    .outborder {
                         width: 114px;
+                        height: 114px;
+                        border: 1px solid #D7D7D7;
+                        border-radius: 57px;
+                        
+                        div {
+                            margin: 4px;
+                            height: 106px;
+                            width: 106px;
+                            border-radius: 53px;
+                            background: #F1F4FB;
+                            img {
+                                width: 60px;
+                                margin: 23px;
+                            }
+                        }
                     }
                     p {
                         font-size: 16px;

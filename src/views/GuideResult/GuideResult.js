@@ -18,7 +18,7 @@ export default function CommentPage() {
       <Orientation></Orientation>
       <Guide></Guide>
       <Comment></Comment>
-      <Rate></Rate>
+      {/* <Rate></Rate> */}
       <FooterInfo></FooterInfo>
       <SlideCS></SlideCS>
     </div>
