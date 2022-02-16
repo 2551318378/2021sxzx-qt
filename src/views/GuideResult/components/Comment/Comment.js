@@ -87,12 +87,12 @@ export default function Comment() {
           <TextArea 
             value={comment}
             className={style.textArea} 
-            rows={6} 
-            placeholder="请描述问题或建议，帮助我们做得更好（不少于10个字，不多于200个字）" 
-            minLength={10} maxLength={200} showCount
+            rows={5} 
+            placeholder="请输入其它想说的评价……" 
+            minLength={10} maxLength={200} 
             onChange={updateComment}/>
-          <div className={style.tips}>温馨提示：该评议只对办事指南内容是否规范、准确、清晰、合理等方面进行评议。</div>
-          <div className={`${style.btn} ${style.commit}`} onClick={commit}>提交</div>
+          {/* <div className={style.tips}>温馨提示：该评议只对办事指南内容是否规范、准确、清晰、合理等方面进行评议。</div> */}
+          <div className={`${style.btn} ${style.commit}`} onClick={commit}>提&nbsp;&nbsp;交</div>
         </div>
 
       </div>

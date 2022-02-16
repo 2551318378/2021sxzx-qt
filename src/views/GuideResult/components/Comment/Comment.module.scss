@@ -1,26 +1,17 @@
 .container {
-  background-color: #DFEAF7;
-  width: 600px;
-  border-radius: 15px;
-  padding: 15px 30px 30px 30px;
+  background-color: rgba($color: #DFEAF7, $alpha: 0.5);
   display: flex;
   flex-direction: column;
-  margin-bottom: 200px;
   .widthController{
     display: flex;
     flex-direction: column;
     align-items: center;
     .title {
       color: #5772B8;
-      font-size: 1.5em;
-      text-shadow:  #9b9d9e3a 1px 1px 1px;
     }
     .scoreContainer{
       width: 100%;
       background-color: #fff;
-      border-radius: 10px;
-      padding: 20px 40px;
-      margin-top: 15px;
       display: flex;
       justify-content: space-between;
       display: flex;
@@ -34,39 +25,211 @@
         .antRateText{
           justify-self: left;
           align-self: center;
-          margin-left: 25px;
           color: #F59A23;
         }
       }
       .optionContainer{
-        margin-top: 10px;
         margin-right: auto;
       }
       .textArea{
-        margin-top: 10px;
         width: 100%;
-      }
-      .tips{
-        // margin-top: 10px;
-        color: #7F7F7F;
-        font-size: 10px;
       }
       .btn{
         outline: none;
         background-color: #5772B8;
-        border-radius: 3px;
-        font-size: 10px;
-        line-height: 3em;
-        padding: 0 15px;
         color: #fff;
         cursor: pointer;
-      }
-      .commit{
-        margin-top: 15px;
       }
     }
 
   }
   
 }
+@media screen and (min-width: 401px) {
+  .container {
+    width: 1186px;
+    border-radius: 20px;
+    padding: 20px 48px 40px 48px;
+    margin-bottom: 200px;
+    .widthController{
+      .title {
+        font-size: 48px;
+      }
+      .scoreContainer{
+        border-radius: 2px;
+        padding: 15px 75px;
+        margin-top: 25px;
+        border: solid 10px #F2F2F2;
+        .top{
+          .rateContainer{
+            font-size: 48px;
+          }
+          .antRateText{
+            margin-left: 25px;
+            font-size: 28px;
+          }
+        }
+        .optionContainer{
+          margin-top: 20px;
+          span {
+            background: #E8E8E8;
+            padding: 10px 20px;
+            border: none;
+            margin-right: 35px;
+            a {
+              font-size: 20px;
+            }
+          }
+        }
+        .textArea{
+          margin-top: 25px;
+          font-size: 20px;
+          border: solid 10px #F2F2F2;
+          border-radius: 30px;
+          resize: none;
+        }
+        .btn{
+          border-radius: 10px;
+          font-size: 28px;
+          padding: 0 50px;
+        }
+        .commit{
+          margin-top: 25px;
+        }
+        .btn:hover{
+          background: #0D3698;
+        }
+      }
+  
+    }
+    
+  }
+}
+@media screen and (max-width: 400px) {
+  .container {
+    width: 315px;
+    border-radius: 10px;
+    padding: 15px;
+    .widthController{
+      .title {
+        font-size: 14px;
+      }
+      .scoreContainer{
+        padding: 5px 15px;
+        margin-top: 15px;
+        border: solid 2px #F2F2F2;
+        .top{
+          .rateContainer{
+            font-size: 16px;
+          }
+          .antRateText{
+            margin-left: 10px;
+            font-size: 12px;
+          }
+        }
+        .optionContainer{
+          margin-top: 10px;
+          span {
+            background: #E8E8E8;
+            padding: 2px 5px;
+            border: none;
+            margin-right: 15px;
+            a {
+              font-size: 9px;
+            }
+          }
+        }
+        .textArea{
+          margin-top: 15px;
+          font-size: 9px;
+          border: solid 2px #F2F2F2;
+          border-radius: 10px;
+          resize: none;
+        }
+        .btn{
+          border-radius: 5px;
+          font-size: 12px;
+          padding: 0 10px;
+        }
+        .commit{
+          margin-top: 10px;
+        }
+        .btn:hover{
+          background: #0D3698;
+        }
+      }
+  
+    }
+    
+  }
+}
+// .container {
+//   width: 600px;
+//   border-radius: 15px;
+//   padding: 15px 30px 30px 30px;
+//   display: flex;
+//   flex-direction: column;
+//   margin-bottom: 200px;
+//   .widthController{
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     .title {
+//       color: #5772B8;
+//       font-size: 1.5em;
+//       text-shadow:  #9b9d9e3a 1px 1px 1px;
+//     }
+//     .scoreContainer{
+//       width: 100%;
+//       background-color: #fff;
+//       border-radius: 10px;
+//       padding: 20px 40px;
+//       margin-top: 15px;
+//       display: flex;
+//       justify-content: space-between;
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       .top{
+//         margin-right: auto;
+//         .rateContainer{
+//           color:#F59A23;
+//         }
+//         .antRateText{
+//           justify-self: left;
+//           align-self: center;
+//           margin-left: 25px;
+//           color: #F59A23;
+//         }
+//       }
+//       .optionContainer{
+//         margin-top: 10px;
+//         margin-right: auto;
+//       }
+//       .textArea{
+//         margin-top: 10px;
+//         width: 100%;
+//       }
+//       .tips{
+//         // margin-top: 10px;
+//         color: #7F7F7F;
+//         font-size: 10px;
+//       }
+//       .btn{
+//         outline: none;
+//         background-color: #5772B8;
+//         border-radius: 3px;
+//         font-size: 10px;
+//         line-height: 3em;
+//         padding: 0 15px;
+//         color: #fff;
+//         cursor: pointer;
+//       }
+//       .commit{
+//         margin-top: 15px;
+//       }
+//     }
 
+//   }
+  
+// }
