@@ -146,6 +146,10 @@ export default function Guide() {
 	return (
 		<div className={style.container}>
 			<div className={style.title}>{data.task_name}</div>
+			<div className={style.GB_name}>国家标准名: {data.task_name}</div>
+			<span className={style.button}>事项办理</span>
+			<span className={style.button}>详细指南</span>
+			<span className={style.button}>打印咨询结果</span>
 			<Divider />
 			<div className={style.subtitle}>申请材料</div>
 			<Table className='audit_material' columns={audit_material_colunms} dataSource={data.audit_material} pagination={false} size='middle' />
