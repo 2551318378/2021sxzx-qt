@@ -50,6 +50,7 @@ export default function Orientation() {
             tmplist.push({rule_name:'市级'});
             tmplist.push({rule_name:'区级'});
             setOptionList(tmplist);
+            // console.log(optionList);
         } else {
             switch (stepValue) {
                 case 1:
@@ -99,18 +100,41 @@ export default function Orientation() {
                 break;
             case 5: 
                 setStepOption5(item); 
-                
-                history.push({ 
-                    pathname: "/v1/taskResult", 
-                    state: {
-                        step1: stepOption1,
-                        step2: stepOption2,
-                        step3: stepOption3,
-                        step4: stepOption4,
-                        step5: stepOption5
-                    } 
-                })
+                setTimeout(() => {
+                    history.push({ 
+                        pathname: "/v1/taskResult", 
+                        state: {
+                            step1: stepOption1,
+                            step2: stepOption2,
+                            step3: stepOption3,
+                            step4: stepOption4,
+                            step5: item
+                        } 
+                    })
+                 }, 500);
+                // history.push({ 
+                //     pathname: "/v1/taskResult", 
+                //     state: {
+                //         step1: stepOption1,
+                //         step2: stepOption2,
+                //         step3: stepOption3,
+                //         step4: stepOption4,
+                //         step5: stepOption5
+                //     } 
+                // })
         }
+        // if (stepValue == 5) {
+        //     history.push({ 
+        //         pathname: "/v1/taskResult", 
+        //         state: {
+        //             step1: stepOption1,
+        //             step2: stepOption2,
+        //             step3: stepOption3,
+        //             step4: stepOption4,
+        //             step5: stepOption5
+        //         } 
+        //     })
+        // }
     }
 
     return (
