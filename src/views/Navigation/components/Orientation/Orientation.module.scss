@@ -22,6 +22,10 @@ $inner_font_color: #7F7F7F;
 }
 
 @media screen and (min-width: 401px) {
+    .hidden {
+        visibility: hidden;
+        
+    }
     .container {
         padding: 0 155px;
         height: 800px;
@@ -69,11 +73,11 @@ $inner_font_color: #7F7F7F;
             flex-wrap: wrap;
             justify-content: space-between;
             // 多于4个
-            // align-content: flex-start;
-            // flex-direction: row;
+            align-content: flex-start;
+            flex-direction: row;
             // 低于4个
-            align-content: center;
-            flex-direction: column;
+            // align-content: center;
+            // flex-direction: column;
             .select_item {
                 height: 45px;
                 width: 360px;

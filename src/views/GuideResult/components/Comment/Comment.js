@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from 'react'
 import { useHistory } from 'react-router'
 import { useDispatch } from 'react-redux'
-import {Rate,Input,message,Tag} from 'antd'
+import { Rate,Input,message,Tag } from 'antd'
 
 import style from './Comment.module.scss'
 import axios from '../../../../api/http'
@@ -16,7 +16,7 @@ export default function Comment() {
   const [starValue, setStarValue] = useState(5)
   const [comment, setComment] = useState('')
   const [update, setUpdate] = useState('')
-  const [optionList,setOptionList] = useState(['办理条件非常准确','申请流程非常清晰','情形非常合理'])
+  const [optionList, setOptionList] = useState(['办理条件非常准确','申请流程非常清晰','情形非常合理'])
 
   useEffect(() => {
     if(starValue===5||starValue===4){

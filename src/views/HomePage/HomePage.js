@@ -5,8 +5,6 @@ import FooterInfo from '../components/FooterInfo/FooterInfo.js'
 import SlideCS from '../components/SlideCS/SlideCS.js'
 import style from './HomePage.module.scss'
 
-
-
 export default function Home() {
     return (
       <div className={style.container}>
