@@ -78,7 +78,7 @@ export default function Orientation() {
         }
            
         
-    })
+    },[])
 
     const handleItemClick = (item) => {
         switch(stepValue) {
