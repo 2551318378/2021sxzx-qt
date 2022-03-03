@@ -3,190 +3,202 @@ import style from './Orientation.module.scss'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import axios from '../../../../api/http'
 
+
 export default function Orientation() {
-    const history = useHistory();
-
-    let tmplist = [];
-    
+    const hint = '您属于情况：';
     const location = useLocation();
-
-    const [stepValue, setStepValue] = useState(3); 
+    const history = useHistory();
+    
+    const [stepNum, setStepNum] = useState(0);
+    const [isRuleFinish, setIsRuleFinish] = useState(false);
+    const [isRegionFinish, setIsRegionFinish] = useState(false);
+    const [ruleSelected, setRuleSelected] = useState([]);
+    const [regionSelected, setRegionSelected] = useState([]);
     const [optionList, setOptionList] = useState([]);
-    const [stepOption1, setStepOption1] = useState({rule_id: location.state? location.state.parentRuleId : '1'});
-    const [stepOption2, setStepOption2] = useState({rule_id: location.state? location.state.childRuleId : '4'});
-    const [stepOption3, setStepOption3] = useState({});
-    const [stepOption4, setStepOption4] = useState({});
-    const [stepOption5, setStepOption5] = useState({});
-     
-    const handleStepChange = (stepValue) => {
-        setStepValue(stepValue);
+    
+    var lastRegionIndex = 0;
+    var nextParentRuleId = '0';
+    var data = [];
+    var taskCode = '';
+
+    const handleClickStepRule = (item, index) => {
+        console.log('click index: ', index);
+        console.log('rule click: ', item, index);
+        setIsRuleFinish(false);
+        // setRuleSelected(data);
+        // setStepNum(index);
+        // nextParentRuleId = ruleSelected[index-1] ? ruleSelected[index-1].rule_id : '0';
+        // // console.log('nextParentRuleId', nextParentRuleId);
+    }
+    const handleClickStepRegion = (item, index) => {
+        console.log('region click: ', item, index);
     }
 
-    // 开始只执行一次
-    useEffect(() => {   
-        var data = [];
-        var parentId = '';
-        if (stepOption1.rule_name == null && stepOption2.rule_name == null) {
+    const handleClickOption = (item) => {
+        setStepNum(stepNum+1);
+        if (!isRuleFinish) {
+            setRuleSelected([...ruleSelected, item]);
             axios.post('/v1/getRules',{
-                rule_id: stepOption1.rule_id
-            }).then(res => {
-                data = res.data.data[0];
-                setStepOption1(data);
-                console.log(data);
-            }).catch((res)=>{
-                // console.log(res);
-            })
-
-            axios.post('/v1/getRules',{
-                rule_id: stepOption2.rule_id
-            }).then(res => {
-                data = res.data.data[0];
-                setStepOption2(data);
-            }).catch((res)=>{
-                // console.log(res);
-            })
-        }
-        if (stepValue == 5) {
-            tmplist.push({rule_name:'市级'});
-            tmplist.push({rule_name:'区级'});
-            setOptionList(tmplist);
-            // console.log(optionList);
-        } else {
-            switch (stepValue) {
-                case 1:
-                    parentId = '0'; break;
-                case 2: 
-                    parentId = stepOption1.rule_id; break;
-                case 3:
-                    parentId = stepOption2.rule_id; break;
-                case 4:
-                    parentId = stepOption3.rule_id; break;
-            }
-            // console.log(parentId);
-            axios.post('/v1/getRules',{
-                parentId: parentId
+                parentId: item.rule_id
             }).then(res => {
                 data = res.data.data;
-                // console.log(data);
-                data.map((item)=> {
-                    tmplist.push(item);
-                })
-                setOptionList(tmplist);
+                if (!data[0]) {
+                    setIsRuleFinish(true);
+                    axios.post('/v1/getRegions', {
+                        parentId: ""
+                    }).then(res => {
+                        data = res.data.data;
+                        setOptionList(data);
+                    })
+                } else {
+                    setOptionList(data);
+                }
             }).catch((res)=>{
-                // console.log(res);
+                console.log(res);
+            })
+        } else {
+            setRegionSelected([...regionSelected, item]);
+            // console.log(item);
+            axios.post('/v1/getRegions',{
+                parentId: item.region_id
+            }).then(res => {
+                data = res.data.data;
+                setOptionList(data);
+                if (!data[0]) {
+                    setIsRegionFinish(true);
+                    handleForTaskCode(item);
+                }
+            }).catch((res)=>{
+                console.log(res);
             })
         }
-           
-        
-    },[])
-
-    const handleItemClick = (item) => {
-        switch(stepValue) {
-            case 1: 
-                setStepOption1(item); 
-                setStepValue(stepValue + 1);
-                break;
-            case 2: 
-                setStepOption2(item); 
-                setStepValue(stepValue + 1);
-                break;
-            case 3: 
-                setStepOption3(item); 
-                setStepValue(stepValue + 1);
-                break;
-            case 4: 
-                setStepOption4(item); 
-                setStepValue(stepValue + 1);
-                break;
-            case 5: 
-                setStepOption5(item); 
-                setTimeout(() => {
-                    history.push({ 
-                        pathname: "/v1/taskResult", 
-                        state: {
-                            step1: stepOption1,
-                            step2: stepOption2,
-                            step3: stepOption3,
-                            step4: stepOption4,
-                            step5: item
-                        } 
-                    })
-                 }, 500);
-                // history.push({ 
-                //     pathname: "/v1/taskResult", 
-                //     state: {
-                //         step1: stepOption1,
-                //         step2: stepOption2,
-                //         step3: stepOption3,
-                //         step4: stepOption4,
-                //         step5: stepOption5
-                //     } 
-                // })
-        }
-        // if (stepValue == 5) {
-        //     history.push({ 
-        //         pathname: "/v1/taskResult", 
-        //         state: {
-        //             step1: stepOption1,
-        //             step2: stepOption2,
-        //             step3: stepOption3,
-        //             step4: stepOption4,
-        //             step5: stepOption5
-        //         } 
-        //     })
-        // }
     }
+
+    // 处理数据获取taskcode并跳转
+    const handleForTaskCode = (item) => {
+        var tItemRuleId;
+        axios.post('/v1/getItemRules', {
+            rule_id: ruleSelected[ruleSelected.length-1].rule_id,
+            region_id: '1'
+        }).then(res => {
+            tItemRuleId = res.data.data[0].item_rule_id;
+            axios.post('/v1/getItems', {
+                item_rule_id: tItemRuleId
+            }).then(res =>{
+                taskCode = res.data.data[0].task_code;
+                console.log("/v1/taskResult/"+taskCode);
+                setTimeout(() => {
+                    history.push({
+                        pathname: "/v1/taskResult/"+taskCode,
+                        state: { 
+                            ruleSelected: ruleSelected,
+                            regionSelected: [...regionSelected, item]
+                            }
+                    })
+                }, 300);
+            }).catch(res => {
+                console.log(res);
+            })
+        }).catch(res => {
+            console.log(res);
+        })
+        
+
+
+    }
+
+
+    const init = () => {
+        if (location.state) {
+            const homeRuleSelected = location.state.homeRuleSelected;
+            const homeSecondRuleId = location.state.secondRuleId;
+            setRuleSelected(homeRuleSelected);
+            setStepNum(homeRuleSelected);
+            axios.post('/v1/getRules',{
+                parentId: homeSecondRuleId
+            }).then(res => {
+                data = res.data.data;
+                setOptionList(data);
+            }).catch((res)=>{
+                console.log(res);
+            })
+        } else {
+            axios.post('/v1/getRules',{
+                parentId: '0'
+            }).then(res => {
+                data = res.data.data;
+                setOptionList(data);
+            }).catch((res)=>{
+                console.log(res);
+            })
+        }
+        
+    }
+    useEffect(() => {
+        init();
+    }, [])
 
     return (
         <div className={style.container}>
-            <p className={style.p_situation}>您属于情况：</p>
-            <div className={style.situation}>
-                <div className={style.outer_div} 
-                    onClick={handleStepChange.bind(this,1)}>
-                    <div className={style.desc}>业务类型</div>
-                    <div className={style.inner_div}>{ stepOption1.rule_name }</div>
-                </div>
-                <label  className={stepValue<1? style.hidden:null}></label>
-                <div className={`${style.outer_div} ${stepValue<2? style.hidden:null}`}
-                    onClick={handleStepChange.bind(this,2)}>
-                    <div className={style.desc}>事项类型</div>
-                    <div className={style.inner_div}>{ stepOption2.rule_name }</div>
-                </div>
-                <label  className={stepValue<2? style.hidden:null}></label>
-                <div className={`${style.outer_div} ${stepValue<3? style.hidden:null}`} 
-                    onClick={handleStepChange.bind(this,3)}>
-                    <div className={style.desc}>事项属于</div>
-                    <div className={style.inner_div}>{ stepOption3.rule_name }</div>
-                </div>
-                <label className={stepValue<3? style.hidden:null}></label>
-                <div className={`${style.outer_div} ${stepValue<4? style.hidden:null}`} 
-                    onClick={handleStepChange.bind(this,4)}>
-                    <div className={style.desc}>事项为</div>
-                    <div className={style.inner_div}>{ stepOption4.rule_name }</div>
-                </div>
-                <label className={stepValue<4? style.hidden:null}></label>
-                <div className={`${style.outer_div} ${stepValue<5? style.hidden:null}`} 
-                    onClick={handleStepChange.bind(this,5)}>
-                    <div className={style.desc}>事项划分</div>
-                    <div className={style.inner_div}>{ stepOption5.rule_name }</div>
-                </div>
-            </div>
-            <div className={style.select_box} >
+            <div className={style.hint}>{ hint }</div>
+            <div className={style.selectedContainer}>
                 {
-                    optionList.map((item)=>{
-                    return(
-                        <div className={style.select_item}
-                            onClick={ handleItemClick.bind(this, item) }>
-                            {item.rule_name}
-                        </div>
+                    ruleSelected.map((item, index) => {
+                        return (
+                            <div className={style.selectedBox} key={index} onClick={handleClickStepRule.bind(this, item, index)}>
+                                <div className={style.outer}>
+                                    <div className={style.desc}>
+                                        { item.rule_name }
+                                    </div>
+                                </div>
+                                <div className={style.separator}></div>
+                            </div>
                         )
+                    })
+                }
+                {
+                    regionSelected.map((item, index) => {
+                        if (isRuleFinish) {
+                            return (
+                                <div className={style.selectedBox} key={index} onClick={handleClickStepRegion.bind(this, item, index)}>
+                                    <div className={style.outer}>
+                                        <div className={style.desc}>
+                                            { item.region_name }
+                                        </div>
+                                    </div>
+                                    {/* <div className={`${style.separator} ${index == lastRegionIndex? style.hidden:null}`}></div> */}
+                                    <div className={style.separator}></div>
+                                </div>
+                            )
+                        }
+                    })
+                }
+            </div>
+            <div className={style.optionContainer}>
+                {
+                    optionList.map((item) => {
+                        if (!isRuleFinish) {
+                        return (
+                            <div className={style.optionBox}
+                                onClick={handleClickOption.bind(this, item)}>
+                                { item.rule_name }
+                            </div>
+                        )} else {
+                            return (
+                                <div className={style.optionBox}
+                                onClick={handleClickOption.bind(this, item)}>
+                                { item.region_name }
+                            </div>
+                            )
+                        }
                     })
                 }
             </div>
             <Link to='/home'>
-                <div className={style.homeBtn}>
-                    回到首页
-                </div>
+                 <div className={style.homeBtn}>
+                     回到首页
+                 </div>
             </Link>
         </div>
-    )}
+    )
+}
