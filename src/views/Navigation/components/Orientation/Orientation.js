@@ -22,16 +22,48 @@ export default function Orientation() {
     var taskCode = '';
 
     const handleClickStepRule = (item, index) => {
-        console.log('click index: ', index);
-        console.log('rule click: ', item, index);
+        // console.log('click index: ', index);
+        // console.log('rule click: ', item, index);
         setIsRuleFinish(false);
-        // setRuleSelected(data);
-        // setStepNum(index);
-        // nextParentRuleId = ruleSelected[index-1] ? ruleSelected[index-1].rule_id : '0';
-        // // console.log('nextParentRuleId', nextParentRuleId);
+        setIsRegionFinish(false);
+        if (index == 0) {
+            axios.post('/v1/getRules',{
+                parentId: '0'
+            }).then(res => {
+                data = res.data.data;
+                setOptionList(data);
+            }).catch((res)=>{
+                console.log(res);
+            })
+        }
+        setRuleSelected(ruleSelected.filter((_, i) => i < index));
     }
+
     const handleClickStepRegion = (item, index) => {
-        console.log('region click: ', item, index);
+        setIsRegionFinish(false);
+        if (index == 0) {
+            axios.post('/v1/getRegions', {
+                parentId: ""
+            }).then(res => {
+                data = res.data.data;
+                setOptionList(data);
+            })
+        } else {
+            axios.post('/v1/getRegions',{
+                parentId: regionSelected[index-1].region_id
+            }).then(res => {
+                data = res.data.data;
+                setOptionList(data);
+                if (!data[0]) {
+                    setIsRegionFinish(true);
+                    handleForTaskCode(item);
+                }
+            }).catch((res)=>{
+                console.log(res);
+            })
+
+        }
+        setRegionSelected(regionSelected.filter((_, i) => i < index));
     }
 
     const handleClickOption = (item) => {
@@ -166,9 +198,7 @@ export default function Orientation() {
                                             { item.region_name }
                                         </div>
                                     </div>
-                                    <div className={`${style.separator} ${isRegionFinish&&index == regionSelected.length-1? style.hidden:null}`}></div>
-                                    {/* <div className={style.separator}></div> */}
-                                    {/* `${style.separator}  ${index == regionSelected.length-1? style.hidden: null}` */}
+                                    <div className={`${style.separator} ${isRegionFinish && index == regionSelected.length-1? style.hidden:null}`}></div>
                                 </div>
                             )
                         }
