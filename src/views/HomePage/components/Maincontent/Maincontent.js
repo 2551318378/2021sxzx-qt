@@ -70,7 +70,7 @@ export default function Maincontent() {
                     <Link to='#'>
                         <div className={style.enterprise}>
                             <img src={EnvIcon}></img>
-                            企业业务
+                            法人业务
                         </div>
                     </Link>
                 </div>
@@ -84,12 +84,12 @@ export default function Maincontent() {
                     <label></label>
                     <div onClick={handleParentClick.bind(this, 1)}
                          className={parentRuleIdIndex == 1 ? style.active : null}>
-                        企业业务
+                        法人业务
                     </div>
                     <label></label>
                     <div onClick={handleParentClick.bind(this, 2)}
                          className={parentRuleIdIndex == 2 ? style.active : null}>
-                        机关事业单位业务
+                        事业单位业务
                     </div>
                 </div>
                 <div className={style.specific}>

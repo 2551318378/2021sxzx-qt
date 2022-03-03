@@ -166,8 +166,9 @@ export default function Orientation() {
                                             { item.region_name }
                                         </div>
                                     </div>
-                                    {/* <div className={`${style.separator} ${index == lastRegionIndex? style.hidden:null}`}></div> */}
-                                    <div className={style.separator}></div>
+                                    <div className={`${style.separator} ${isRegionFinish&&index == regionSelected.length-1? style.hidden:null}`}></div>
+                                    {/* <div className={style.separator}></div> */}
+                                    {/* `${style.separator}  ${index == regionSelected.length-1? style.hidden: null}` */}
                                 </div>
                             )
                         }
