@@ -26,9 +26,19 @@ export default function Orientation() {
         // console.log('rule click: ', item, index);
         setIsRuleFinish(false);
         setIsRegionFinish(false);
+        setRegionSelected([]);
         if (index == 0) {
             axios.post('/v1/getRules',{
                 parentId: '0'
+            }).then(res => {
+                data = res.data.data;
+                setOptionList(data);
+            }).catch((res)=>{
+                console.log(res);
+            })
+        } else {
+            axios.post('/v1/getRules',{
+                parentId: ruleSelected[index-1].rule_id
             }).then(res => {
                 data = res.data.data;
                 setOptionList(data);
@@ -119,15 +129,13 @@ export default function Orientation() {
             }).then(res =>{
                 taskCode = res.data.data[0].task_code;
                 console.log("/v1/taskResult/"+taskCode);
-                setTimeout(() => {
-                    history.push({
-                        pathname: "/v1/taskResult/"+taskCode,
-                        state: { 
-                            ruleSelected: ruleSelected,
-                            regionSelected: [...regionSelected, item]
-                            }
-                    })
-                }, 300);
+                history.push({
+                    pathname: "/v1/taskResult/"+taskCode,
+                    state: { 
+                        ruleSelected: ruleSelected,
+                        regionSelected: [...regionSelected, item]
+                        }
+                })
             }).catch(res => {
                 console.log(res);
             })
