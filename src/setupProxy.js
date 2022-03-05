@@ -11,8 +11,9 @@ module.exports = function(app) {
   app.use(
     '/searchApi',
     createProxyMiddleware({
-      target: 'http://111.230.197.244:7301/',
-      pathRewrite: {
+      // target: 'http://111.230.197.244:7301/',
+     target: 'http://8.134.73.52:5000/', 
+     pathRewrite: {
         '^/searchApi':'' //remove /api
       },
       changeOrigin: true,

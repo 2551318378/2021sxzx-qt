@@ -7,7 +7,7 @@ instance.defaults.headers.post['Content-Type']='application/x-www-form-urlencode
 if(process.env.NODE_ENV==='development'){
   instance.defaults.baseURL='/searchApi'
 } else if(process.env.NODE_ENV==='production'){
-  instance.defaults.baseURL='http://111.230.197.244:7301/searchApi/'
+  instance.defaults.baseURL='http://8.134.73.52:5000/searchApi/'
 }
 instance.defaults.timeout = 10000
 
