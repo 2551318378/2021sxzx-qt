@@ -9,6 +9,8 @@ import {
 } from 'antd';
 
 import {GetHotList, GetSearchRes, GetSearchWord} from "../../api/searchApi";
+import { useLocation } from 'react-router-dom';
+
 const { Option } = Select;
 const sortOptions = [
     { label: '智能排序', value: 'score' },
@@ -41,6 +43,11 @@ const washSearchData=(dataList)=>{
 }
 
 export default function SearchPage() {
+    // 获取咨询关键词
+    const location = useLocation();
+    const searchWord = location.state? location.state.inputValue: '';
+    console.log(searchWord);
+
     const [sortValue, setSortValue] = useState('score')
     const [contentValue, setContentValue] = useState('all')
     const [timeValue, setTimeValue] = useState('all')
