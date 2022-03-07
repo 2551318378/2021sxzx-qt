@@ -15,9 +15,7 @@ export default function Orientation() {
     const [ruleSelected, setRuleSelected] = useState([]);
     const [regionSelected, setRegionSelected] = useState([]);
     const [optionList, setOptionList] = useState([]);
-    
-    var lastRegionIndex = 0;
-    var nextParentRuleId = '0';
+
     var data = [];
     var taskCode = '';
 
