@@ -36,7 +36,9 @@ export default function SearchBar() {
         <div className={style.outer_shadow}>
             
         <div className={style.container}>
-            <img src={Logo} className={style.logo}></img>
+            <Link to='/home'>
+                <img src={Logo} className={style.logo}></img>
+            </Link>
             <Link to='/home'>
                 <div className={style.homepage}>首页</div>
             </Link>

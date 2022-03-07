@@ -63,13 +63,13 @@ export default function Maincontent() {
                 <div className={style.ind_or_ent}>
                     <Link to='#'>
                         <div className={style.individual}>
-                            <img src={IntIcon}></img>
+                            <img src={IntIcon} alt='个人业务'></img>
                             个人业务
                         </div>
                     </Link>
                     <Link to='#'>
                         <div className={style.enterprise}>
-                            <img src={EnvIcon}></img>
+                            <img src={EnvIcon} alt='法人业务'></img>
                             法人业务
                         </div>
                     </Link>
@@ -80,7 +80,7 @@ export default function Maincontent() {
                     {
                         parentRuleList.map((item, index) => {
                             return(
-                                <div className={parentRuleIdIndex == index ? style.active : null}
+                                <div className={parentRuleIdIndex === index ? style.active : null}
                                     onClick={handleParentClick.bind(this, index)}>
                                     { item.rule_name }
                                 </div>
@@ -100,12 +100,14 @@ export default function Maincontent() {
                                     picSrc = shbx; break;
                                 case '就业创业':
                                     picSrc = jycy; break;
+                                default:
+                                    break;
                             }   
                             return (
                                 <div onClick={handleChildClick.bind(this, item)}>
                                     <div className={style.outborder}>
                                         <div>
-                                            <img src={picSrc}></img>
+                                            <img src={picSrc} alt='事项图标'></img>
                                         </div>
                                     </div>
                                     <p>{ item.rule_name }</p>
