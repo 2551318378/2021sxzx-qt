@@ -89,10 +89,8 @@ export default function Maincontent() {
                     }
                 </div>
                 <div className={style.specific}>
-                    { console.log('childRuleList: ', childRuleList) }
                     {
                         childRuleList[parentRuleIdIndex]&&childRuleList[parentRuleIdIndex].map((item, index) => {
-                            console.log('child: ', item);
                             switch (item.rule_name) {
                                 case '劳动保障':
                                     picSrc = ldbz; break;
