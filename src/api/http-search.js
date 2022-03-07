@@ -5,7 +5,7 @@ instance.defaults.headers.post['Content-Type']='application/x-www-form-urlencode
 
 
 if(process.env.NODE_ENV==='development'){
-  instance.defaults.baseURL='/searchApi'
+  instance.defaults.baseURL='http://8.134.73.52:5000/searchApi/'
 } else if(process.env.NODE_ENV==='production'){
   instance.defaults.baseURL='http://8.134.73.52:5000/searchApi/'
 }
@@ -20,7 +20,7 @@ instance.interceptors.response.use(
     }
   },
   error =>{
-    if(error.response.status){
+    if(error.status){
       console.log('error');
       return Promise.reject(error.response)
     }

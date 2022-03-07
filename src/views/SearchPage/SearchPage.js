@@ -9,8 +9,6 @@ import {
 } from 'antd';
 
 import {GetHotList, GetSearchRes, GetSearchWord} from "../../api/searchApi";
-import { useLocation } from 'react-router-dom';
-
 const { Option } = Select;
 const sortOptions = [
     { label: '智能排序', value: 'score' },
@@ -43,23 +41,18 @@ const washSearchData=(dataList)=>{
 }
 
 export default function SearchPage() {
-    // 获取咨询关键词
-    const location = useLocation();
-    const searchWord = location.state? location.state.inputValue: '';
-    console.log(searchWord);
-
     const [sortValue, setSortValue] = useState('score')
     const [contentValue, setContentValue] = useState('all')
     const [timeValue, setTimeValue] = useState('all')
 
     const [searchList,setSearchList]=useState([
         {
-            title:'工伤职工劳动功能障碍程度等级鉴定',
+            title:'岭南英杰工程”后备人才变动登记',
             link:'https://baidu.com',
             material:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……"
         },
         {
-            title:'工伤职工劳动功能障碍程度等级鉴定',
+            title:'出版专业技术人员职业资格（初级、中级）考试报名',
             link:'https://baidu.com',
             material:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……"
         }
@@ -139,6 +132,7 @@ export default function SearchPage() {
             res.data.data.map(item=>{
                 final.push({word:item[0],freq:item[1]})
             })
+            console.log("res", res)
             console.log(final)
             setHotList(final)
         })
