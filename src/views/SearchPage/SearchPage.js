@@ -7,6 +7,8 @@ import HotList from "./components/HotList";
 import {
     Input, Radio, Select, AutoComplete, Button,
 } from 'antd';
+import SearchBar from '../components/SearchBar/SearchBar'
+import FooterInfo from '../components/FooterInfo/FooterInfo'
 
 import {GetHotList, GetSearchRes, GetSearchWord} from "../../api/searchApi";
 const { Option } = Select;
@@ -138,7 +140,8 @@ export default function SearchPage() {
         })
     },[])
     return (
-
+        <>
+        <SearchBar></SearchBar>
         <div className={style.SearchPageContainer}>
 
             <Input.Group compact className='inputGroup'>
@@ -146,7 +149,7 @@ export default function SearchPage() {
                 <span className='inputTitle'>全站搜索:</span>
                 <AutoComplete
                     className='autoComplete'
-                    placeholder="Email"
+                    placeholder="请输入搜索关键词"
                     options={keywordList}
                     size="large"
                     onChange={inputOnChange}
@@ -175,5 +178,7 @@ export default function SearchPage() {
                 </div>
             </div>
         </div>
+        <FooterInfo></FooterInfo>
+        </>
     )
 }
