@@ -51,12 +51,14 @@ export default function SearchPage() {
         {
             title:'岭南英杰工程”后备人才变动登记',
             link:'https://baidu.com',
-            material:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……"
+            material:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
+            date: '2021-11-22 16:56:22'
         },
         {
             title:'出版专业技术人员职业资格（初级、中级）考试报名',
             link:'https://baidu.com',
-            material:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……"
+            material:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
+            date: '2021-10-15 18:54:21'
         }
     ])
     const [hotList,setHotList]=useState([
