@@ -1,6 +1,7 @@
 $contact_color: #D7D7D7; 
 $contact_info_color: #F1F1F1;
 $copyright_color: #F2F2F2;  // $contact_bg_color
+$copyright_info_color: #6B6B6C;
 * {
     flex-shrink: 0;
 }
@@ -92,6 +93,28 @@ $copyright_color: #F2F2F2;  // $contact_bg_color
         }
         .copyright {
             height: 200px;
+            padding: 50px 0;
+            .cr_container {
+                height: 100px;
+                width: 1000px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                .cr_info {
+                    height: 60px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-size: 16px;
+                    color: $copyright_info_color;
+                    img {
+                        margin-right: 5px;
+                    }
+                }
+            }
         }
     }
 }
