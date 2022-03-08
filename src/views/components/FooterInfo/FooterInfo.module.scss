@@ -12,9 +12,9 @@ $copyright_info_color: #6B6B6C;
 }
 @media screen and (min-width: 401px) {
     .container {
+        width: 1519px;
         .contact {
             height: 266px;
-            width: 1519px;
             padding: 0 257px;
             background: $contact_color;
             display: flex;
@@ -29,7 +29,7 @@ $copyright_info_color: #6B6B6C;
             .web_info, .contact_us, .relevant_code div {
                 background: $copyright_color;
             }
-            .web_info {
+            .web_info, .contact_us {
                 padding-top: 20px;
                 padding-left: 30px;
                 p {
@@ -37,6 +37,8 @@ $copyright_info_color: #6B6B6C;
                     color: #333333;
                     font-size: 16px;
                 }
+            }
+            .web_info {
                 a {
                     display: inline-block;
                     margin-top: 10px;
@@ -45,12 +47,13 @@ $copyright_info_color: #6B6B6C;
                 }
             }
             .contact_us {
-                padding-top: 20px;
-                padding-left: 30px;
-                p {
-                    font-weight: bold;
-                    color: #333333;
+                .phone {
+                    margin-top: 25px;
                     font-size: 16px;
+                }
+                .info {
+                    margin-top: 10px;
+
                 }
             }
             .relevant_code {

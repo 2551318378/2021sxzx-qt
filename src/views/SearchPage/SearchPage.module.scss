@@ -1,16 +1,21 @@
-// 展示页面的背景
-.SearchPageContainer{
-  background-color: rgba(223, 234, 247, 1);
+.container {
+  margin: 0 auto;
   width: 1519px;
-  padding-left: 200px;
-  padding-right: 200px;
-  min-height: 400px;
-  padding-bottom: 100px;
-  .mainContainer{
-    align-self: center;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    margin-top: 10px;
+  // 展示页面的背景
+  .SearchPageContainer{
+    background-color: rgba(223, 234, 247, 1);
+    width: 1519px;
+    padding-left: 200px;
+    padding-right: 200px;
+    min-height: 400px;
+    padding-bottom: 100px;
+    .mainContainer{
+      align-self: center;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
   }
 }
+

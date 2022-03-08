@@ -140,7 +140,7 @@ export default function SearchPage() {
         })
     },[])
     return (
-        <>
+        <div className={style.container}>
         <SearchBar></SearchBar>
         <div className={style.SearchPageContainer}>
 
@@ -179,6 +179,6 @@ export default function SearchPage() {
             </div>
         </div>
         <FooterInfo></FooterInfo>
-        </>
+        </div>
     )
 }

@@ -17,7 +17,9 @@
     .autoComplete{
         width: 750px;
         .ant-select-selector{
+            border: solid 1px white;
             border-radius: 25px 0px 0px 25px !important;
+            box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.1);
         }
         display:inline-block;
     }
@@ -27,7 +29,9 @@
         border-top-right-radius: 25px;
         border-end-end-radius: 25px;
         display:inline-block;
+        box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.1);
     }
+    
 }
 
 .searchOptionContainer{

@@ -26,31 +26,33 @@ export default function FooterInfo() {
 
                 <div className={style.contact_us}>
                     <p>联系我们</p>
+                    <div className={style.phone}>020-12345；020-68127853</div>
+                    <div className={style.info}>联系信息</div>
                 </div>
 
                 <div className={style.relevant_code}>
                     <div className={`${style.dropdown_web} ${style.dropdown}`}>
                         <div className={style.dropdown_desc}>
-                            <img src={QRcode}></img> 广州市人设局官网 
+                            <img src={QRcode} alt='二维码图标'></img> 广州市人设局官网 
                         </div>
                         <div className={`${style.web_content} ${style.content}`}>
-                            <img src={QRcode_web}></img>
+                            <img src={QRcode_web} alt='广州市人设局官网二维码'></img>
                         </div>
                     </div>
                     <div className={`${style.dropdown_wechat} ${style.dropdown}`}>
                         <div className={style.dropdown_desc}>
-                            <img src={QRcode}></img> 广州市人设局微信公众号
+                            <img src={QRcode} alt='二维码图标'></img> 广州市人设局微信公众号
                         </div>
                         <div className={`${style.wechat_content} ${style.content}`}>
-                            <img src={QRcode_wechat}></img>
+                            <img src={QRcode_wechat} alt='广州市人设局微信公众号二维码'></img>
                         </div>
                     </div>
                     <div className={`${style.dropdown_app} ${style.dropdown}`}>
                         <div className={style.dropdown_desc}>
-                            <img src={QRcode}></img> 穗好办 APP 
+                            <img src={QRcode} alt='二维码图标'></img> 穗好办 APP 
                         </div>
                         <div className={`${style.app_content} ${style.content}`}>
-                            <img src={QRcode_app}></img>
+                            <img src={QRcode_app} alt='穗好办APP二维码'></img>
                         </div>
                     </div>
                 </div>
@@ -58,12 +60,12 @@ export default function FooterInfo() {
             
             <div className={style.copyright}>
                 <div className={style.cr_container}>
-                    <img src={footer_2}></img>
-                    <img src={footer_1}></img>
+                    <img src={footer_2} alt='政府网站找错'></img>
+                    <img src={footer_1} alt='党政机关标志'></img>
                     <div className={style.cr_info}>
                         <div>主办单位：广州市人力资源和社会保障局</div>
                         <div>
-                            <img src={footer_3}></img>
+                            <img src={footer_3} alt='粤公网标志'></img>
                             粤公网安备44010402001594号 粤ICP备11001610号-1 网站标识码：4401000059   
                         </div>
                     </div>
