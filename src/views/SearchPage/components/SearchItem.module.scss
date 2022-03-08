@@ -14,5 +14,11 @@
     text-overflow:ellipsis;
     white-space: nowrap;
   }
+  .date{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    text-align: right;
+  }
 }
 

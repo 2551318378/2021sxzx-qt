@@ -169,7 +169,7 @@ export default function SearchPage() {
                 <div className={style.searchListContainer}>
                     {searchList.map((item)=>{
                         return(
-                            <SearchItem content={item.material} link={item.link} title={item.title}></SearchItem>
+                            <SearchItem content={item.material} link={item.link} title={item.title} date={item.date}></SearchItem>
                         )
                     })}
                 </div>
