@@ -6,11 +6,10 @@ export default function SearchItem(props) {
         <div className={style.container} >
             <div className={style.title}>
                 <a href={props.link}>{props.title}</a>
-
             </div>
             <div className={style.content}>
                 {props.content}
-            </div>
+            </div>  
         </div>
     )
 }
