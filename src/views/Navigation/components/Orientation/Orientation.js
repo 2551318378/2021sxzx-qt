@@ -25,7 +25,7 @@ export default function Orientation() {
         setIsRuleFinish(false);
         setIsRegionFinish(false);
         setRegionSelected([]);
-        if (index == 0) {
+        if (index === 0) {
             axios.post('/v1/getRules',{
                 parentId: '0'
             }).then(res => {
@@ -49,7 +49,7 @@ export default function Orientation() {
 
     const handleClickStepRegion = (item, index) => {
         setIsRegionFinish(false);
-        if (index == 0) {
+        if (index === 0) {
             axios.post('/v1/getRegions', {
                 parentId: ""
             }).then(res => {
@@ -174,6 +174,7 @@ export default function Orientation() {
     }
     useEffect(() => {
         init();
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -204,7 +205,7 @@ export default function Orientation() {
                                             { item.region_name }
                                         </div>
                                     </div>
-                                    <div className={`${style.separator} ${isRegionFinish && index == regionSelected.length-1? style.hidden:null}`}></div>
+                                    <div className={`${style.separator} ${isRegionFinish && index === regionSelected.length-1? style.hidden:null}`}></div>
                                 </div>
                             )
                         }

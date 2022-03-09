@@ -10,11 +10,12 @@ export default function SlideCS() {
         <div className={isSiderHide ? style.hide : null}>
             <div className={style.container}>
                 <img src={deleteIcon} 
-                     className={style.delete} 
-                     onClick={setIsSiderHide.bind(this, true)}/>
+                    alt='关闭按钮'
+                    className={style.delete} 
+                    onClick={setIsSiderHide.bind(this, true)}/>
                 <Link to='/intelligentCS'>
                     <div className={style.clickbox}>
-                        <img src={csIcon}/>
+                        <img src={csIcon} alt='智能客服图标'/>
                     </div>
                 </Link>
             </div>
