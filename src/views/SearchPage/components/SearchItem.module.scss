@@ -1,7 +1,8 @@
 .container{
   background-color: white;
   border-radius: 10px;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
+
   margin-bottom: 20px;
   width: 700px;
   .title{
@@ -15,6 +16,7 @@
     white-space: nowrap;
   }
   .date{
+    margin-top: 10px;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
