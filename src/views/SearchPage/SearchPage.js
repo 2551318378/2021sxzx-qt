@@ -61,12 +61,6 @@ export default function SearchPage() {
         }
     ])
     const [hotList,setHotList]=useState([
-        {
-            word:'基层就业补贴',
-        },
-        {
-            word:'生育津贴',
-        }
     ])
     const [inputValue,setInputValue]=useState('')
     const [keywordList,setKeywordList]=useState([])
@@ -133,7 +127,7 @@ export default function SearchPage() {
             console.log(res)
             let final=[]
             res.data.data.map(item=>{
-                final.push({word:item[0],freq:item[1]})
+                final.push({word:item[1],freq:item[0]})
             })
             console.log("res", res)
             console.log(final)
