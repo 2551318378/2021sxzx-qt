@@ -152,7 +152,7 @@ export default function Guide() {
 			<span className={style.button}>打印咨询结果</span>
 			<Divider />
 			<div className={style.subtitle}>申请材料</div>
-			<Table className='audit_material' columns={audit_material_colunms} dataSource={data.audit_material} pagination={false} size='middle' />
+			<Table className={style.audit_material} columns={audit_material_colunms} dataSource={data.audit_material} pagination={false} size='middle' />
 			<div className={style.subtitle}>办理地点</div>
 			{renderLobby(data.audit_catalog_lobby)}
 

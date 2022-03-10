@@ -1,17 +1,16 @@
 import './Search.scss' 
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 // import axios from "../../http/http";
 import style from "../SearchPage/SearchPage.module.scss";
 import SearchItem from "./components/SearchItem";
 import HotList from "./components/HotList";
-import {
-    Input, Radio, Select, AutoComplete, Button,
-} from 'antd';
+import { Input, Radio, AutoComplete, Button } from 'antd';
+// import { Select } from 'antd';
 import SearchBar from '../components/SearchBar/SearchBar'
 import FooterInfo from '../components/FooterInfo/FooterInfo'
 
 import {GetHotList, GetSearchRes, GetSearchWord} from "../../api/searchApi";
-const { Option } = Select;
+// const { Option } = Select;
 const sortOptions = [
     { label: '智能排序', value: 'score' },
     { label: '时间排序', value: 'time' },

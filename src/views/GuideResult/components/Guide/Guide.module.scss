@@ -1,6 +1,6 @@
 .container{
-    width: 75%;
-    padding-top: 50px; 
+    width: 1519px;
+    padding: 50px 200px 0px 200px; 
 
     .title{
         color: #5772B8;
@@ -16,7 +16,7 @@
         color: #FFFFFF;
         padding: 7px 15px 7px 15px;
         margin-right: 25px;
-        border-radius: 7px;
+        border-radius: 8px;
         cursor: pointer;
     }
     .subtitle{
@@ -40,5 +40,8 @@
         color: #1E90FF;
         font-weight: bold;
         cursor: pointer;
+    }
+    .audit_material{
+        width: 1125px;
     }
 }

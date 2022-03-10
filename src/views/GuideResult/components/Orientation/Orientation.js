@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import style from './Orientation.module.scss'
 import { useLocation } from 'react-router-dom'
-import axios from '../../../../api/http';
+// import axios from '../../../../api/http';
 
 export default function Orientation() {
     const hint = '您属于情况：';
@@ -14,7 +14,8 @@ export default function Orientation() {
     }
     useEffect(() => {
         init();
-    }, [])
+        // eslint-disable-next-line
+    }, []) 
     return (
         <div className={style.container}>
             <div className={style.hint}>{ hint }</div>
@@ -43,7 +44,7 @@ export default function Orientation() {
                                         { item.region_name }
                                     </div>
                                 </div>
-                                <div className={`${style.separator}  ${index == regionSelected.length-1? style.hidden: null}`}></div>
+                                <div className={`${style.separator}  ${index === regionSelected.length-1? style.hidden: null}`}></div>
                             </div>
                         )
                     })

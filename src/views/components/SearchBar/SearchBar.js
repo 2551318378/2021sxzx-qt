@@ -16,7 +16,7 @@ export default function SearchBar() {
         getSearchInfo();
     }
     const handleEnterSearch = (e) => {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             getSearchInfo();
         }
     }
@@ -37,7 +37,7 @@ export default function SearchBar() {
             
         <div className={style.container}>
             <Link to='/home'>
-                <img src={Logo} className={style.logo}></img>
+                <img src={Logo} alt='人社局logo' className={style.logo}></img>
             </Link>
             <Link to='/home'>
                 <div className={style.homepage}>首页</div>
@@ -50,7 +50,10 @@ export default function SearchBar() {
                     <p>事业单位业务</p>
                 </div>
             </div>
-            <div className={style.provservice}>省政务服务</div>
+            <a target='_blank' rel='noreferrer'  
+                href='https://www.gdzwfw.gov.cn/?isLogin=false'>
+                <div className={style.provservice}>省政务服务</div>
+            </a> 
             <div className={style.searchbox}>
                 <input 
                     type='text'
@@ -60,6 +63,7 @@ export default function SearchBar() {
                     onChange={e => handleChangeWord(e)}
                     onKeyDown={e => handleEnterSearch(e)}/>
                 <img 
+                    alt='搜索按钮'
                     src={SearchBtn} 
                     className={style.searchbtn}
                     onClick={handleClickSearchBtn}/>
