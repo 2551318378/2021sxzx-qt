@@ -58,8 +58,8 @@ export default function Maincontent() {
     return (
         <div className={style.container}>
             <div className={style.banner_show}>
-                <div className={style.slogan1}>广州人设 为您解决事项咨询最后一公里问题</div>
-                <div className={style.slogan2}>广州人设为您提供866个事项咨询，打造一站式事项咨询平台</div>
+                <div className={style.slogan1}>广州人社 为您解决事项咨询最后一公里问题</div>
+                <div className={style.slogan2}>广州人社为您提供866个事项咨询，打造一站式事项咨询平台</div>
                 <div className={style.ind_or_ent}>
                     <Link to='#'>
                         <div className={style.individual}>
