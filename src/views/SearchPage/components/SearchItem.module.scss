@@ -24,3 +24,31 @@
   }
 }
 
+@media screen and (max-width:400px){
+  .container{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 20px 10px 20px;
+  
+    margin-bottom: 20px;
+    width: 350px;
+    .title{
+      font-size: 20px;
+      color: #027DB4;
+      font-weight: 700;
+    }
+    .content{
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
+    .date{
+      margin-top: 10px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+      text-align: right;
+    }
+  }
+}
+

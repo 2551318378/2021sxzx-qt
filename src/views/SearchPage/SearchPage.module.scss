@@ -29,6 +29,16 @@
       width: 100%;
       padding-left: 8px;
       padding-right: 0px;
+      .mainContainer{
+        align-self: center;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        margin-top: 10px;
+        .searchListContainer{
+          position:absolute;
+        }
+      }
     }
   }
 }
