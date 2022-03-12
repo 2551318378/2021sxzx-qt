@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import style from './Orientation.module.scss'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import axios from '../../../../api/http'
+import { Spin } from 'antd'
 
 
 export default function Orientation() {
@@ -9,7 +10,6 @@ export default function Orientation() {
     const location = useLocation();
     const history = useHistory();
     
-    // const [stepNum, setStepNum] = useState(0);
     const [isRuleFinish, setIsRuleFinish] = useState(false);
     const [isRegionFinish, setIsRegionFinish] = useState(false);
     const [ruleSelected, setRuleSelected] = useState([]);
@@ -31,8 +31,6 @@ export default function Orientation() {
             })
         } else {
             setIsRuleFinish(false);
-            // setIsRegionFinish(false);
-            // setRegionSelected([]);
             axios.post('/v1/getRules', {
                 parentId: item.rule_id
             }).then(res => {
@@ -42,28 +40,7 @@ export default function Orientation() {
                 console.log(res);
             })
             setRuleSelected(ruleSelected.filter((_, i) => i <= index));
-        }
-        
-        // if (index === 0) {
-        //     axios.post('/v1/getRules',{
-        //         parentId: '0'
-        //     }).then(res => {
-        //         data = res.data.data;
-        //         setOptionList(data);
-        //     }).catch((res)=>{
-        //         console.log(res);
-        //     })
-        // } else {
-        //     axios.post('/v1/getRules',{
-        //         parentId: ruleSelected[index-1].rule_id
-        //     }).then(res => {
-        //         data = res.data.data;
-        //         setOptionList(data);
-        //     }).catch((res)=>{
-        //         console.log(res);
-        //     })
-        // }
-        
+        }  
     }
 
     const handleClickStepRegion = (item, index) => {
@@ -76,33 +53,10 @@ export default function Orientation() {
         }).catch(res => {
             console.log(res);
         })
-        // if (index === 0) {
-            // axios.post('/v1/getRegions', {
-            //     parentId: ""
-            // }).then(res => {
-            //     data = res.data.data;
-            //     setOptionList(data);
-            // })
-        // } else {
-        //     axios.post('/v1/getRegions',{
-        //         parentId: regionSelected[index-1].region_id
-        //     }).then(res => {
-        //         data = res.data.data;
-        //         setOptionList(data);
-        //         if (!data[0]) {
-        //             setIsRegionFinish(true);
-        //             handleForTaskCode(item);
-        //         }
-        //     }).catch((res)=>{
-        //         console.log(res);
-        //     })
-
-        // }
         setRegionSelected(regionSelected.filter((_, i) => i <= index));
     }
 
     const handleClickOption = (item) => {
-        // setStepNum(stepNum+1);
         if (!isRuleFinish) {
             setRuleSelected([...ruleSelected, item]);
             axios.post('/v1/getRules',{
@@ -110,6 +64,7 @@ export default function Orientation() {
             }).then(res => {
                 data = res.data.data;
                 if (!data[0]) {
+                    setOptionList([]);
                     setIsRuleFinish(true);
                     axios.post('/v1/getRegions', {
                         parentId: ""
@@ -125,7 +80,6 @@ export default function Orientation() {
             })
         } else {
             setRegionSelected([...regionSelected, item]);
-            // console.log(item);
             axios.post('/v1/getRegions',{
                 parentId: item.region_id
             }).then(res => {
@@ -200,14 +154,6 @@ export default function Orientation() {
             }
             
         } else {
-            // axios.post('/v1/getRules',{
-            //     parentId: '0'
-            // }).then(res => {
-            //     data = res.data.data;
-            //     setOptionList(data);
-            // }).catch((res)=>{
-            //     console.log(res);
-            // })
             history.push('/home');
         }
         
@@ -272,6 +218,11 @@ export default function Orientation() {
                     })
                 }
             </div>
+            {
+                <div className={style.loadingBox}>
+                    <Spin spinning={ optionList.length === 0 }/>
+                </div>
+            }
             <Link to='/home'>
                  <div className={style.homeBtn}>
                     回到首页
