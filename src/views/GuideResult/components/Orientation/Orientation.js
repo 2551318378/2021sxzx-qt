@@ -1,21 +1,47 @@
 import React, { useState, useEffect } from 'react'
 import style from './Orientation.module.scss'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 // import axios from '../../../../api/http';
 
 export default function Orientation() {
     const hint = '您属于情况：';
     const location = useLocation();
+    const history = useHistory();
     const [ruleSelected, setRuleSelected] = useState(location.state? location.state.ruleSelected: []);
     const [regionSelected, setRegionSelected] = useState(location.state? location.state.regionSelected: []);
 
     const init = () => {
-        console.log(regionSelected.length);
+        // console.log(regionSelected.length);
     }
     useEffect(() => {
         init();
         // eslint-disable-next-line
     }, []) 
+
+
+    const handleClickStepRule = (item, index) => {
+        history.push({
+            pathname: '/navigation',
+            state: { 
+                ruleSelected: ruleSelected.filter((_, i) => i < index), 
+                regionSelected: [],
+                type: 1 
+            }
+        })
+        // console.log(ruleSelected.filter((_, i) => i < index));
+    }
+
+    const handleClickStepRegion = (item, index) => {
+        history.push({
+            pathname: '/navigation',
+            state: { 
+                ruleSelected: ruleSelected, 
+                regionSelected: regionSelected.filter((_, i) => i < index),
+                type: 1 
+            }
+        })
+    }
+
     return (
         <div className={style.container}>
             <div className={style.hint}>{ hint }</div>
@@ -24,7 +50,7 @@ export default function Orientation() {
                     ruleSelected.map((item, index) => {
                         return (
                             <div className={style.selectedBox} key={index}>
-                                <div className={style.outer}>
+                                <div className={style.outer} onClick={handleClickStepRule.bind(this, item, index)}>
                                     <div className={style.desc}>
                                         { item.rule_name }
                                     </div>
@@ -39,7 +65,7 @@ export default function Orientation() {
                         return (
                             <div className={style.selectedBox} 
                                 key={index}>
-                                <div className={style.outer}>
+                                <div className={style.outer} onClick={handleClickStepRegion.bind(this, item, index)}>
                                     <div className={style.desc}>
                                         { item.region_name }
                                     </div>

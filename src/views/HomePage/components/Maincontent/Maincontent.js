@@ -51,7 +51,7 @@ export default function Maincontent() {
         ruleSelected.push(parentRuleList[parentRuleIdIndex], item);
         history.push({
             pathname: '/navigation',
-            state: { homeRuleSelected: ruleSelected, secondRuleId: item.rule_id }
+            state: { ruleSelected: ruleSelected, type: 0 }
         })
     }
 
