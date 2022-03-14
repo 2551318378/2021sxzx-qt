@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import style from './SearchBar.module.scss'
-import Logo from '../../../assets/logo.png'
-import SearchBtn from '../../../assets/icon_searchbtn.png'
 import { Link, useHistory } from 'react-router-dom'
 import { message } from 'antd'
+import { Images } from '../../../assets'
 
 export default function SearchBar() {
     const history = useHistory();
@@ -37,7 +36,7 @@ export default function SearchBar() {
             
         <div className={style.container}>
             <Link to='/home'>
-                <img src={Logo} alt='人社局logo' className={style.logo}></img>
+                <img src={Images.common.ic_logo} alt='人社局logo' className={style.logo}></img>
             </Link>
             <Link to='/home'>
                 <div className={style.homepage}>首页</div>
@@ -64,7 +63,7 @@ export default function SearchBar() {
                     onKeyDown={e => handleEnterSearch(e)}/>
                 <img 
                     alt='搜索按钮'
-                    src={SearchBtn} 
+                    src={Images.common.ic_search} 
                     className={style.searchbtn}
                     onClick={handleClickSearchBtn}/>
             </div>

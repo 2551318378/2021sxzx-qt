@@ -7,14 +7,22 @@ export default function Orientation() {
     const hint = '您属于情况：';
     const location = useLocation();
     const history = useHistory();
-    const [ruleSelected, setRuleSelected] = useState(location.state? location.state.ruleSelected: []);
-    const [regionSelected, setRegionSelected] = useState(location.state? location.state.regionSelected: []);
+    const [ruleSelected, setRuleSelected] = useState([]);
+    const [regionSelected, setRegionSelected] = useState([]);
 
-    const init = () => {
-        // console.log(regionSelected.length);
-    }
     useEffect(() => {
-        init();
+        if (location.state) {
+            setRuleSelected(location.state.ruleSelected);
+            setRegionSelected(location.state.regionSelected);
+        } else {
+            console.log(location.pathname);
+            /* 
+                task_code -> item_rule_id (/api/v1/getItemByUniId)
+                item_rule_id -> rule_id + region_id (/api/v1/getItemRules)
+                region_id[] -> regionList (/api/v1/getRegionPath)
+                rule_id[] -> ruleList (/api/v1/getRulePath)
+            */
+        }
         // eslint-disable-next-line
     }, []) 
 
@@ -23,7 +31,7 @@ export default function Orientation() {
         history.push({
             pathname: '/navigation',
             state: { 
-                ruleSelected: ruleSelected.filter((_, i) => i < index), 
+                ruleSelected: ruleSelected.filter((_, i) => i <= index), 
                 regionSelected: [],
                 type: 1 
             }
@@ -36,7 +44,7 @@ export default function Orientation() {
             pathname: '/navigation',
             state: { 
                 ruleSelected: ruleSelected, 
-                regionSelected: regionSelected.filter((_, i) => i < index),
+                regionSelected: regionSelected.filter((_, i) => i <= index),
                 type: 1 
             }
         })
