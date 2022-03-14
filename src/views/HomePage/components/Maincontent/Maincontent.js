@@ -1,13 +1,18 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './Maincontent.module.scss'
-import IntIcon from '../../../../assets/icon_gerenyewu.png'
-import EnvIcon from '../../../../assets/icon_qiyeyewu.png'
-import shbx from '../../../../assets/icon_shehuibaoxian.png'
-import rcrs from '../../../../assets/icon_rencairenshi.png'
-import jycy from '../../../../assets/icon_jiuyechuangye.png'
-import ldbz from '../../../../assets/icon_laodongbaozhang.png'
+import { Images } from '../../../../assets'
 import { Link, useHistory } from 'react-router-dom'
+import { GetRules, GetRegion } from '../../../../api/navigationApi'
+
+import IntIcon from '../../../../assets/imgs/icon_gerenyewu.png'
+import EnvIcon from '../../../../assets/imgs/icon_qiyeyewu.png'
+import shbx from '../../../../assets/imgs/icon_shehuibaoxian.png'
+import rcrs from '../../../../assets/imgs/icon_rencairenshi.png'
+import jycy from '../../../../assets/imgs/icon_jiuyechuangye.png'
+import ldbz from '../../../../assets/imgs/icon_laodongbaozhang.png'
+
 import axios from '../../../../api/http'
+
 // parent -> classify
 // child -> specific
 
@@ -21,6 +26,26 @@ export default function Maincontent() {
     var picSrc = '';
 
     useEffect(() => {
+        // let data;
+        // let req;
+        // // 获取第一级事项（父事项）
+        // req = {
+        //     parentId : '0'
+        // };
+        // GetRules(req).then(res => {
+        //     data = res.data.data;
+        //     setParentRuleList(data);
+        // });
+        // // 获取第二级事项（子事项）
+        // data.map(item => {
+        //     req = {
+        //         parentId : item.rule_id
+        //     };
+        //     GetRegion(req).then(res => {
+        //         tmpList.push(res.data.data);
+        //         setChildRuleList(tmpList);
+        //     })
+        // });
         let data;
         axios.post('/v1/getRules', {
             parentId: '0'
@@ -40,6 +65,8 @@ export default function Maincontent() {
         }).catch(res => {
             console.log(res);
         })
+
+        // eslint-disable-next-line
     }, [])
     
     const handleParentClick = (index) => {

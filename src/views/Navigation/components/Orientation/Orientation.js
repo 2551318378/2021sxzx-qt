@@ -107,7 +107,7 @@ export default function Orientation() {
                 item_rule_id: tItemRuleId
             }).then(res =>{
                 taskCode = res.data.data[0].task_code;
-                console.log("/v1/taskResult/"+taskCode);
+                // console.log("/v1/taskResult/"+taskCode);
                 history.push({
                     pathname: "/v1/taskResult/"+taskCode,
                     state: { 
