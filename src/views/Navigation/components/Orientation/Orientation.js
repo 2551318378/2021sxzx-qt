@@ -243,7 +243,7 @@ export default function Orientation() {
 
             
         } else {
-            history.push('/home');
+            // history.push('/home');
         }
         // eslint-disable-next-line
     }, []);

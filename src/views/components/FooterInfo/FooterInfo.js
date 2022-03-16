@@ -7,6 +7,7 @@ export default function FooterInfo() {
     return (
         <div className={style.container}>
             <div className={style.contact}>
+                <div className={style.ct_container}>
                 <div className={style.web_info}>
                     <p>网站信息</p>
                     <div>
@@ -49,6 +50,7 @@ export default function FooterInfo() {
                             <img src={Images.common.qrcode_app} alt='穗好办APP二维码'></img>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
             

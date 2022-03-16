@@ -138,38 +138,38 @@ export default function SearchPage() {
         <div className={style.container}>
         <SearchBar></SearchBar>
         <div className={style.SearchPageContainer}>
+            <div className={style.content}>
+                <Input.Group compact className='inputGroup'>
+                    <span className='inputTitle'>全站搜索:</span>
+                    <AutoComplete
+                        className='autoComplete'
+                        placeholder="请输入搜索关键词"
+                        options={keywordList}
+                        size="large"
+                        onChange={inputOnChange}
+                        value={inputValue}/>
+                    <Button className='inputButton' size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
 
-            <Input.Group compact className='inputGroup'>
-
-                <span className='inputTitle'>全站搜索:</span>
-                <AutoComplete
-                    className='autoComplete'
-                    placeholder="请输入搜索关键词"
-                    options={keywordList}
-                    size="large"
-                    onChange={inputOnChange}
-                    value={inputValue}/>
-                <Button className='inputButton' size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
-
-            </Input.Group>
-            <div className='searchOptionContainer'>
-                <div className='subContainer'><Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
+                </Input.Group>
+                <div className='searchOptionContainer'>
+                    <div className='subContainer'><Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
                              buttonStyle="solid" className='searchOption'/></div>
-                <div className='subContainer'><Radio.Group options={contentOptions} onChange={contentOnChange} value={contentValue} optionType="button"
+                    <div className='subContainer'><Radio.Group options={contentOptions} onChange={contentOnChange} value={contentValue} optionType="button"
                              buttonStyle="solid" className='searchOption'/></div>
-                <div className='subContainer'><Radio.Group options={timeOptions} onChange={timeOnChange} value={timeValue} optionType="button"
+                    <div className='subContainer'><Radio.Group options={timeOptions} onChange={timeOnChange} value={timeValue} optionType="button"
                              buttonStyle="solid" className='searchOption'/></div>
-            </div>
-            <div className={style.mainContainer}>
-                <div className={style.searchListContainer}>
-                    {searchList.map((item)=>{
-                        return(
-                            <SearchItem content={item.material} link={item.link} title={item.title} date={item.date}></SearchItem>
-                        )
-                    })}
                 </div>
-                <div className={style.hotListContainer}>
-                    <HotList wordList={hotList} handler={handleHotList}></HotList>
+                <div className={style.mainContainer}>
+                    <div className={style.searchListContainer}>
+                        {searchList.map((item)=>{
+                            return(
+                                <SearchItem content={item.material} link={item.link} title={item.title} date={item.date}></SearchItem>
+                            )
+                        })}
+                    </div>
+                    <div className={style.hotListContainer}>
+                        <HotList wordList={hotList} handler={handleHotList}></HotList>
+                    </div>
                 </div>
             </div>
         </div>

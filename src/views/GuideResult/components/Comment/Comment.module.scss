@@ -51,26 +51,26 @@
     width: 1186px;
     border-radius: 20px;
     padding: 20px 48px 40px 48px;
-    margin-bottom: 200px;
-    .widthController{
+    margin-bottom: 100px;
+    .widthController {
       .title {
         font-size: 48px;
       }
-      .scoreContainer{
+      .scoreContainer {
         border-radius: 2px;
         padding: 15px 75px;
         margin-top: 25px;
         border: solid 10px #F2F2F2;
         .top{
-          .rateContainer{
+          .rateContainer {
             font-size: 48px;
           }
-          .antRateText{
+          .antRateText {
             margin-left: 25px;
             font-size: 28px;
           }
         }
-        .optionContainer{
+        .optionContainer {
           margin-top: 20px;
           span {
             background: #E8E8E8;
@@ -82,7 +82,7 @@
             }
           }
         }
-        .textArea{
+        .textArea {
           margin-top: 25px;
           font-size: 20px;
           border: solid 10px #F2F2F2;
@@ -111,6 +111,7 @@
     width: 315px;
     border-radius: 10px;
     padding: 15px;
+    margin-bottom: 50px;
     .widthController{
       .title {
         font-size: 14px;
