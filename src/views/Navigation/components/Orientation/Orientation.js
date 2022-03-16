@@ -136,7 +136,7 @@ export default function Orientation() {
                     setIsRegionFinish(true);
                     handleForTaskCode(item);
                 }
-            }).catch((res)=>{
+            }).catch((res) => {
                 console.log(res);
             })
         }
