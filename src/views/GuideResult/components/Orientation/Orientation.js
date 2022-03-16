@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import style from './Orientation.module.scss'
 import { useLocation, useHistory } from 'react-router-dom'
+import { GetItemByUniId, GetItemRules, GetRegionPath, GetRulePath } from '../../../../api/navigationApi';
 // import axios from '../../../../api/http';
 
 export default function Orientation() {
@@ -10,18 +11,47 @@ export default function Orientation() {
     const [ruleSelected, setRuleSelected] = useState([]);
     const [regionSelected, setRegionSelected] = useState([]);
 
+    var req;
+
+    /* 结果页面初始化：
+        1. 导航页面进入(有数据列表)
+        2. 其他情况(只有task_code)
+    */
     useEffect(() => {
         if (location.state) {
             setRuleSelected(location.state.ruleSelected);
             setRegionSelected(location.state.regionSelected);
         } else {
             console.log(location.pathname);
-            /* 
-                task_code -> item_rule_id (/api/v1/getItemByUniId)
-                item_rule_id -> rule_id + region_id (/api/v1/getItemRules)
-                region_id[] -> regionList (/api/v1/getRegionPath)
-                rule_id[] -> ruleList (/api/v1/getRulePath)
-            */
+            let tmp = location.pathname;
+            let ruleId;
+            let regionId;
+            // 获取rule_id和region_id
+            req = {
+                task_code: tmp
+            }
+            GetItemByUniId(req).then(res => {
+                req = {
+                    item_rule_id: res.data.data[0].item_rule_id
+                }
+                GetItemRules(req).then(res => {
+                    ruleId = res.data.data[0].rule_id;
+                    regionId = res.data.data[0].region_id;
+                })
+            })
+            // 获取路径
+            req = {
+                ruleIds: [ruleId]
+            }
+            GetRulePath(req).then(res => {
+                setRuleSelected(res.data.data[0]);
+            })
+            req = {
+                regionIds: [regionId]
+            }
+            GetRegionPath(req).then(res => {
+                setRegionSelected(res.data.data[0]);
+            })
         }
         // eslint-disable-next-line
     }, []) 
@@ -31,21 +61,24 @@ export default function Orientation() {
         history.push({
             pathname: '/navigation',
             state: { 
-                ruleSelected: ruleSelected.filter((_, i) => i <= index), 
-                regionSelected: [],
-                type: 1 
+                type: 1, 
+                ruleSelected: ruleSelected, 
+                regionSelected: regionSelected,
+                clickItem: item,
+                clickIndex: index
             }
         })
-        // console.log(ruleSelected.filter((_, i) => i < index));
     }
 
     const handleClickStepRegion = (item, index) => {
         history.push({
             pathname: '/navigation',
             state: { 
+                type: 2, 
                 ruleSelected: ruleSelected, 
-                regionSelected: regionSelected.filter((_, i) => i <= index),
-                type: 1 
+                regionSelected: regionSelected,
+                clickItem: item,
+                clickIndex: index
             }
         })
     }

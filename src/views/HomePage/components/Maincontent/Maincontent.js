@@ -2,19 +2,8 @@ import React, { useEffect, useState } from 'react'
 import style from './Maincontent.module.scss'
 import { Images } from '../../../../assets'
 import { Link, useHistory } from 'react-router-dom'
-import { GetRules, GetRegion } from '../../../../api/navigationApi'
-
-import IntIcon from '../../../../assets/imgs/icon_gerenyewu.png'
-import EnvIcon from '../../../../assets/imgs/icon_qiyeyewu.png'
-import shbx from '../../../../assets/imgs/icon_shehuibaoxian.png'
-import rcrs from '../../../../assets/imgs/icon_rencairenshi.png'
-import jycy from '../../../../assets/imgs/icon_jiuyechuangye.png'
-import ldbz from '../../../../assets/imgs/icon_laodongbaozhang.png'
-
+import { GetRules, GetRegions } from '../../../../api/navigationApi'
 import axios from '../../../../api/http'
-
-// parent -> classify
-// child -> specific
 
 export default function Maincontent() {
     const history = useHistory();
@@ -22,10 +11,10 @@ export default function Maincontent() {
     const [parentRuleList, setParentRuleList] = useState([]);
     const [childRuleList, setChildRuleList] = useState([[]]);
 
-    var tmpList = [];
-    var picSrc = '';
+    var picSrc;
 
     useEffect(() => {
+        var tmpList = [];
         // let data;
         // let req;
         // // 获取第一级事项（父事项）
@@ -41,11 +30,12 @@ export default function Maincontent() {
         //     req = {
         //         parentId : item.rule_id
         //     };
-        //     GetRegion(req).then(res => {
+        //     GetRegions(req).then(res => {
         //         tmpList.push(res.data.data);
         //         setChildRuleList(tmpList);
         //     })
         // });
+        
         let data;
         axios.post('/v1/getRules', {
             parentId: '0'
@@ -90,13 +80,13 @@ export default function Maincontent() {
                 <div className={style.ind_or_ent}>
                     <Link to='#'>
                         <div className={style.individual}>
-                            <img src={IntIcon} alt='个人业务'></img>
+                            <img src={Images.home.ic_gryw} alt='个人业务'></img>
                             个人业务
                         </div>
                     </Link>
                     <Link to='#'>
                         <div className={style.enterprise}>
-                            <img src={EnvIcon} alt='法人业务'></img>
+                            <img src={Images.home.ic_fryw} alt='法人业务'></img>
                             法人业务
                         </div>
                     </Link>
@@ -120,13 +110,13 @@ export default function Maincontent() {
                         childRuleList[parentRuleIdIndex]&&childRuleList[parentRuleIdIndex].map((item, index) => {
                             switch (item.rule_name) {
                                 case '劳动保障':
-                                    picSrc = ldbz; break;
+                                    picSrc = Images.home.ic_ldbz; break;
                                 case '人事人才':
-                                    picSrc = rcrs; break;
+                                    picSrc = Images.home.ic_rsrc; break;
                                 case '社会保险':
-                                    picSrc = shbx; break;
+                                    picSrc = Images.home.ic_shbx; break;
                                 case '就业创业':
-                                    picSrc = jycy; break;
+                                    picSrc = Images.home.ic_jycy; break;
                                 default:
                                     break;
                             }   
