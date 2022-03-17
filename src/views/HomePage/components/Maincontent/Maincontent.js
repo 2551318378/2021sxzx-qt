@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import style from './Maincontent.module.scss'
 import { Images } from '../../../../assets'
 import { Link, useHistory } from 'react-router-dom'
-import { GetRules, GetRegions } from '../../../../api/navigationApi'
+import { GetRules } from '../../../../api/navigationApi'
 import axios from '../../../../api/http'
 
 export default function Maincontent() {
@@ -14,48 +14,27 @@ export default function Maincontent() {
     var picSrc;
 
     useEffect(() => {
-        var tmpList = [];
-        // let data;
-        // let req;
-        // // 获取第一级事项（父事项）
-        // req = {
-        //     parentId : '0'
-        // };
-        // GetRules(req).then(res => {
-        //     data = res.data.data;
-        //     setParentRuleList(data);
-        // });
-        // // 获取第二级事项（子事项）
-        // data.map(item => {
-        //     req = {
-        //         parentId : item.rule_id
-        //     };
-        //     GetRegions(req).then(res => {
-        //         tmpList.push(res.data.data);
-        //         setChildRuleList(tmpList);
-        //     })
-        // });
-        
-        let data;
-        axios.post('/v1/getRules', {
-            parentId: '0'
-        }).then(res => {
+        let tmpList = [];
+        let data = [];
+        let req;
+        // 获取第一级事项（父事项）
+        req = {
+            parentId : '0'
+        }
+        GetRules(req).then(res => {
             data = res.data.data;
-            setParentRuleList(data);  
+            setParentRuleList(data);
+            // 获取第二级事项（子事项）
             data.map(item => {
-                axios.post('/v1/getRules', {
-                    parentId: item.rule_id
-                }).then(res => {
+                req = {
+                    parentId : item.rule_id
+                }
+                GetRules(req).then(res => {
                     tmpList.push(res.data.data);
                     setChildRuleList(tmpList);
-                }).catch(res => {
-                    console.log(res);
                 })
-            })
-        }).catch(res => {
-            console.log(res);
-        })
-
+            });
+        });
         // eslint-disable-next-line
     }, [])
     

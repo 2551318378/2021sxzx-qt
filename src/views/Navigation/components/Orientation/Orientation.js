@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import style from './Orientation.module.scss'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import { Spin } from 'antd'
-import axios from '../../../../api/http'
 import { GetRules, GetRegions, GetItemRules, GetItems } from '../../../../api/navigationApi'
 
 
@@ -24,33 +23,19 @@ export default function Orientation() {
         setRegionSelected([]);
         setIsRegionFinish(false);
         if (index === ruleSelected.length-1) {
-            // req = {
-            //     parentId: ""
-            // };
-            // GetRegions(req).then(res => {
-            //     setOptionList(res.data.data);
-            // })
-            axios.post('/v1/getRegions', {
+            req = {
                 parentId: ""
-            }).then(res => {
-                data = res.data.data;
-                setOptionList(data);
+            }
+            GetRegions(req).then(res => {
+                setOptionList(res.data.data);
             })
         } else {
             setIsRuleFinish(false);
-            // req = {
-            //     parentId: item.rule_id
-            // };
-            // GetRules(req).then(res => {
-            //     setOptionList(res.data.data);
-            // });
-            axios.post('/v1/getRules', {
+            req = {
                 parentId: item.rule_id
-            }).then(res => {
-                data = res.data.data;
-                setOptionList(data);
-            }).catch(res => {
-                console.log(res);
+            }
+            GetRules(req).then(res => {
+                setOptionList(res.data.data);
             })
             setRuleSelected(ruleSelected.filter((_, i) => i <= index));
         }  
@@ -58,19 +43,11 @@ export default function Orientation() {
 
     const handleClickStepRegion = (item, index) => {
         setIsRegionFinish(false);
-        // req = {
-        //     parentId: item.region_id
-        // };
-        // GetRegions(req).then(res => {
-        //     setOptionList(res.data.data);
-        // })
-        axios.post('/v1/getRegions', {
+        req = {
             parentId: item.region_id
-        }).then(res => {
-            data = res.data.data;
-            setOptionList(data);
-        }).catch(res => {
-            console.log(res);
+        }
+        GetRegions(req).then(res => {
+            setOptionList(res.data.data);
         })
         setRegionSelected(regionSelected.filter((_, i) => i <= index));
     }
@@ -78,66 +55,37 @@ export default function Orientation() {
     const handleClickOption = (item) => {
         if (!isRuleFinish) {
             setRuleSelected([...ruleSelected, item]);
-            // req = {
-            //     parentId: item.rule_id
-            // };
-            // GetRules(req).then(res => {
-            //     data = res.data.data;
-            //     if (!data[0]) {
-            //         setOptionList([]);
-            //         setIsRuleFinish(true);
-            //         req = {
-            //             parentId: ""
-            //         };
-            //         GetRegions(req).then(res => {
-            //             data = res.data.data;
-            //         })
-            //     } 
-            //     setOptionList(data);
-            // })
-            axios.post('/v1/getRules',{
+            req = {
                 parentId: item.rule_id
-            }).then(res => {
+            }
+            GetRules(req).then(res => {
                 data = res.data.data;
                 if (!data[0]) {
                     setOptionList([]);
                     setIsRuleFinish(true);
-                    axios.post('/v1/getRegions', {
+                    req = {
                         parentId: ""
-                    }).then(res => {
+                    };
+                    GetRegions(req).then(res => {
                         data = res.data.data;
                         setOptionList(data);
                     })
                 } else {
                     setOptionList(data);
                 }
-            }).catch((res)=>{
-                console.log(res);
             })
         } else {
             setRegionSelected([...regionSelected, item]);
-            // req = {
-            //     parentId: item.region_id
-            // };
-            // GetRegions(req).then(res => {
-            //     data = res.data.data;
-            //     setOptionList(data);
-            //     if (!data[0]) {
-            //         setIsRegionFinish(true);
-            //         handleForTaskCode(item);
-            //     }
-            // })
-            axios.post('/v1/getRegions',{
+            req = {
                 parentId: item.region_id
-            }).then(res => {
+            }
+            GetRegions(req).then(res => {
                 data = res.data.data;
                 setOptionList(data);
                 if (!data[0]) {
                     setIsRegionFinish(true);
                     handleForTaskCode(item);
                 }
-            }).catch((res) => {
-                console.log(res);
             })
         }
     }
@@ -146,55 +94,54 @@ export default function Orientation() {
     const handleForTaskCode = (item) => {
         let tmpItemRuleId;
         let taskCode;
-        // // 获取item_rule_id
-        // req = {
-        //     rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-        //     region_id: '1'
-        // };
-        // GetItemRules(req).then(res => {
-        //     tmpItemRuleId = res.data.data[0].item_rule_id;
-        // });
-        // // 获取task_code
-        // req = {
-        //     item_rule_id: tmpItemRuleId
-        // };
-        // GetItems(req).then(res => {
-        //     taskCode = res.data.data[0].task_code;
-        // })
-        // // 跳转
-        // history.push({
-        //     pathname: "/v1/taskResult/" + taskCode,
-        //     state: { 
-        //         ruleSelected: ruleSelected,
-        //         regionSelected: [...regionSelected, item]
-        //         }
-        // })
-
-        axios.post('/v1/getItemRules', {
+        // 获取item_rule_id
+        req = {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
             region_id: '1'
-        }).then(res => {
+        }
+        GetItemRules(req).then(res => {
             tmpItemRuleId = res.data.data[0].item_rule_id;
-            axios.post('/v1/getItems', {
-                item_rule_id: tmpItemRuleId
-            }).then(res =>{
-                taskCode = res.data.data[0].task_code;
-                history.push({
-                    pathname: "/v1/taskResult/" + taskCode,
-                    state: { 
-                        ruleSelected: ruleSelected,
-                        regionSelected: [...regionSelected, item]
-                        }
-                })
-            }).catch(res => {
-                console.log(res);
-            })
-        }).catch(res => {
-            console.log(res);
         })
-        
-
-
+        // 获取task_code
+        req = {
+            item_rule_id: tmpItemRuleId
+        }
+        GetItems(req).then(res => {
+            taskCode = res.data.data[0].task_code;
+        })
+        // 跳转
+        history.push({
+            pathname: "/v1/taskResult/" + taskCode,
+            state: { 
+                ruleSelected: ruleSelected,
+                regionSelected: [...regionSelected, item]
+                }
+        })
+        // console.log(ruleSelected[ruleSelected.length-1]);
+        // console.log(regionSelected[1]);
+        // axios.post('/v1/getItemRules', {
+        //     rule_id: ruleSelected[ruleSelected.length-1].rule_id,
+        //     region_id: item.region_id
+        // }).then(res => {
+        //     console.log(res.data.data);
+        //     tmpItemRuleId = res.data.data[0].item_rule_id;
+        //     axios.post('/v1/getItems', {
+        //         item_rule_id: tmpItemRuleId
+        //     }).then(res =>{
+        //         taskCode = res.data.data[0].task_code;
+        //         history.push({
+        //             pathname: "/v1/taskResult/" + taskCode,
+        //             state: { 
+        //                 ruleSelected: ruleSelected,
+        //                 regionSelected: [...regionSelected, item]
+        //                 }
+        //         })
+        //     }).catch(res => {
+        //         console.log(res);
+        //     })
+        // }).catch(res => {
+        //     console.log(res);
+        // })
     }
 
 
@@ -212,21 +159,14 @@ export default function Orientation() {
             let type = location.state.type;
 
             if (type === 0) {
+
                 tmpRuleSelected = location.state.ruleSelected;
                 setRuleSelected(location.state.ruleSelected);
-                // req = {
-                //     parentId: tmpRuleSelected[tmpRuleSelected.length-1].rule_id
-                // };
-                // GetRules(req).then(res => {
-                //     setOptionList(res.data.data);
-                // })
-                axios.post('/v1/getRules',{
+                req = {
                     parentId: tmpRuleSelected[tmpRuleSelected.length-1].rule_id
-                }).then(res => {
-                    data = res.data.data;
-                    setOptionList(data);
-                }).catch((res)=>{
-                    console.log(res);
+                }
+                GetRules(req).then(res => {
+                    setOptionList(res.data.data);
                 })
             } else {
                 setRuleSelected(location.state.ruleSelected);
@@ -239,11 +179,9 @@ export default function Orientation() {
                 if (type === 2) {
                     handleClickStepRegion(item, index);
                 }
-            }
-
-            
+            }  
         } else {
-            // history.push('/home');
+            history.push('/home');
         }
         // eslint-disable-next-line
     }, []);
@@ -253,9 +191,10 @@ export default function Orientation() {
             <div className={style.hint}>{ hint }</div>
             <div className={style.selectedContainer}>
                 {
-                    ruleSelected.map((item, index) => {
+                    ruleSelected&&ruleSelected.map((item, index) => {
                         return (
-                            <div className={style.selectedBox} key={index} onClick={handleClickStepRule.bind(this, item, index)}>
+                            <div className={style.selectedBox} key={index} 
+                                onClick={handleClickStepRule.bind(this, item, index)}>
                                 <div className={style.outer}>
                                     <div className={style.desc}>
                                         { item.rule_name }
@@ -267,10 +206,11 @@ export default function Orientation() {
                     })
                 }
                 {
-                    regionSelected.map((item, index) => {
+                    regionSelected&&regionSelected.map((item, index) => {
                         if (isRuleFinish) {
                             return (
-                                <div className={style.selectedBox} key={index} onClick={handleClickStepRegion.bind(this, item, index)}>
+                                <div className={style.selectedBox} key={index} 
+                                    onClick={handleClickStepRegion.bind(this, item, index)}>
                                     <div className={style.outer}>
                                         <div className={style.desc}>
                                             { item.region_name }
