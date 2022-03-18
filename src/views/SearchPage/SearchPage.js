@@ -1,5 +1,5 @@
 import './Search.scss' 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 // import axios from "../../http/http";
 import style from "../SearchPage/SearchPage.module.scss";
 import SearchItem from "./components/SearchItem";
@@ -102,7 +102,7 @@ export default function SearchPage() {
 
     }
     const handleSearch=(value)=>{
-        if (!inputValue) {
+        if (!value) {
             message.error('请输入咨询关键词');
             return
         }
@@ -128,8 +128,15 @@ export default function SearchPage() {
         setInputValue(keyword)
         handleSearch(keyword)
     }
-    useEffect(()=>{
+    function useDidUpdateEffect(fn, inputs) {  //初次渲染不执行的useEffect
+        const didMountRef = useRef(false);
+        useEffect(() => {
+            if (didMountRef.current) fn();
+            else didMountRef.current = true;
+        }, inputs);
+    }
 
+    useDidUpdateEffect(()=>{
         handleSearch(inputValue)
     },[timeValue,contentValue,sortValue])
     useEffect(()=>{
