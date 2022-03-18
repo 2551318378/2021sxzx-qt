@@ -4,16 +4,18 @@ import React, { useEffect, useState } from "react";
 import style from "../SearchPage/SearchPage.module.scss";
 import SearchItem from "./components/SearchItem";
 import HotList from "./components/HotList";
-import { Input, Radio, AutoComplete, Button } from 'antd';
+import {Input, Radio, AutoComplete, Button, message} from 'antd';
 // import { Select } from 'antd';
 import SearchBar from '../components/SearchBar/SearchBar'
 import FooterInfo from '../components/FooterInfo/FooterInfo'
 
 import {GetHotList, GetSearchRes, GetSearchWord} from "../../api/searchApi";
+import {useLocation} from "react-router-dom";
 // const { Option } = Select;
 const sortOptions = [
     { label: '智能排序', value: 'score' },
-    { label: '时间排序', value: 'time' },
+    { label: '时间降序', value: 'timeDec' },
+    { label: '时间升序', value: 'timeInc' },
 
 ];
 const contentOptions = [
@@ -45,7 +47,7 @@ export default function SearchPage() {
     const [sortValue, setSortValue] = useState('score')
     const [contentValue, setContentValue] = useState('all')
     const [timeValue, setTimeValue] = useState('all')
-
+    const location=useLocation()
     const [searchList,setSearchList]=useState([
         {
             title:'岭南英杰工程”后备人才变动登记',
@@ -100,6 +102,10 @@ export default function SearchPage() {
 
     }
     const handleSearch=(value)=>{
+        if (!inputValue) {
+            message.error('请输入咨询关键词');
+            return
+        }
         let data={
             keyword:value,
 
@@ -123,6 +129,15 @@ export default function SearchPage() {
         handleSearch(keyword)
     }
     useEffect(()=>{
+
+        handleSearch(inputValue)
+    },[timeValue,contentValue,sortValue])
+    useEffect(()=>{
+
+        if (location.state&&location.state.inputValue){
+            setInputValue(location.state.inputValue)
+            handleSearch(location.state.inputValue)
+        }
         GetHotList().then(res=>{
             console.log(res)
             let final=[]
