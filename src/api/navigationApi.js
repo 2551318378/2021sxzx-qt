@@ -1,4 +1,5 @@
 /* 
+    引用方法
     import { 函数名 } from ...
     let req = {}
     GetRules(req).then(res=>{})
@@ -17,14 +18,6 @@ export function GetRegions(req) {
     return service.request({
         method: "post",
         url: "/v1/getRegions",
-        data: req
-    })
-}
-
-export function GetItemRules(req) {
-    return service.request({
-        method: "post",
-        url: "/v1/getItemRules",
         data: req
     })
 }
@@ -57,6 +50,14 @@ export function GetRulePath(req) {
     return service.request({
         method: "post",
         url: "/v1/getRulePath",
+        data: req
+    })
+}
+
+export function GetChildRegionsByRuleAndRegion(req) {
+    return service.request({
+        method: "post",
+        url: "/v1/getChildRegionsByRuleAndRegion",
         data: req
     })
 }

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import style from './Orientation.module.scss'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import { Spin } from 'antd'
-import { GetRules, GetRegions, GetItemRules, GetItems } from '../../../../api/navigationApi'
+import { GetRules, GetRegions, GetItems, GetChildRegionsByRuleAndRegion } from '../../../../api/navigationApi'
+import axios from '../../../../api/http'
 
 
 export default function Orientation() {
@@ -42,6 +43,8 @@ export default function Orientation() {
     }
 
     const handleClickStepRegion = (item, index) => {
+        console.log(item, index);
+        
         setIsRegionFinish(false);
         req = {
             parentId: item.region_id
@@ -92,56 +95,21 @@ export default function Orientation() {
 
     // 处理数据获取taskcode并跳转
     const handleForTaskCode = (item) => {
-        let tmpItemRuleId;
-        let taskCode;
-        // 获取item_rule_id
         req = {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-            region_id: '1'
-        }
-        GetItemRules(req).then(res => {
-            tmpItemRuleId = res.data.data[0].item_rule_id;
-        })
-        // 获取task_code
-        req = {
-            item_rule_id: tmpItemRuleId
+            // region_id: item.region_id      //  区划id
+            region_id: '440115000000'      // 南沙区
         }
         GetItems(req).then(res => {
-            taskCode = res.data.data[0].task_code;
-        })
-        // 跳转
-        history.push({
-            pathname: "/v1/taskResult/" + taskCode,
-            state: { 
-                ruleSelected: ruleSelected,
-                regionSelected: [...regionSelected, item]
-                }
-        })
-        // console.log(ruleSelected[ruleSelected.length-1]);
-        // console.log(regionSelected[1]);
-        // axios.post('/v1/getItemRules', {
-        //     rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-        //     region_id: item.region_id
-        // }).then(res => {
-        //     console.log(res.data.data);
-        //     tmpItemRuleId = res.data.data[0].item_rule_id;
-        //     axios.post('/v1/getItems', {
-        //         item_rule_id: tmpItemRuleId
-        //     }).then(res =>{
-        //         taskCode = res.data.data[0].task_code;
-        //         history.push({
-        //             pathname: "/v1/taskResult/" + taskCode,
-        //             state: { 
-        //                 ruleSelected: ruleSelected,
-        //                 regionSelected: [...regionSelected, item]
-        //                 }
-        //         })
-        //     }).catch(res => {
-        //         console.log(res);
-        //     })
-        // }).catch(res => {
-        //     console.log(res);
-        // })
+            // 跳转
+            history.push({
+                pathname: "/v1/taskResult/" + res.data.data[0].task_code,
+                state: { 
+                    ruleSelected: ruleSelected,
+                    regionSelected: [...regionSelected, item]
+                    }
+                })
+            })          
     }
 
 
@@ -159,7 +127,6 @@ export default function Orientation() {
             let type = location.state.type;
 
             if (type === 0) {
-
                 tmpRuleSelected = location.state.ruleSelected;
                 setRuleSelected(location.state.ruleSelected);
                 req = {
@@ -171,14 +138,16 @@ export default function Orientation() {
             } else {
                 setRuleSelected(location.state.ruleSelected);
                 setRegionSelected(location.state.regionSelected);
+                setIsRuleFinish(true);
                 let item = location.state.clickItem;
                 let index = location.state.clickIndex;
-                if (type === 1) {
-                    handleClickStepRule(item, index);
-                }
-                if (type === 2) {
-                    handleClickStepRegion(item, index);
-                }
+                // console.log(item, index);
+                // if (type === 1) {
+                //     handleClickStepRule(item, index);
+                // }
+                // if (type === 2) {
+                //     handleClickStepRegion(item, index);
+                // }
             }  
         } else {
             history.push('/home');
@@ -225,7 +194,7 @@ export default function Orientation() {
             </div>
             <div className={style.optionContainer}>
                 {
-                    optionList.map((item) => {
+                    optionList.map((item, index) => {
                         if (!isRuleFinish) {
                         return (
                             <div className={style.optionBox}
@@ -234,10 +203,11 @@ export default function Orientation() {
                             </div>
                         )} else {
                             return (
+                                // <div className={`${style.optionBox} ${!item.haveItem&&index!==0?style.disable: null}`}
                                 <div className={style.optionBox}
-                                onClick={handleClickOption.bind(this, item)}>
-                                { item.region_name }
-                            </div>
+                                    onClick={handleClickOption.bind(this, item)}>
+                                    { item.region_name }
+                                </div>
                             )
                         }
                     })

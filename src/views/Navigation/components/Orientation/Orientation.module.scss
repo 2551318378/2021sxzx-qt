@@ -5,6 +5,7 @@ $hint_color: #333333;
 .hidden {
     display: none;
 }
+
 .container {
     display: flex;
     flex-direction: column;
@@ -47,6 +48,12 @@ $hint_color: #333333;
         border-color: #0D349A;
     }
 }
+.disable {
+    background-color: #aaaaaa;
+    color: white;
+    pointer-events: none;
+}
+
 
 @media screen and (min-width: 401px) {
     .container {
@@ -98,11 +105,12 @@ $hint_color: #333333;
                 border: solid 1px #7F7F7F;
                 border-radius: 10px;
                 text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -o-text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
             }
+
         }
         .homeBtn {
             margin: 0 auto;

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import style from './Orientation.module.scss'
 import { useLocation, useHistory } from 'react-router-dom'
-import { GetItemByUniId, GetItemRules, GetRegionPath, GetRulePath } from '../../../../api/navigationApi';
+import { GetItemByUniId, GetItems, GetRegionPath, GetRulePath } from '../../../../api/navigationApi';
 // import axios from '../../../../api/http';
 
 export default function Orientation() {
     const hint = '您属于情况：';
+    const subStartIndex = '/v1/taskResult/'.length;
     const location = useLocation();
     const history = useHistory();
     const [ruleSelected, setRuleSelected] = useState([]);
@@ -22,36 +23,16 @@ export default function Orientation() {
             setRuleSelected(location.state.ruleSelected);
             setRegionSelected(location.state.regionSelected);
         } else {
-            console.log(location.pathname);
-            let tmp = location.pathname;
-            let ruleId;
-            let regionId;
+            console.log(location.pathname.substring(subStartIndex));
+            let taskCode = location.pathname.substring(subStartIndex);
             // 获取rule_id和region_id
             req = {
-                task_code: tmp
+                task_code: taskCode
             }
-            GetItemByUniId(req).then(res => {
-                req = {
-                    item_rule_id: res.data.data[0].item_rule_id
-                }
-                GetItemRules(req).then(res => {
-                    ruleId = res.data.data[0].rule_id;
-                    regionId = res.data.data[0].region_id;
-                })
+            GetItems(req).then(res => {
+                console.log(res.data.data);
             })
-            // 获取路径
-            req = {
-                ruleIds: [ruleId]
-            }
-            GetRulePath(req).then(res => {
-                setRuleSelected(res.data.data[0]);
-            })
-            req = {
-                regionIds: [regionId]
-            }
-            GetRegionPath(req).then(res => {
-                setRegionSelected(res.data.data[0]);
-            })
+            
         }
         // eslint-disable-next-line
     }, []) 
@@ -71,16 +52,18 @@ export default function Orientation() {
     }
 
     const handleClickStepRegion = (item, index) => {
-        history.push({
-            pathname: '/navigation',
-            state: { 
-                type: 2, 
-                ruleSelected: ruleSelected, 
-                regionSelected: regionSelected,
-                clickItem: item,
-                clickIndex: index
-            }
-        })
+        if (index !== regionSelected.length-1) {
+            history.push({
+                pathname: '/navigation',
+                state: { 
+                    type: 2, 
+                    ruleSelected: ruleSelected, 
+                    regionSelected: regionSelected,
+                    clickItem: item,
+                    clickIndex: index
+                }
+            })
+        }  
     }
 
     return (
