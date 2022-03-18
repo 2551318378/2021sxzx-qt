@@ -14,8 +14,8 @@ import {useLocation} from "react-router-dom";
 // const { Option } = Select;
 const sortOptions = [
     { label: '智能排序', value: 'score' },
-    { label: '时间降序', value: 'timeDec' },
-    { label: '时间升序', value: 'timeInc' },
+    { label: '时间降序', value: 'ascendingTime' },
+    { label: '时间升序', value: 'descendingTime' },
 
 ];
 const contentOptions = [
