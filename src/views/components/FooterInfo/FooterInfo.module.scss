@@ -12,16 +12,20 @@ $copyright_info_color: #6B6B6C;
 }
 @media screen and (min-width: 401px) {
     .container {
-        width: 1519px;
+        width: 100%;
         .contact {
-            height: 266px;
-            padding: 0 257px;
+            padding: 50px 0;
             background: $contact_color;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            justify-content: space-between;
+            .ct_container {
+                width: 1005px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            
             .web_info, .contact_us, .relevant_code {
                 width: 300px;
                 height: 185px;
@@ -95,10 +99,8 @@ $copyright_info_color: #6B6B6C;
             
         }
         .copyright {
-            height: 200px;
-            padding: 50px 0;
+            padding: 30px 0;
             .cr_container {
-                height: 100px;
                 width: 1000px;
                 margin: 0 auto;
                 display: flex;

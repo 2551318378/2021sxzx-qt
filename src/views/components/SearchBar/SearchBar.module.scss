@@ -26,9 +26,8 @@ a {
 }
 @media screen and (min-width: 401px) {
     .outer_shadow {
-        width: 1519px;
+        width: 100%;
         box-shadow: 0 1px 5px rgba($color: #000000, $alpha: 0.1);
-
     }
     .container {
         height: 53px;

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import style from './Orientation.module.scss'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import axios from '../../../../api/http'
 import { Spin } from 'antd'
+import { GetRules, GetRegions, GetItems, GetChildRegionsByRuleAndRegion } from '../../../../api/navigationApi'
+import axios from '../../../../api/http'
 
 
 export default function Orientation() {
@@ -16,42 +17,40 @@ export default function Orientation() {
     const [regionSelected, setRegionSelected] = useState([]);
     const [optionList, setOptionList] = useState([]);
 
+    var req = {};
     var data = [];
-    var taskCode = '';
 
     const handleClickStepRule = (item, index) => {
         setRegionSelected([]);
         setIsRegionFinish(false);
         if (index === ruleSelected.length-1) {
-            axios.post('/v1/getRegions', {
+            req = {
                 parentId: ""
-            }).then(res => {
-                data = res.data.data;
-                setOptionList(data);
+            }
+            GetRegions(req).then(res => {
+                setOptionList(res.data.data);
             })
         } else {
             setIsRuleFinish(false);
-            axios.post('/v1/getRules', {
+            req = {
                 parentId: item.rule_id
-            }).then(res => {
-                data = res.data.data;
-                setOptionList(data);
-            }).catch(res => {
-                console.log(res);
+            }
+            GetRules(req).then(res => {
+                setOptionList(res.data.data);
             })
             setRuleSelected(ruleSelected.filter((_, i) => i <= index));
         }  
     }
 
     const handleClickStepRegion = (item, index) => {
+        console.log(item, index);
+        
         setIsRegionFinish(false);
-        axios.post('/v1/getRegions', {
+        req = {
             parentId: item.region_id
-        }).then(res => {
-            data = res.data.data;
-            setOptionList(data);
-        }).catch(res => {
-            console.log(res);
+        }
+        GetRegions(req).then(res => {
+            setOptionList(res.data.data);
         })
         setRegionSelected(regionSelected.filter((_, i) => i <= index));
     }
@@ -59,118 +58,112 @@ export default function Orientation() {
     const handleClickOption = (item) => {
         if (!isRuleFinish) {
             setRuleSelected([...ruleSelected, item]);
-            axios.post('/v1/getRules',{
+            req = {
                 parentId: item.rule_id
-            }).then(res => {
+            }
+            GetRules(req).then(res => {
                 data = res.data.data;
                 if (!data[0]) {
                     setOptionList([]);
                     setIsRuleFinish(true);
-                    axios.post('/v1/getRegions', {
+                    req = {
                         parentId: ""
-                    }).then(res => {
+                    };
+                    GetRegions(req).then(res => {
                         data = res.data.data;
                         setOptionList(data);
                     })
                 } else {
                     setOptionList(data);
                 }
-            }).catch((res)=>{
-                console.log(res);
             })
         } else {
             setRegionSelected([...regionSelected, item]);
-            axios.post('/v1/getRegions',{
+            req = {
                 parentId: item.region_id
-            }).then(res => {
+            }
+            GetRegions(req).then(res => {
                 data = res.data.data;
                 setOptionList(data);
                 if (!data[0]) {
                     setIsRegionFinish(true);
                     handleForTaskCode(item);
                 }
-            }).catch((res)=>{
-                console.log(res);
             })
         }
     }
 
     // 处理数据获取taskcode并跳转
     const handleForTaskCode = (item) => {
-        var tItemRuleId;
-        axios.post('/v1/getItemRules', {
+        req = {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-            region_id: '1'
-        }).then(res => {
-            tItemRuleId = res.data.data[0].item_rule_id;
-            axios.post('/v1/getItems', {
-                item_rule_id: tItemRuleId
-            }).then(res =>{
-                taskCode = res.data.data[0].task_code;
-                // console.log("/v1/taskResult/"+taskCode);
-                history.push({
-                    pathname: "/v1/taskResult/"+taskCode,
-                    state: { 
-                        ruleSelected: ruleSelected,
-                        regionSelected: [...regionSelected, item]
-                        }
+            // region_id: item.region_id      //  区划id
+            region_id: '440115000000'      // 南沙区
+        }
+        GetItems(req).then(res => {
+            // 跳转
+            history.push({
+                pathname: "/v1/taskResult/" + res.data.data[0].task_code,
+                state: { 
+                    ruleSelected: ruleSelected,
+                    regionSelected: [...regionSelected, item]
+                    }
                 })
-            }).catch(res => {
-                console.log(res);
-            })
-        }).catch(res => {
-            console.log(res);
-        })
-        
-
-
+            })          
     }
 
 
-    /* 导航页面初始化情况：
-        1. 有携带数据
-            0 -> 首页跳转
-            1 -> 结果页回退
+    /* 导航页面初始化：
+        1. 有初始数据 -> 处理渲染
+            1.1 首页进入(type=0)
+            1.2 结果回退
+                1.2.1 事项回退(type=1)
+                1.2.2 地区回退(type=2)
         2. 无初始数据 -> 重定向首页
     */    
-    const init = () => {
+    useEffect(() => {
         if (location.state) {
             let tmpRuleSelected = [];
-            let tmpRegionSelected = [];
-            // 首页跳转情况
-            if (!location.state.type) {
+            let type = location.state.type;
+
+            if (type === 0) {
                 tmpRuleSelected = location.state.ruleSelected;
                 setRuleSelected(location.state.ruleSelected);
-                axios.post('/v1/getRules',{
+                req = {
                     parentId: tmpRuleSelected[tmpRuleSelected.length-1].rule_id
-                }).then(res => {
-                    data = res.data.data;
-                    setOptionList(data);
-                }).catch((res)=>{
-                    console.log(res);
+                }
+                GetRules(req).then(res => {
+                    setOptionList(res.data.data);
                 })
             } else {
-                console.log(location.state);
-            }
-            
+                setRuleSelected(location.state.ruleSelected);
+                setRegionSelected(location.state.regionSelected);
+                setIsRuleFinish(true);
+                let item = location.state.clickItem;
+                let index = location.state.clickIndex;
+                // console.log(item, index);
+                // if (type === 1) {
+                //     handleClickStepRule(item, index);
+                // }
+                // if (type === 2) {
+                //     handleClickStepRegion(item, index);
+                // }
+            }  
         } else {
             history.push('/home');
         }
-        
-    }
-    useEffect(() => {
-        init();
         // eslint-disable-next-line
-    }, [])
+    }, []);
 
     return (
         <div className={style.container}>
             <div className={style.hint}>{ hint }</div>
             <div className={style.selectedContainer}>
                 {
-                    ruleSelected.map((item, index) => {
+                    ruleSelected&&ruleSelected.map((item, index) => {
                         return (
-                            <div className={style.selectedBox} key={index} onClick={handleClickStepRule.bind(this, item, index)}>
+                            <div className={style.selectedBox} key={index} 
+                                onClick={handleClickStepRule.bind(this, item, index)}>
                                 <div className={style.outer}>
                                     <div className={style.desc}>
                                         { item.rule_name }
@@ -182,10 +175,11 @@ export default function Orientation() {
                     })
                 }
                 {
-                    regionSelected.map((item, index) => {
+                    regionSelected&&regionSelected.map((item, index) => {
                         if (isRuleFinish) {
                             return (
-                                <div className={style.selectedBox} key={index} onClick={handleClickStepRegion.bind(this, item, index)}>
+                                <div className={style.selectedBox} key={index} 
+                                    onClick={handleClickStepRegion.bind(this, item, index)}>
                                     <div className={style.outer}>
                                         <div className={style.desc}>
                                             { item.region_name }
@@ -200,7 +194,7 @@ export default function Orientation() {
             </div>
             <div className={style.optionContainer}>
                 {
-                    optionList.map((item) => {
+                    optionList.map((item, index) => {
                         if (!isRuleFinish) {
                         return (
                             <div className={style.optionBox}
@@ -209,10 +203,11 @@ export default function Orientation() {
                             </div>
                         )} else {
                             return (
+                                // <div className={`${style.optionBox} ${!item.haveItem&&index!==0?style.disable: null}`}
                                 <div className={style.optionBox}
-                                onClick={handleClickOption.bind(this, item)}>
-                                { item.region_name }
-                            </div>
+                                    onClick={handleClickOption.bind(this, item)}>
+                                    { item.region_name }
+                                </div>
                             )
                         }
                     })

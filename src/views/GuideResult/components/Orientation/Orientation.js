@@ -1,27 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import style from './Orientation.module.scss'
 import { useLocation, useHistory } from 'react-router-dom'
+import { GetItemByUniId, GetItems, GetRegionPath, GetRulePath } from '../../../../api/navigationApi';
 // import axios from '../../../../api/http';
 
 export default function Orientation() {
     const hint = '您属于情况：';
+    const subStartIndex = '/v1/taskResult/'.length;
     const location = useLocation();
     const history = useHistory();
     const [ruleSelected, setRuleSelected] = useState([]);
     const [regionSelected, setRegionSelected] = useState([]);
 
+    var req;
+
+    /* 结果页面初始化：
+        1. 导航页面进入(有数据列表)
+        2. 其他情况(只有task_code)
+    */
     useEffect(() => {
         if (location.state) {
             setRuleSelected(location.state.ruleSelected);
             setRegionSelected(location.state.regionSelected);
         } else {
-            console.log(location.pathname);
-            /* 
-                task_code -> item_rule_id (/api/v1/getItemByUniId)
-                item_rule_id -> rule_id + region_id (/api/v1/getItemRules)
-                region_id[] -> regionList (/api/v1/getRegionPath)
-                rule_id[] -> ruleList (/api/v1/getRulePath)
-            */
+            console.log(location.pathname.substring(subStartIndex));
+            let taskCode = location.pathname.substring(subStartIndex);
+            // 获取rule_id和region_id
+            req = {
+                task_code: taskCode
+            }
+            GetItems(req).then(res => {
+                console.log(res.data.data);
+            })
+            
         }
         // eslint-disable-next-line
     }, []) 
@@ -31,23 +42,28 @@ export default function Orientation() {
         history.push({
             pathname: '/navigation',
             state: { 
-                ruleSelected: ruleSelected.filter((_, i) => i <= index), 
-                regionSelected: [],
-                type: 1 
+                type: 1, 
+                ruleSelected: ruleSelected, 
+                regionSelected: regionSelected,
+                clickItem: item,
+                clickIndex: index
             }
         })
-        // console.log(ruleSelected.filter((_, i) => i < index));
     }
 
     const handleClickStepRegion = (item, index) => {
-        history.push({
-            pathname: '/navigation',
-            state: { 
-                ruleSelected: ruleSelected, 
-                regionSelected: regionSelected.filter((_, i) => i <= index),
-                type: 1 
-            }
-        })
+        if (index !== regionSelected.length-1) {
+            history.push({
+                pathname: '/navigation',
+                state: { 
+                    type: 2, 
+                    ruleSelected: ruleSelected, 
+                    regionSelected: regionSelected,
+                    clickItem: item,
+                    clickIndex: index
+                }
+            })
+        }  
     }
 
     return (

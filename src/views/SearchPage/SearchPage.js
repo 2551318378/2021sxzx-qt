@@ -1,19 +1,21 @@
 import './Search.scss' 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 // import axios from "../../http/http";
 import style from "../SearchPage/SearchPage.module.scss";
 import SearchItem from "./components/SearchItem";
 import HotList from "./components/HotList";
-import { Input, Radio, AutoComplete, Button } from 'antd';
+import {Input, Radio, AutoComplete, Button, message} from 'antd';
 // import { Select } from 'antd';
 import SearchBar from '../components/SearchBar/SearchBar'
 import FooterInfo from '../components/FooterInfo/FooterInfo'
 
 import {GetHotList, GetSearchRes, GetSearchWord} from "../../api/searchApi";
+import {useLocation} from "react-router-dom";
 // const { Option } = Select;
 const sortOptions = [
     { label: '智能排序', value: 'score' },
-    { label: '时间排序', value: 'time' },
+    { label: '时间降序', value: 'ascendingTime' },
+    { label: '时间升序', value: 'descendingTime' },
 
 ];
 const contentOptions = [
@@ -45,19 +47,21 @@ export default function SearchPage() {
     const [sortValue, setSortValue] = useState('score')
     const [contentValue, setContentValue] = useState('all')
     const [timeValue, setTimeValue] = useState('all')
-
+    const location=useLocation()
     const [searchList,setSearchList]=useState([
         {
             title:'岭南英杰工程”后备人才变动登记',
-            link:'https://baidu.com',
+            link:'#/v1/taskResult/11440100696927671X344211190900001',
             material:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
-            date: '2021-11-22 16:56:22'
+            date: '2021-11-22 16:56:22',
+            area: '广州市'
         },
         {
             title:'出版专业技术人员职业资格（初级、中级）考试报名',
-            link:'https://baidu.com',
+            link:'#/v1/taskResult/11440100696927671X344211173600001',
             material:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
-            date: '2021-10-15 18:54:21'
+            date: '2021-10-15 18:54:21',
+            area: '广州市'
         }
     ])
     const [hotList,setHotList]=useState([
@@ -100,6 +104,10 @@ export default function SearchPage() {
 
     }
     const handleSearch=(value)=>{
+        if (!value) {
+            message.error('请输入咨询关键词');
+            return
+        }
         let data={
             keyword:value,
 
@@ -122,7 +130,23 @@ export default function SearchPage() {
         setInputValue(keyword)
         handleSearch(keyword)
     }
+    function useDidUpdateEffect(fn, inputs) {  //初次渲染不执行的useEffect
+        const didMountRef = useRef(false);
+        useEffect(() => {
+            if (didMountRef.current) fn();
+            else didMountRef.current = true;
+        }, inputs);
+    }
+
+    useDidUpdateEffect(()=>{
+        handleSearch(inputValue)
+    },[timeValue,contentValue,sortValue])
     useEffect(()=>{
+
+        if (location.state&&location.state.inputValue){
+            setInputValue(location.state.inputValue)
+            handleSearch(location.state.inputValue)
+        }
         GetHotList().then(res=>{
             console.log(res)
             let final=[]
@@ -138,38 +162,38 @@ export default function SearchPage() {
         <div className={style.container}>
         <SearchBar></SearchBar>
         <div className={style.SearchPageContainer}>
+            <div className={style.content}>
+                <Input.Group compact className='inputGroup'>
+                    <span className='inputTitle'>全站搜索:</span>
+                    <AutoComplete
+                        className='autoComplete'
+                        placeholder="请输入搜索关键词"
+                        options={keywordList}
+                        size="large"
+                        onChange={inputOnChange}
+                        value={inputValue}/>
+                    <Button className='inputButton' size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
 
-            <Input.Group compact className='inputGroup'>
-
-                <span className='inputTitle'>全站搜索:</span>
-                <AutoComplete
-                    className='autoComplete'
-                    placeholder="请输入搜索关键词"
-                    options={keywordList}
-                    size="large"
-                    onChange={inputOnChange}
-                    value={inputValue}/>
-                <Button className='inputButton' size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
-
-            </Input.Group>
-            <div className='searchOptionContainer'>
-                <div className='subContainer'><Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
+                </Input.Group>
+                <div className='searchOptionContainer'>
+                    <div className='subContainer'><Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
                              buttonStyle="solid" className='searchOption'/></div>
-                <div className='subContainer'><Radio.Group options={contentOptions} onChange={contentOnChange} value={contentValue} optionType="button"
+                    <div className='subContainer'><Radio.Group options={contentOptions} onChange={contentOnChange} value={contentValue} optionType="button"
                              buttonStyle="solid" className='searchOption'/></div>
-                <div className='subContainer'><Radio.Group options={timeOptions} onChange={timeOnChange} value={timeValue} optionType="button"
+                    <div className='subContainer'><Radio.Group options={timeOptions} onChange={timeOnChange} value={timeValue} optionType="button"
                              buttonStyle="solid" className='searchOption'/></div>
-            </div>
-            <div className={style.mainContainer}>
-                <div className={style.searchListContainer}>
-                    {searchList.map((item)=>{
-                        return(
-                            <SearchItem content={item.material} link={item.link} title={item.title} date={item.date}></SearchItem>
-                        )
-                    })}
                 </div>
-                <div className={style.hotListContainer}>
-                    <HotList wordList={hotList} handler={handleHotList}></HotList>
+                <div className={style.mainContainer}>
+                    <div className={style.searchListContainer}>
+                        {searchList.map((item)=>{
+                            return(
+                                <SearchItem content={item.material} link={item.link} title={item.title} date={item.area + " " + item.date} ></SearchItem>
+                            )
+                        })}
+                    </div>
+                    <div className={style.hotListContainer}>
+                        <HotList wordList={hotList} handler={handleHotList}></HotList>
+                    </div>
                 </div>
             </div>
         </div>

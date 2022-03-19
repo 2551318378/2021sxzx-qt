@@ -1,9 +1,23 @@
 .container {
-  margin: 0 auto;
+  // margin: 0 auto;
+  // width: 1519px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   // 展示页面的背景
   .SearchPageContainer{
+    width: 100%;
     background-color: rgba(223, 234, 247, 1);
+    .content {
+      width: 1519px;
+      margin: 0 auto;
+      padding-left: 200px;
+      padding-right: 200px;
+      min-height: 400px;
+      padding-bottom: 100px;
+    }
     .mainContainer{
+      // width: 1519px;
       align-self: center;
       display: flex;
       flex-direction: row;

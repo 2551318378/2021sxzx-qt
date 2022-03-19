@@ -1,4 +1,5 @@
 /* 
+    引用方法
     import { 函数名 } from ...
     let req = {}
     GetRules(req).then(res=>{})
@@ -9,7 +10,7 @@ export function GetRules(req) {
     return service.request({
         method: "post",
         url: "/v1/getRules",
-        params: req
+        data: req
     })
 }
 
@@ -17,15 +18,7 @@ export function GetRegions(req) {
     return service.request({
         method: "post",
         url: "/v1/getRegions",
-        params: req
-    })
-}
-
-export function GetItemRules(req) {
-    return service.request({
-        method: "post",
-        url: "/v1/getItemRules",
-        params: req
+        data: req
     })
 }
 
@@ -33,7 +26,7 @@ export function GetItems(req) {
     return service.request({
         method: "post",
         url: "/v1/getItems",
-        params: req
+        data: req
     })
 }
 
@@ -41,7 +34,7 @@ export function GetItemByUniId(req) {
     return service.request({
         method: "post",
         url: "/v1/getItemByUniId",
-        params: req
+        data: req
     })
 }
 
@@ -49,7 +42,7 @@ export function GetRegionPath(req) {
     return service.request({
         method: "post",
         url: "/v1/getRegionPath",
-        params: req
+        data: req
     })
 }
 
@@ -57,6 +50,14 @@ export function GetRulePath(req) {
     return service.request({
         method: "post",
         url: "/v1/getRulePath",
-        params: req
+        data: req
+    })
+}
+
+export function GetChildRegionsByRuleAndRegion(req) {
+    return service.request({
+        method: "post",
+        url: "/v1/getChildRegionsByRuleAndRegion",
+        data: req
     })
 }
