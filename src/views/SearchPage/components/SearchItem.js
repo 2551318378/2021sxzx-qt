@@ -3,7 +3,7 @@ export default function SearchItem(props) {
 
     return (
         <div className={style.container} >
-            <div className={style.title}>
+            <div className={style.title} onClick={e=>{props.handler(props.title)}}>
                 <a href={props.link}>{props.title}</a>
             </div>
             <div className={style.content}>

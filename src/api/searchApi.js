@@ -23,3 +23,11 @@ export function GetHotList(data) {
         params:data, //data:data同名可以直接写 data
     });
 }
+
+export function AddOneClick(data) {
+    return service.request({
+        method: "get",
+        url: "/addOneClick",
+        params:data, //data:data同名可以直接写 data
+    });
+}
