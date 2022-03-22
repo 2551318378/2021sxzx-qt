@@ -30,26 +30,18 @@ export function GetItems(req) {
     })
 }
 
-export function GetItemByUniId(req) {
+export function GetRegionPaths(req) {
     return service.request({
         method: "post",
-        url: "/v1/getItemByUniId",
+        url: "/v1/getRegionPaths",
         data: req
     })
 }
 
-export function GetRegionPath(req) {
+export function GetRulePaths(req) {
     return service.request({
         method: "post",
-        url: "/v1/getRegionPath",
-        data: req
-    })
-}
-
-export function GetRulePath(req) {
-    return service.request({
-        method: "post",
-        url: "/v1/getRulePath",
+        url: "/v1/getRulePaths",
         data: req
     })
 }

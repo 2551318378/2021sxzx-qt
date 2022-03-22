@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import style from './Orientation.module.scss'
 import { useLocation, useHistory } from 'react-router-dom'
-import { GetItemByUniId, GetItems, GetRegionPath, GetRulePath } from '../../../../api/navigationApi';
-// import axios from '../../../../api/http';
+import { GetItems, GetRegionPaths, GetRulePaths } from '../../../../api/navigationApi';
 
 export default function Orientation() {
     const hint = '您属于情况：';
@@ -30,8 +29,25 @@ export default function Orientation() {
                 task_code: taskCode
             }
             GetItems(req).then(res => {
-                console.log(res.data.data);
+                let ruleId = res.data.data[0].rule_id;
+                let regionId = res.data.data[0].region_id;
+                
+                req = {
+                    rule_id: [ruleId]
+                }
+                GetRulePaths(req).then(res => {
+                    // 去除第一项“分类规则标准”
+                    setRuleSelected(res.data.data[ruleId].filter((_, i) => i > 0));
+                })
+
+                req = {
+                    region_id: [regionId]
+                }
+                GetRegionPaths(req).then(res => {
+                    setRegionSelected(res.data.data[regionId]);
+                })
             })
+            
             
         }
         // eslint-disable-next-line
