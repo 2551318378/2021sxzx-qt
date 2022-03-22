@@ -34,9 +34,23 @@ export default function SearchBar() {
     return (
         <div className={style.outer_shadow}>     
             <div className={style.container}>
+                <Link to='/home'>
+                    <img src={Images.common.ic_logo} alt='人社局logo' className={style.logo}></img>
+                </Link>
+                <Link to='/home'>
+                    <div className={style.homepage}>首页</div>
+                </Link>
+                <div className={style.dropdown}>
+                    <div className={style.consultmenu}>事项咨询</div>
+                    <div className={style.menu}>
+                        <p>个人业务</p>
+                        <p>法人业务</p>
+                        <p>事业单位业务</p>
+                    </div>
+                </div>
                 <a target='_blank' rel='noreferrer'  
                     href='https://www.gdzwfw.gov.cn/?isLogin=false'>
-                    <div className={style.provservice}>电子政务检索系统</div>
+                    <div className={style.provservice}>省政务服务</div>
                 </a> 
                 <div className={style.searchbox}>
                     <input 
