@@ -35,29 +35,17 @@ export default function SearchBar() {
         <div className={style.outer_shadow}>     
             <div className={style.container}>
                 <Link to='/home'>
-<<<<<<< HEAD
                     <img src={Images.common.ic_logo} alt='人社局logo' className={style.logo}></img>
-=======
-                    <img src='#' alt='logo' className={style.logo}></img>
->>>>>>> ce9812dd7b005022a93584777e194993ec9120e1
                 </Link>
                 <Link to='/home'>
                     <div className={style.homepage}>首页</div>
                 </Link>
                 <div className={style.dropdown}>
-<<<<<<< HEAD
                     <div className={style.consultmenu}>事项咨询</div>
                     <div className={style.menu}>
                         <p>个人业务</p>
                         <p>法人业务</p>
                         <p>事业单位业务</p>
-=======
-                    <div className={style.consultmenu}>termX</div>
-                    <div className={style.menu}>
-                        <p>term1</p>
-                        <p>term2</p>
-                        <p>term3</p>
->>>>>>> ce9812dd7b005022a93584777e194993ec9120e1
                     </div>
                 </div>
                 <a target='_blank' rel='noreferrer'  
