@@ -50,7 +50,7 @@ export default function Orientation() {
         setIsRegionFinish(false);
         req = {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-            region_id: item.region_id
+            region_code: item.region_code
         }
         GetChildRegionsByRuleAndRegion(req).then(res => {
             setOptionList(res.data.data);
@@ -76,10 +76,12 @@ export default function Orientation() {
             })
         } else {
             setRegionSelected([...regionSelected, item]);
+            console.log(item);
             req = {
                 rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-                region_id: item.region_id
+                region_code: item.region_code
             }
+            console.log(req);
             GetChildRegionsByRuleAndRegion(req).then(res => {
                 data = res.data.data;
                 console.log(res.data.data);
@@ -168,7 +170,7 @@ export default function Orientation() {
                 if (type === 2) {
                     req = {
                         rule_id: tmpRuleSelected[tmpRuleSelected.length-1].rule_id,
-                        region_id: item.region_id
+                        region_code: item.region_code
                     }
                     GetChildRegionsByRuleAndRegion(req).then(res => {
                         setOptionList(res.data.data);

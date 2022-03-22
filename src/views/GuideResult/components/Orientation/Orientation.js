@@ -24,13 +24,13 @@ export default function Orientation() {
         } else {
             console.log(location.pathname.substring(subStartIndex));
             let taskCode = location.pathname.substring(subStartIndex);
-            // 获取rule_id和region_id
+            // 获取rule_id和region_code
             req = {
                 task_code: taskCode
             }
             GetItems(req).then(res => {
                 let ruleId = res.data.data[0].rule_id;
-                let regionId = res.data.data[0].region_id;
+                let regionCode = res.data.data[0].region_code;
                 
                 req = {
                     rule_id: [ruleId]
@@ -41,10 +41,10 @@ export default function Orientation() {
                 })
 
                 req = {
-                    region_id: [regionId]
+                    region_code: [regionCode]
                 }
                 GetRegionPaths(req).then(res => {
-                    setRegionSelected(res.data.data[regionId]);
+                    setRegionSelected(res.data.data[regionCode]);
                 })
             })
             
@@ -87,7 +87,7 @@ export default function Orientation() {
             <div className={style.hint}>{ hint }</div>
             <div className={style.selectedContainer}>
                 {
-                    ruleSelected.map((item, index) => {
+                    ruleSelected&&ruleSelected.map((item, index) => {
                         return (
                             <div className={style.selectedBox} key={index}>
                                 <div className={style.outer} onClick={handleClickStepRule.bind(this, item, index)}>
@@ -101,7 +101,7 @@ export default function Orientation() {
                     })
                 }
                 {
-                    regionSelected.map((item, index) => {
+                    regionSelected&&regionSelected.map((item, index) => {
                         return (
                             <div className={style.selectedBox} 
                                 key={index}>
