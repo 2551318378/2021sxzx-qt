@@ -34,6 +34,20 @@ export default function SearchBar() {
     return (
         <div className={style.outer_shadow}>     
             <div className={style.container}>
+                <Link to='/home'>
+                    <img src='#' alt='logo' className={style.logo}></img>
+                </Link>
+                <Link to='/home'>
+                    <div className={style.homepage}>首页</div>
+                </Link>
+                <div className={style.dropdown}>
+                    <div className={style.consultmenu}>termX</div>
+                    <div className={style.menu}>
+                        <p>term1</p>
+                        <p>term2</p>
+                        <p>term3</p>
+                    </div>
+                </div>
                 <a target='_blank' rel='noreferrer'  
                     href='https://www.gdzwfw.gov.cn/?isLogin=false'>
                     <div className={style.provservice}>电子政务检索系统</div>
