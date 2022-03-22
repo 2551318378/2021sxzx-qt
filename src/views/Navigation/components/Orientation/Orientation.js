@@ -10,7 +10,6 @@ export default function Orientation() {
     const location = useLocation();
     const history = useHistory();
     
-    // const [clickEnable, setClickEnable] = useState(true);
     const [isRuleFinish, setIsRuleFinish] = useState(false);
     const [isRegionFinish, setIsRegionFinish] = useState(false);
     const [ruleSelected, setRuleSelected] = useState([]);
@@ -47,8 +46,7 @@ export default function Orientation() {
 
     }
 
-    const handleClickStepRegion = (item, index) => {
-        console.log(item, index);     
+    const handleClickStepRegion = (item, index) => {    
         setIsRegionFinish(false);
         req = {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
@@ -123,11 +121,12 @@ export default function Orientation() {
             1.2 结果回退
                 1.2.1 事项回退(type=1)
                 1.2.2 地区回退(type=2)
-        2. 无初始数据 -> 重定向首页
+        2. 无初始数据(直接打开或者刷新页面) -> 重定向首页
     */    
     useEffect(() => {
         if (location.state) {
             let tmpRuleSelected = [];
+            let tmpRegionSelected = [];
             let type = location.state.type;
 
             if (type === 0) {
@@ -140,11 +139,42 @@ export default function Orientation() {
                     setOptionList(res.data.data);
                 })
             } else {
+                tmpRuleSelected = location.state.ruleSelected;
+                tmpRegionSelected = location.state.regionSelected;
+                let item = location.state.clickItem;
+                let index = location.state.clickIndex;
                 setRuleSelected(location.state.ruleSelected);
                 setRegionSelected(location.state.regionSelected);
                 setIsRuleFinish(true);
-                let item = location.state.clickItem;
-                let index = location.state.clickIndex;
+                // 重复逻辑原因：hooks和请求的延时问题
+                // 逻辑同 handleClickStepRule()
+                if (type === 1) {
+                    setRegionSelected([]);
+                    if (index === tmpRuleSelected.length-1) {
+                        getFirstRegion();
+                    } else {
+                        setIsRuleFinish(false);
+                        req = {
+                            parentId: item.rule_id
+                        }
+                        GetRules(req).then(res => {
+                            setOptionList(res.data.data);
+                        })
+                        setRuleSelected(tmpRuleSelected.filter((_, i) => i <= index));
+                    }  
+                    
+                }
+                // 逻辑同 handleClickStepRegion()
+                if (type === 2) {
+                    req = {
+                        rule_id: tmpRuleSelected[tmpRuleSelected.length-1].rule_id,
+                        region_id: item.region_id
+                    }
+                    GetChildRegionsByRuleAndRegion(req).then(res => {
+                        setOptionList(res.data.data);
+                    })
+                    setRegionSelected(tmpRegionSelected.filter((_, i) => i <= index));
+                }
             }  
         } else {
             history.push('/home');
