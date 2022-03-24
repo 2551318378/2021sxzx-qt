@@ -31,13 +31,14 @@ export default function Orientation() {
     const handleClickStepRule = (item, index) => {
         setRegionSelected([]);
         setIsRegionFinish(false);
-        if (index === ruleSelected.length-1) {
+        if (index === ruleSelected.length-1 && isRuleFinish) {
             getFirstRegion();
         } else {
             setIsRuleFinish(false);
             req = {
                 parentId: item.rule_id
             }
+            console.log("rule req:", req);
             GetRules(req).then(res => {
                 setOptionList(res.data.data);
             })
@@ -47,18 +48,21 @@ export default function Orientation() {
     }
 
     const handleClickStepRegion = (item, index) => {    
+        setRegionSelected([]);
         setIsRegionFinish(false);
         req = {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
             region_code: item.region_code
         }
         GetChildRegionsByRuleAndRegion(req).then(res => {
-            setOptionList(res.data.data);
+            data = res.data.data.filter((_, i) => i > 0);
+            setOptionList(data);
         })
         setRegionSelected(regionSelected.filter((_, i) => i <= index));
     }
 
     const handleClickOption = (item) => {
+        setOptionList([]);
         if (!isRuleFinish) {
             setRuleSelected([...ruleSelected, item]);
             req = {
@@ -67,7 +71,6 @@ export default function Orientation() {
             GetRules(req).then(res => {
                 data = res.data.data;
                 if (!data[0]) {
-                    setOptionList([]);
                     setIsRuleFinish(true);
                     getFirstRegion();
                 } else {
@@ -76,7 +79,6 @@ export default function Orientation() {
             })
         } else {
             setRegionSelected([...regionSelected, item]);
-            setOptionList([]);
             req = {
                 rule_id: ruleSelected[ruleSelected.length-1].rule_id,
                 region_code: item.region_code
@@ -231,8 +233,8 @@ export default function Orientation() {
                             </div>
                         )} else {
                             return (
-                                <div className={`${style.optionBox} ${item.haveItem === 0?style.disable: null}`}
-                                // <div className={style.optionBox}
+                                // <div className={`${style.optionBox} ${item.haveItem === 0?style.disable: null}`}
+                                <div className={style.optionBox}
                                     onClick={handleClickOption.bind(this, item)}>
                                     { item.region_name }
                                 </div>
