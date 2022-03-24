@@ -49,8 +49,7 @@ $hint_color: #333333;
     }
 }
 .disable {
-    background-color: #aaaaaa;
-    color: white;
+    color: #969696;
     pointer-events: none;
 }
 
@@ -109,6 +108,10 @@ $hint_color: #333333;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 -o-text-overflow: ellipsis;
+            }
+            .optionBox:hover {
+                background-color: #eeeeee;
+                cursor: pointer;
             }
 
         }

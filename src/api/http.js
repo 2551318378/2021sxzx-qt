@@ -9,7 +9,7 @@ if(process.env.NODE_ENV==='development'){
 } else if(process.env.NODE_ENV==='production'){
   instance.defaults.baseURL='http://8.134.73.52:80/api/'
 }
-instance.defaults.timeout = 10000
+instance.defaults.timeout = 20000
 
 instance.interceptors.response.use(
   response=>{

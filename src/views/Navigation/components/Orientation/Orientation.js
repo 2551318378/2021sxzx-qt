@@ -76,15 +76,14 @@ export default function Orientation() {
             })
         } else {
             setRegionSelected([...regionSelected, item]);
-            console.log(item);
+            setOptionList([]);
             req = {
                 rule_id: ruleSelected[ruleSelected.length-1].rule_id,
                 region_code: item.region_code
             }
-            console.log(req);
             GetChildRegionsByRuleAndRegion(req).then(res => {
-                data = res.data.data;
-                console.log(res.data.data);
+                // 排除自己
+                data = res.data.data.filter((_, i) => i > 0);
                 setOptionList(data);
                 if (!data[0]) {
                     setIsRegionFinish(true);
@@ -232,8 +231,8 @@ export default function Orientation() {
                             </div>
                         )} else {
                             return (
-                                // <div className={`${style.optionBox} ${item.haveItem === 0?style.disable: null}`}
-                                <div className={style.optionBox}
+                                <div className={`${style.optionBox} ${item.haveItem === 0?style.disable: null}`}
+                                // <div className={style.optionBox}
                                     onClick={handleClickOption.bind(this, item)}>
                                     { item.region_name }
                                 </div>
