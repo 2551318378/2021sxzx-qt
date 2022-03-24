@@ -87,10 +87,8 @@ export default function Orientation() {
                 setOptionList(data);
                 if (!data[0]) {
                     setIsRegionFinish(true);
-                    // handleForTaskCode(item);
+                    handleForTaskCode(item);
                 }
-            }).catch(e => {
-                console.log(e);
             })
         }
         
@@ -233,8 +231,8 @@ export default function Orientation() {
                             </div>
                         )} else {
                             return (
-                                // <div className={`${style.optionBox} ${item.haveItem === 0?style.disable: null}`}
-                                <div className={style.optionBox}
+                                <div className={`${style.optionBox} ${item.haveItem === 0?style.disable: null}`}
+                                // <div className={style.optionBox}
                                     onClick={handleClickOption.bind(this, item)}>
                                     { item.region_name }
                                 </div>
