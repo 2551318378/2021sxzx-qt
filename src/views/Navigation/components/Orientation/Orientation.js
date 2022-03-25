@@ -55,7 +55,7 @@ export default function Orientation() {
             region_code: item.region_code
         }
         GetChildRegionsByRuleAndRegion(req).then(res => {
-            data = res.data.data.filter((_, i) => i > 0);
+            data = res.data.data;
             setOptionList(data);
         })
         setRegionSelected(regionSelected.filter((_, i) => i <= index));
@@ -78,20 +78,22 @@ export default function Orientation() {
                 }
             })
         } else {
-            setRegionSelected([...regionSelected, item]);
-            req = {
-                rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-                region_code: item.region_code
-            }
-            GetChildRegionsByRuleAndRegion(req).then(res => {
-                // 排除自己
-                data = res.data.data.filter((_, i) => i > 0);
-                setOptionList(data);
-                if (!data[0]) {
-                    setIsRegionFinish(true);
-                    handleForTaskCode(item);
+            let len = regionSelected.length;
+            if (len>1 && item.region_code === regionSelected[len-1].region_code) {
+                // 选择本级事项
+                setIsRegionFinish(true);
+                handleForTaskCode(item);
+            } else {
+                setRegionSelected([...regionSelected, item]);
+                req = {
+                    rule_id: ruleSelected[ruleSelected.length-1].rule_id,
+                    region_code: item.region_code
                 }
-            })
+                GetChildRegionsByRuleAndRegion(req).then(res => {
+                    data = res.data.data;
+                    setOptionList(data);
+                })
+            }
         }
         
     }
@@ -100,17 +102,14 @@ export default function Orientation() {
     const handleForTaskCode = (item) => {
         req = {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-            // region_id: item.region_id      //  区划id
-            region_id: '440115000000'      // 南沙区
+            region_id: item.region_id      
         }
         GetItems(req).then(res => {
-            console.log(res.data.data);
-            // 跳转
             history.push({
                 pathname: "/v1/taskResult/" + res.data.data[0].task_code,
                 state: { 
                     ruleSelected: ruleSelected,
-                    regionSelected: [...regionSelected, item]
+                    regionSelected: regionSelected
                     }
                 })
             })      
@@ -134,7 +133,7 @@ export default function Orientation() {
 
             if (type === 0) {
                 tmpRuleSelected = location.state.ruleSelected;
-                setRuleSelected(location.state.ruleSelected);
+                setRuleSelected(tmpRuleSelected);
                 req = {
                     parentId: tmpRuleSelected[tmpRuleSelected.length-1].rule_id
                 }
@@ -146,8 +145,8 @@ export default function Orientation() {
                 tmpRegionSelected = location.state.regionSelected;
                 let item = location.state.clickItem;
                 let index = location.state.clickIndex;
-                setRuleSelected(location.state.ruleSelected);
-                setRegionSelected(location.state.regionSelected);
+                setRuleSelected(tmpRuleSelected);
+                setRegionSelected(tmpRegionSelected);
                 setIsRuleFinish(true);
                 // 重复逻辑原因：hooks和请求的延时问题
                 // 逻辑同 handleClickStepRule()
@@ -233,8 +232,7 @@ export default function Orientation() {
                             </div>
                         )} else {
                             return (
-                                // <div className={`${style.optionBox} ${item.haveItem === 0?style.disable: null}`}
-                                <div className={style.optionBox}
+                                <div className={`${style.optionBox} ${item.haveItem === 0?style.disable: null}`}
                                     onClick={handleClickOption.bind(this, item)}>
                                     { item.region_name }
                                 </div>
