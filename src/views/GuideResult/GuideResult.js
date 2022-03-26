@@ -11,7 +11,7 @@ import SlideCS from '../components/SlideCS/SlideCS.js'
 
 export default function CommentPage() {
   return (
-    <div className={style.testContainer}>
+    <div className={style.Container}>
       <SearchBar></SearchBar>
       <Orientation></Orientation>
       <Guide></Guide>

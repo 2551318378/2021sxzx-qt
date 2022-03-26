@@ -1,3 +1,7 @@
+/* 
+    Images.js: 图片资源管理
+*/
+
 // const imgPath = 'http://8.134.73.52:80/imgs/';
 const imgPath = 'http://127.0.0.1:5001/imgs/';
 

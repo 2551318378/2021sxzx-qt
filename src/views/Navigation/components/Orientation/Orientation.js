@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import style from './Orientation.module.scss'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import { Spin, message } from 'antd'
+import { Spin } from 'antd'
 import { GetRules, GetRegions, GetItems, GetChildRegionsByRuleAndRegion } from '../../../../api/navigationApi'
 
 
@@ -80,7 +80,7 @@ export default function Orientation() {
         } else {
             let len = regionSelected.length;
             if (len>1 && item.region_code === regionSelected[len-1].region_code) {
-                // 选择本级事项
+                // 确定选择本级地区事项
                 setIsRegionFinish(true);
                 handleForTaskCode(item);
             } else {
@@ -98,7 +98,7 @@ export default function Orientation() {
         
     }
 
-    // 处理数据获取taskcode并跳转
+    // 获取task_code并跳转
     const handleForTaskCode = (item) => {
         req = {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
@@ -117,7 +117,8 @@ export default function Orientation() {
     }
 
 
-    /* 导航页面初始化：
+    /* 
+        导航页面初始化：
         1. 有初始数据 -> 处理渲染
             1.1 首页进入(type=0)
             1.2 结果回退
@@ -148,7 +149,7 @@ export default function Orientation() {
                 setRuleSelected(tmpRuleSelected);
                 setRegionSelected(tmpRegionSelected);
                 setIsRuleFinish(true);
-                // 重复逻辑原因：hooks和请求的延时问题
+                // 重复逻辑原因：规避hooks和请求的延时问题
                 // 逻辑同 handleClickStepRule()
                 if (type === 1) {
                     setRegionSelected([]);
@@ -187,6 +188,7 @@ export default function Orientation() {
     return (
         <div className={style.container}>
             <div className={style.hint}>{ hint }</div>
+            {/* 选择步骤条部分 Step */}
             <div className={style.selectedContainer}>
                 {
                     ruleSelected&&ruleSelected.map((item, index) => {
@@ -221,6 +223,7 @@ export default function Orientation() {
                     })
                 }
             </div>
+            {/* 具体选择部分 Option */}
             <div className={style.optionContainer}>
                 {
                     optionList&&optionList.map((item, index) => {
@@ -241,6 +244,7 @@ export default function Orientation() {
                     })
                 }
             </div>
+            {/* 加载中图标提示部分 */}
             {
                 <div className={style.loadingBox}>
                     <Spin spinning={ optionList.length === 0 }/>

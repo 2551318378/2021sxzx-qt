@@ -1,8 +1,5 @@
 /* 
-    引用方法
-    import { 函数名 } from ...
-    let req = {}
-    GetRules(req).then(res=>{})
+    navigationApi: 导航接口管理
 */
 import service from "./http"
 
