@@ -9,6 +9,7 @@ $hint_color: #333333;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
     .hint {
         font-weight: bold;
         color: $hint_color;

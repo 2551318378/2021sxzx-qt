@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import style from './Orientation.module.scss'
 import { useLocation, useHistory } from 'react-router-dom'
-import { GetItems, GetRegionPaths, GetRulePaths } from '../../../../api/navigationApi';
+import { GetItems, GetRegionPaths, GetRulePaths } from '../../../../api/navigationApi'
+import { Spin } from 'antd'
 
 export default function Orientation() {
     const hint = '您属于情况：';
@@ -13,9 +14,10 @@ export default function Orientation() {
 
     var req;
 
-    /* 结果页面初始化：
-        1. 导航页面进入(有数据列表)
-        2. 其他情况(只有task_code)
+    /* 
+        结果页面初始化：
+        1. 导航页面进入(有事项列表 -> 直接渲染)
+        2. 其他情况(只有task_code -> 获取事项列表)
     */
     useEffect(() => {
         if (location.state) {
@@ -85,6 +87,7 @@ export default function Orientation() {
     return (
         <div className={style.container}>
             <div className={style.hint}>{ hint }</div>
+            {/* 选择步骤条部分 Step */}
             <div className={style.selectedContainer}>
                 {
                     ruleSelected&&ruleSelected.map((item, index) => {
@@ -116,5 +119,11 @@ export default function Orientation() {
                     })
                 }
             </div>
+            {/* 加载中图标提示部分 */}
+            {
+                <div className={style.loadingBox}>
+                    <Spin spinning={ regionSelected.length === 0 }/>
+                </div>
+            }
         </div>
     )}
