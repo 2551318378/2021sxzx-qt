@@ -27,3 +27,34 @@
 }
 
 
+@media screen and (max-width:400px){
+  .container{
+    background-color: white;
+    border-radius: 10px;
+    position:relative;
+
+    width:300px;
+    margin-top:300px;
+    flex-direction: column;
+    padding: 20px 30px;
+
+
+    .title{
+      text-align: center;
+      font-weight: 400;
+      font-size: 20px;
+    }
+
+    .wordList{
+      font-size: 16px;
+      color: #555555;
+      margin: 10px 0;
+      .wordList .wordItem{
+        margin: 10px 0;
+        cursor: pointer;
+      }
+    }
+
+  }
+}
+
