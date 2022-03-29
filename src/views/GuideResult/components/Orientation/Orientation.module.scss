@@ -1,3 +1,5 @@
+@import '../../../../assets/styles/variable.scss';
+
 $outer_bg_color: #DFEAF7;
 $separator_color: #797979;
 $inner_font_color: #7F7F7F;
@@ -12,13 +14,13 @@ $hint_color: #333333;
     margin: 0 auto;
     .hint {
         font-weight: bold;
-        color: $hint_color;
+        color: $gray-6;
     }
     .selectedContainer {
         display: flex;
         .selectedBox {
             .outer {
-                background-color: $outer_bg_color;
+                background-color: $blue-2;
                 .desc {
                     text-align: center;
                     background-color: white;
@@ -39,7 +41,7 @@ $hint_color: #333333;
         padding: 15px 100px;
         .hint {
             width: 1150px;
-            font-size: 20px;
+            font-size: map-get($map: $navigation, $key: 'hint-font-pc');
             margin: 30px 0;
         }
         .selectedContainer {
@@ -59,12 +61,13 @@ $hint_color: #333333;
                         margin: 30px 20px;
                         border: solid 1px white;
                         border-radius: 5px;
+                        font-size: map-get($map: $navigation, $key: 'step-font-pc');
                     }
                 }
                 .separator {
                     width: 70px;
                     height: 1px;
-                    border-top: dashed 1px #7F7F7F;
+                    border-top: dashed 1px $gray-5;
                     margin: 0 20px;
                 }
             }
@@ -77,7 +80,7 @@ $hint_color: #333333;
         width: 350px;
         .hint {
             width: 350px;
-            font-size: 16px;
+            font-size: map-get($map: $navigation, $key: 'hint-font-mb');
             margin: 15px 0;
         }
         .selectedContainer {
@@ -97,12 +100,13 @@ $hint_color: #333333;
                         margin: 10px 30px;
                         border: solid 1px white;
                         border-radius: 5px;
+                        font-size: map-get($map: $navigation, $key: 'step-font-mb');
                     }
                 }
                 .separator {
                     width: 1px;
                     height: 20px;
-                    border-left: dashed 1px #7F7F7F;
+                    border-left: dashed 1px $gray-4;
                     margin: 5px 0;
                 }
             }

@@ -1,27 +1,27 @@
-$blue_dark: #5772B8;
-$blue_light: #1E90FF;
+@import '../../../../assets/styles/variable.scss';
+
 .container{
     margin: 0 auto;
     .title{
-        color: $blue_dark;
+        color: $blue-3;
         font-weight: bold;
     }
     .button{
-        background-color: $blue_dark;
+        background-color: $blue-3;
         color: white;
         cursor: pointer;
     }
     .subtitle{
-        color: $blue_dark;
+        color: $blue-3;
         font-weight: bold;
     }
     .lobby{
         .lobbyInfo{ 
-            color: $blue_dark;
+            color: $blue-3;
         }
     }
     .materialReqest{
-        color: $blue_light;
+        color: $blue-4;
         font-weight: bold;
         cursor: pointer;
     }

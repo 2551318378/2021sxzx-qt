@@ -1,8 +1,5 @@
 @import '../../../../assets/styles/variable.scss';
-$outer_bg_color: #DFEAF7;
-$separator_color: #797979;
-$inner_font_color: #7F7F7F;
-$hint_color: #333333;
+
 .hidden {
     display: none;
 }
@@ -50,7 +47,7 @@ $hint_color: #333333;
     }
 }
 .disable {
-    color: $gray-3;
+    color: $gray-4;
     pointer-events: none;
 }
 
@@ -83,7 +80,6 @@ $hint_color: #333333;
                         border: solid 1px white;
                         border-radius: 5px;
                         font-size: map-get($map: $navigation, $key: 'step-font-pc');
-
                     }
                 }
                 .separator {
@@ -156,13 +152,12 @@ $hint_color: #333333;
                         border: solid 1px white;
                         border-radius: 5px;
                         font-size: map-get($map: $navigation, $key: 'step-font-mb');
-
                     }
                 }
                 .separator {
                     width: 1px;
                     height: 20px;
-                    border-left: dashed 1px #7F7F7F;
+                    border-left: dashed 1px $gray-4;
                     margin: 5px 0;
                 }
             }
@@ -181,7 +176,7 @@ $hint_color: #333333;
                 text-align: center;
                 padding: 5px;
                 margin-bottom: 15px;
-                border: solid 1px #7F7F7F;
+                border: solid 1px $gray-4;
                 border-radius: 10px;
                 text-align: center;
                 font-size: map-get($map: $navigation, $key: 'option-font-mb');
@@ -189,7 +184,7 @@ $hint_color: #333333;
         }
         .homeBtn {
             margin: 0 auto;
-            border: 1px solid #5772B8;
+            border: 1px solid $blue-3;
             border-radius: 10px;
             width: 120px;
             height: 40px;
