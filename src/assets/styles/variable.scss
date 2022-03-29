@@ -1,0 +1,46 @@
+// 主题色
+$theme-color: #0D349A;
+// 标准色
+$blue-1: #F1F4FB;
+$blue-2: #DFEAF7;
+$blue-3: #5772B8;
+$blue-4: #1E90FF;
+$gray-1: #F1F1F1;
+$gray-2: #F2F2F2;
+$gray-3: #D7D7D7;
+$gray-4: #797979;
+$gray-5: #6B6B6C;
+$gray-6: #333333;
+$orange: #F59A23;
+$alpha-blue: rgba($color: #DFEAF7, $alpha: 0.5);
+$alpha-black: rgba($color: black, $alpha: 0.1);
+// 字体大小
+$common: (
+    'searchbar-font-1-pc': 18px,
+    'searchabr-font-2-pc': 16px,
+    'searchabr-font-2-mb': 10px,
+    'footer-font-1-pc': 16px,
+    'footer-font-2-pc': 16px
+);
+$homepage: (
+    'banner-font-1-pc': 36px,
+    'banner-font-1-mb': 13px,
+    'banner-font-2-pc': 20px,
+    'banner-font-2-mb': 8px,
+    'banner-font-3-pc': 18px,
+    'banner-font-3-mb': 13px,
+    'selection-font-1-pc': 18px,
+    'selection-font-1-mb':16px,
+    'selection-font-2-pc': 28px,
+    'selection-font-2-mb':16px,
+);
+$navigation: (
+    'hint-font-pc': 20px,
+    'hint-font-mb': 16px,
+    'step-font-pc': 16px,
+    'step-font-mb': 14px,
+    'option-font-pc': 16px,
+    'option-font-mb': 14px,
+    'return-font-pc': 24px,
+    'return-font-mb': 20px,
+);

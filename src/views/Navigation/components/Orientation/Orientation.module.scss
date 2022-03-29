@@ -1,3 +1,4 @@
+@import '../../../../assets/styles/variable.scss';
 $outer_bg_color: #DFEAF7;
 $separator_color: #797979;
 $inner_font_color: #7F7F7F;
@@ -12,13 +13,13 @@ $hint_color: #333333;
     align-items: center;
     .hint {
         font-weight: bold;
-        color: $hint_color;
+        color: $gray-6;
     }
     .selectedContainer {
         display: flex;
         .selectedBox {
             .outer {
-                background-color: $outer_bg_color;
+                background-color: $blue-2;
                 .desc {
                     text-align: center;
                     background-color: white;
@@ -39,17 +40,17 @@ $hint_color: #333333;
         margin-bottom: 20px;
     }
     .homeBtn {
-        background: #5772B8;
+        background: $blue-3;
         text-align: center;
         color: white;
     }
     .homeBtn:hover {
-        background: #0D349A;
-        border-color: #0D349A;
+        background: $theme-color;
+        border-color: $theme-color;
     }
 }
 .disable {
-    color: #969696;
+    color: $gray-3;
     pointer-events: none;
 }
 
@@ -61,7 +62,7 @@ $hint_color: #333333;
         padding: 15px 100px;
         .hint {
             width: 1150px;
-            font-size: 20px;
+            font-size: map-get($map: $navigation, $key: 'hint-font-pc');
             margin: 30px 0;
         }
         .selectedContainer {
@@ -81,12 +82,14 @@ $hint_color: #333333;
                         margin: 30px 20px;
                         border: solid 1px white;
                         border-radius: 5px;
+                        font-size: map-get($map: $navigation, $key: 'step-font-pc');
+
                     }
                 }
                 .separator {
                     width: 70px;
                     height: 1px;
-                    border-top: dashed 1px #7F7F7F;
+                    border-top: dashed 1px $gray-5;
                     margin: 0 20px;
                 }
             }
@@ -101,28 +104,29 @@ $hint_color: #333333;
                 width: 360px;
                 padding: 10px;
                 margin-bottom: 25px;
-                border: solid 1px #7F7F7F;
+                border: solid 1px $gray-4;
                 border-radius: 10px;
                 text-align: center;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 -o-text-overflow: ellipsis;
+                font-size: map-get($map: $navigation, $key: 'option-font-pc');
             }
             .optionBox:hover {
-                background-color: #eeeeee;
+                background-color: $gray-2;
                 cursor: pointer;
             }
 
         }
         .homeBtn {
             margin: 0 auto;
-            border: 2px solid #5772B8;
+            border: 2px solid $blue-3;
             border-radius: 19px;
             width: 150px;
             height: 50px;
             line-height: 45px;
-            font-size: 24px;
+            font-size: map-get($map: $navigation, $key: 'return-font-pc');
         }
     }
 }
@@ -131,7 +135,7 @@ $hint_color: #333333;
         width: 350px;
         .hint {
             width: 350px;
-            font-size: 16px;
+            font-size: map-get($map: $navigation, $key: 'hint-font-mb');
             margin: 15px 0;
         }
         .selectedContainer {
@@ -151,6 +155,8 @@ $hint_color: #333333;
                         margin: 10px 30px;
                         border: solid 1px white;
                         border-radius: 5px;
+                        font-size: map-get($map: $navigation, $key: 'step-font-mb');
+
                     }
                 }
                 .separator {
@@ -178,6 +184,7 @@ $hint_color: #333333;
                 border: solid 1px #7F7F7F;
                 border-radius: 10px;
                 text-align: center;
+                font-size: map-get($map: $navigation, $key: 'option-font-mb');
             }
         }
         .homeBtn {
@@ -187,7 +194,7 @@ $hint_color: #333333;
             width: 120px;
             height: 40px;
             line-height: 35px;
-            font-size: 20px;
+            font-size: map-get($map: $navigation, $key: 'return-font-mb');
             margin-bottom: 20px;
         }
     }

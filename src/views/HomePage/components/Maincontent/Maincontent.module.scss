@@ -1,15 +1,7 @@
-$theme_color: #0D349A;
-$border_color: #D7D7D7;
-$separator_color: #797979;
+@import '../../../../assets/styles/variable.scss';
+
 $banner_pc_bg: url('../../../../assets/imgs/banner_pc_bg.jpg');
 $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
-$slogan1_pc_size: 36px;
-$slogan2_pc_size: 20px;
-$slogan1_mb_size: 13px;
-$slogan2_mb_size: 8px;
-* {
-    flex-shrink: 0;
-}
 .hide {
     display: none;
 }
@@ -20,7 +12,7 @@ $slogan2_mb_size: 8px;
             display: flex;
             flex-direction: row;   
             div {
-                background: $theme_color;
+                background: $theme-color;
                 color: white;
                 display: flex;
                 flex-direction: row;
@@ -36,7 +28,7 @@ $slogan2_mb_size: 8px;
             justify-content: center;
             label {
                 width: 1px;
-                background: $separator_color;
+                background: $gray-4;
             }
 
         }
@@ -60,10 +52,10 @@ $slogan2_mb_size: 8px;
             background: $banner_pc_bg;
             background-size: 1519px;
             .slogan1 {
-                font-size: $slogan1_pc_size;
+                font-size: map-get($map: $homepage, $key: 'banner-font-1-pc');
             }
             .slogan2 {
-                font-size: $slogan2_pc_size;
+                font-size: map-get($map: $homepage, $key: 'banner-font-2-pc');
                 margin-top: 32px;
                 margin-bottom: 67px;
             }
@@ -72,7 +64,7 @@ $slogan2_mb_size: 8px;
                     width: 152px;
                     height: 42px;
                     margin-right: 44px;
-                    font-size: 18px;
+                    font-size: map-get($map: $homepage, $key: 'banner-font-3-pc');
                     img {
                         width: 32px;
                         margin-left: 20px;
@@ -93,22 +85,22 @@ $slogan2_mb_size: 8px;
                 margin-bottom: 57px;
                 div {
                     height: 39px;
-                    border: 1px solid $border_color;
+                    border: 1px solid $gray-3;
                     border-radius: 20px;
                     line-height: 40px;
                     padding: 0 35px;
-                    font-size: 18px;
+                    font-size: map-get($map: $homepage, $key: 'selection-font-1-pc');
                     margin: 0 36px;
                     cursor: pointer;
                 }
                 div:hover {
-                    border-color: $theme_color;
-                    background: $theme_color;
+                    border-color: $theme-color;
+                    background: $theme-color;
                     color: white;
                 }
                 .active {
-                    border-color: $theme_color;
-                    background: $theme_color;
+                    border-color: $theme-color;
+                    background: $theme-color;
                     color: white;
                 }
                 label {
@@ -123,7 +115,7 @@ $slogan2_mb_size: 8px;
                     .outborder {
                         width: 210px;
                         height: 210px;
-                        border: 1px solid #D7D7D7;
+                        border: 1px solid $gray-3;
                         border-radius: 105px;
                         
                         div {
@@ -131,7 +123,7 @@ $slogan2_mb_size: 8px;
                             height: 195px;
                             width: 195px;
                             border-radius: 98px;
-                            background: #F1F4FB;
+                            background: $blue-1;
                             img {
                                 width: 110px;
                                 margin: 42.5px;
@@ -139,7 +131,7 @@ $slogan2_mb_size: 8px;
                         }
                     }
                     p {
-                        font-size: 28px;
+                        font-size: map-get($map: $homepage, $key: 'selection-font-2-pc');
                         margin-top: 17px;
                     }
                 }
@@ -166,10 +158,10 @@ $slogan2_mb_size: 8px;
             background: $banner_mb_bg;
             background-size: 375px;
             .slogan1 {
-                font-size: $slogan1_mb_size;
+                font-size: map-get($map: $homepage, $key: 'selection-font-1-mb');
             }
             .slogan2 {
-                font-size: $slogan2_mb_size;
+                font-size: map-get($map: $homepage, $key: 'selection-font-2-mb');
                 margin-top: 9px;
                 margin-bottom: 29px;
                 max-height: 100%;
@@ -179,7 +171,7 @@ $slogan2_mb_size: 8px;
                     width: 85px;
                     height: 21px;
                     margin-right: 18px;
-                    font-size: 13px;
+                    font-size: map-get($map: $homepage, $key: 'banner-font-3-mb');
                     img {
                         width: 13px;
                         margin-left: 8px;
@@ -194,7 +186,7 @@ $slogan2_mb_size: 8px;
             .classify {
                 div {
                     margin: 0 25px;
-                    font-size: 16px;
+                    font-size: map-get($map: $homepage, $key: 'selection-font-1-mb');
                 }
                 .active {
                     color: $theme_color;
@@ -214,11 +206,10 @@ $slogan2_mb_size: 8px;
                 padding: 0 40px;
                 margin-top: 60px;
                 div {
-                    // margin-top: 60px;
                     .outborder {
                         width: 114px;
                         height: 114px;
-                        border: 1px solid #D7D7D7;
+                        border: 1px solid $gray-3;
                         border-radius: 57px;
                         
                         div {
@@ -226,7 +217,7 @@ $slogan2_mb_size: 8px;
                             height: 106px;
                             width: 106px;
                             border-radius: 53px;
-                            background: #F1F4FB;
+                            background: $blue-1;
                             img {
                                 width: 60px;
                                 margin: 23px;
@@ -234,7 +225,7 @@ $slogan2_mb_size: 8px;
                         }
                     }
                     p {
-                        font-size: 16px;
+                        font-size: map-get($map: $homepage, $key: 'selection-font-2-mb');
                         margin-top: 10px;
                     }
                 }

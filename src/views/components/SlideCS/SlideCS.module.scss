@@ -1,3 +1,4 @@
+@import '../../../assets/styles/variable.scss';
 .hide {
     display: none;
 }
@@ -5,7 +6,7 @@
     .container {
         width: 129px;
         height: 129px;
-        border: 1px solid #D7D7D7;
+        border: 1px solid $gray-3;
         border-radius: 17px;
         background: white;
         text-align: center;

@@ -4,6 +4,11 @@ import style from './FooterInfo.module.scss'
 import { Images } from '../../../assets'
 
 export default function FooterInfo() {
+    const ct_phone_1 = '020-12345';
+    const ct_phone_2 = '020-68127853';
+    const cr_hint_1 = '主办单位：广州市人力资源和社会保障局';
+    const cr_hint_2 = '粤公网安备44010402001594号 粤ICP备11001610号-1 网站标识码：4401000059';
+
     return (
         <div className={style.container}>
             <div className={style.contact}>
@@ -21,7 +26,7 @@ export default function FooterInfo() {
 
                 <div className={style.contact_us}>
                     <p>联系我们</p>
-                    <div className={style.phone}>020-12345；020-68127853</div>
+                    <div className={style.phone}>{ ct_phone_1 }；{ ct_phone_2 }</div>
                     <div className={style.info}>联系信息</div>
                 </div>
 
@@ -59,10 +64,10 @@ export default function FooterInfo() {
                     <img src={Images.common.ic_zfwzzc} alt='政府网站找错'></img>
                     <img src={Images.common.ic_dzjg} alt='党政机关标志'></img>
                     <div className={style.cr_info}>
-                        <div>主办单位：广州市人力资源和社会保障局</div>
+                        <div>{ cr_hint_1 }</div>
                         <div>
                             <img src={Images.common.ic_ygwa} alt='粤公网标志'></img>
-                            粤公网安备44010402001594号 粤ICP备11001610号-1 网站标识码：4401000059   
+                            { cr_hint_2 }   
                         </div>
                     </div>
                 </div>

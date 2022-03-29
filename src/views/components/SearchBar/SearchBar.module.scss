@@ -1,8 +1,5 @@
-$font_size: 18px;
-$theme_color: #0D349A;
-* {
-    flex-shrink: 0;
-}
+@import '../../../assets/styles/variable.scss';
+
 input {
     outline: none;
 }
@@ -27,7 +24,7 @@ a {
 @media screen and (min-width: 401px) {
     .outer_shadow {
         width: 100%;
-        box-shadow: 0 1px 5px rgba($color: #000000, $alpha: 0.1);
+        box-shadow: 0 1px 5px $alpha-black;
     }
     .container {
         height: 53px;
@@ -36,12 +33,12 @@ a {
             height: 50px;
         }
         .homepage, .consultmenu, .provservice {
-            font-size: $font_size;
+            font-size: map-get($map: $common, $key: 'searchbar-font-1-pc');
             padding: 0 50px;
             cursor: pointer;
         }
         .homepage:hover, .consultmenu:hover, .provservice:hover {
-            color: $theme_color;
+            color: $theme-color;
             font-weight: bold;
         }
         .dropdown {
@@ -55,14 +52,14 @@ a {
                 text-align: center;
                 background-color: white;
                 p {
-                    font-size: 18px;
+                    font-size: map-get($map: $common, $key: 'searchbar-font-1-pc');
                     margin-bottom: 0;
                     padding: 10px 0;
                     cursor: pointer;
                 }
                 p:hover {
                     font-weight: bold;
-                    color: $theme_color;
+                    color: $theme-color;
                 }
             }
         }
@@ -76,6 +73,7 @@ a {
                 border: 2px solid $theme_color;
                 border-radius: 20px;
                 padding-left: 20px;
+                font-size: map-get($map: $common, $key: 'searchbar-font-2-pc');
             }
             .searchbtn {
                 width: 27px;
@@ -100,10 +98,10 @@ a {
             .searchinput {
                 width: 156px;
                 height: 27px;
-                border: 1px solid $theme_color;
+                border: 1px solid $theme-color;
                 border-radius: 7px;
                 padding-left: 25px;
-                font-size: 10px;
+                font-size: map-get($map: $common, $key: 'searchbar-font-2-mb');
             }
             .searchbtn {
                 width: 17px;
