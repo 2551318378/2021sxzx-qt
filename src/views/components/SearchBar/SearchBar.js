@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import style from './SearchBar.module.scss'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { message } from 'antd'
 import { Images } from '../../../assets'
 
 export default function SearchBar() {
     const history = useHistory();
+    const location = useLocation();
     const [searchWord, setSearchWord] = useState('');
 
     const handleChangeWord = (e) => {
@@ -22,11 +23,11 @@ export default function SearchBar() {
     const getSearchInfo = () => {
         if (searchWord) {
             console.log(searchWord);
-            // 只传关键词？还是带数据
             history.push({
                 pathname: '/searchPage',
                 state: { inputValue: searchWord }
             })
+            console.log(location.pathname);
         } else {
             message.error('请输入咨询关键词');
         }
@@ -35,7 +36,7 @@ export default function SearchBar() {
         <div className={style.outer_shadow}>     
             <div className={style.container}>
                 <Link to='/home'>
-                    <img src={Images.common.ic_logo} alt='人社局logo' className={style.logo}></img>
+                    <img src={Images.common.ic_placeholder} alt='logo' className={style.logo}></img>
                 </Link>
                 <Link to='/home'>
                     <div className={style.homepage}>首页</div>

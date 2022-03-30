@@ -4,8 +4,14 @@ import style from './FooterInfo.module.scss'
 import { Images } from '../../../assets'
 
 export default function FooterInfo() {
-    const ct_phone_1 = '020-12345';
-    const ct_phone_2 = '020-68127853';
+    // const main_name = '广州市人社局';
+    const main_name = '';
+    // const app_name = '穗好办';
+    const app_name = '';
+    // const ct_phone_1 = '020-12345';
+    const ct_phone_1 = 'phoneNum-1';
+    // const ct_phone_2 = '020-68127853';
+    const ct_phone_2 = 'phoneNum-2';
     const cr_hint_1 = '主办单位：广州市人力资源和社会保障局';
     const cr_hint_2 = '粤公网安备44010402001594号 粤ICP备11001610号-1 网站标识码：4401000059';
 
@@ -33,26 +39,26 @@ export default function FooterInfo() {
                 <div className={style.relevant_code}>
                     <div className={`${style.dropdown_web} ${style.dropdown}`}>
                         <div className={style.dropdown_desc}>
-                            <img src={Images.common.ic_qrcode} alt='二维码图标'></img> 广州市人设局官网 
+                            <img src={Images.common.ic_qrcode} alt='二维码图标'></img> {main_name}官网
                         </div>
                         <div className={`${style.web_content} ${style.content}`}>
-                            <img src={Images.common.qrcode_web} alt='广州市人设局官网二维码'></img>
+                            <img src={Images.common.ic_placeholder} alt={{main_name}+'官网二维码'}></img>
                         </div>
                     </div>
                     <div className={`${style.dropdown_wechat} ${style.dropdown}`}>
                         <div className={style.dropdown_desc}>
-                            <img src={Images.common.ic_qrcode} alt='二维码图标'></img> 广州市人设局微信公众号
+                            <img src={Images.common.ic_qrcode} alt='二维码图标'></img> {main_name}微信公众号
                         </div>
                         <div className={`${style.wechat_content} ${style.content}`}>
-                            <img src={Images.common.ic_qrcode} alt='广州市人设局微信公众号二维码'></img>
+                            <img src={Images.common.ic_placeholder} alt={{main_name}+'微信公众号二维码'}></img>
                         </div>
                     </div>
                     <div className={`${style.dropdown_app} ${style.dropdown}`}>
                         <div className={style.dropdown_desc}>
-                            <img src={Images.common.ic_qrcode} alt='二维码图标'></img> 穗好办 APP 
+                            <img src={Images.common.ic_qrcode} alt='二维码图标'></img> {app_name}APP
                         </div>
                         <div className={`${style.app_content} ${style.content}`}>
-                            <img src={Images.common.qrcode_app} alt='穗好办APP二维码'></img>
+                            <img src={Images.common.ic_placeholder} alt={{app_name}+'APP二维码'}></img>
                         </div>
                     </div>
                 </div>
