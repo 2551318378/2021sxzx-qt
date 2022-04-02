@@ -121,8 +121,14 @@ export default function Guide() {
 			myGeo.getPoint(handleAddress(lobbyInfo?.address),function(point){
 				if(point){
 					setLobbyLocation(point);
-					console.log(lobbyInfo?.address)
-					console.log(point)
+					console.log("原地址" + lobbyInfo?.address)
+					console.log("正编码得到经纬度", point)
+					myGeo.getLocation(point, function(result){      
+						if (result){      
+							console.log("逆编码得到地址", result.address);    
+						}      
+					});
+					
 				}else{
 					alert('您选择的地址没有解析到结果！');
 				}
