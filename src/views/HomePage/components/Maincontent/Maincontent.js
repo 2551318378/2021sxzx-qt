@@ -9,51 +9,40 @@ export default function Maincontent() {
     const main = '';
     const itemNum = '000';
     const history = useHistory();
-    const [parentRuleIdIndex, setParentRuleIdIndex] = useState(0);
-    const [parentRuleList, setParentRuleList] = useState([]);
-    const [childRuleList, setChildRuleList] = useState([[]]);
+    const [serviceObjectIndex, setServiceObjectIndex] = useState(0);
+    const [serviceObjectList, setServiceObjectList] = useState([
+        { rule_name: '个人业务', obj_type: '[1]' },
+        { rule_name: '法人业务', obj_type: '[2,3,4]'},
+        { rule_name: '事业单位业务', obj_type: '[5,6,9]'}
+    ]);
+    const [FirstRuleList, setFirstRuleList] = useState([[]]);
 
     var picSrc;
     
     /* 
         首页初始化：
-        1. 获取一二级事项列表
     */
     useEffect(() => {
-        let tmpList = [];
         let data = [];
         let req;
-        // 获取第一级事项列表（父事项）
         req = {
             parentId : '0'
         }
         GetRules(req).then(res => {
             data = res.data.data;
-            setParentRuleList(data);
-            // 获取第二级事项列表（子事项）
-            data.map(item => {
-                req = {
-                    parentId : item.rule_id
-                }
-                GetRules(req).then(res => {
-                    tmpList.push(res.data.data);
-                    setChildRuleList(tmpList);
-                })
-            })
+            setFirstRuleList(data);  
         })
         // eslint-disable-next-line
     }, [])
     
-    const handleParentClick = (index) => {
-        setParentRuleIdIndex(index);
+    const handleServiceObjClick = (index) => {
+        setServiceObjectIndex(index);
     }
 
-    const handleChildClick = (item) => {
-        var ruleSelected = [];
-        ruleSelected.push(parentRuleList[parentRuleIdIndex], item);
+    const handleFirstRulelick = (item) => {
         history.push({
             pathname: '/navigation',
-            state: { ruleSelected: ruleSelected, type: 0 }
+            state: { ruleSelected: [item], nav_type: 0, obj_type: serviceObjectList[serviceObjectIndex].obj_type }
         })
     }
 
@@ -83,10 +72,10 @@ export default function Maincontent() {
                 {/* 第一级事项渲染 */}
                 <div className={style.classify}>
                     {
-                        parentRuleList.map((item, index) => {
+                        serviceObjectList.map((item, index) => {
                             return(
-                                <div className={parentRuleIdIndex === index ? style.active : null}
-                                    onClick={handleParentClick.bind(this, index)}>
+                                <div className={serviceObjectIndex === index ? style.active : null}
+                                    onClick={handleServiceObjClick.bind(this, index)}>
                                     { item.rule_name }
                                 </div>
                             )
@@ -96,7 +85,7 @@ export default function Maincontent() {
                 {/* 第二级事项渲染 */}
                 <div className={style.specific}>
                     {
-                        childRuleList[parentRuleIdIndex]&&childRuleList[parentRuleIdIndex].map((item, index) => {
+                        FirstRuleList&&FirstRuleList.map((item, index) => {
                             switch (item.rule_name) {
                                 case '劳动保障':
                                     picSrc = Images.home.ic_ldbz; break;
@@ -110,10 +99,11 @@ export default function Maincontent() {
                                     break;
                             }   
                             return (
-                                <div onClick={handleChildClick.bind(this, item)}>
+                                <div className={serviceObjectIndex === 0&&item.rule_name === '劳动保障'?style.hide:null} 
+                                    onClick={handleFirstRulelick.bind(this, item)}>
                                     <div className={style.outborder}>
                                         <div>
-                                            <img src={picSrc} alt='事项图标'></img>
+                                            <img src={picSrc}></img>
                                         </div>
                                     </div>
                                     <p>{ item.rule_name }</p>

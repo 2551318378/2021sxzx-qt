@@ -60,7 +60,7 @@ export default function Orientation() {
         history.push({
             pathname: '/navigation',
             state: { 
-                type: 1, 
+                nav_type: 1, 
                 ruleSelected: ruleSelected, 
                 regionSelected: regionSelected,
                 clickItem: item,
@@ -74,7 +74,7 @@ export default function Orientation() {
             history.push({
                 pathname: '/navigation',
                 state: { 
-                    type: 2, 
+                    nav_type: 2, 
                     ruleSelected: ruleSelected, 
                     regionSelected: regionSelected,
                     clickItem: item,

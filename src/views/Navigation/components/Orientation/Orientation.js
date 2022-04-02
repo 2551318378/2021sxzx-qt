@@ -15,30 +15,31 @@ export default function Orientation() {
     const [ruleSelected, setRuleSelected] = useState([]);
     const [regionSelected, setRegionSelected] = useState([]);
     const [optionList, setOptionList] = useState([]);
+    const [regionInitList, setRegionInitList] = useState([]);
 
     var req = {};
     var data = [];
 
-    const getFirstRegion = () => {
+    const getRegionInit = () => {
         req = {
-            parentId: ""
+            region_level: [0,1]
         }
         GetRegions(req).then(res => {
-            setOptionList(res.data.data);
+            setRegionInitList(res.data.data);
         })
     }
+
 
     const handleClickStepRule = (item, index) => {
         setRegionSelected([]);
         setIsRegionFinish(false);
         if (index === ruleSelected.length-1 && isRuleFinish) {
-            getFirstRegion();
+            setOptionList(regionInitList);
         } else {
             setIsRuleFinish(false);
             req = {
                 parentId: item.rule_id
             }
-            console.log("rule req:", req);
             GetRules(req).then(res => {
                 setOptionList(res.data.data);
             })
@@ -72,14 +73,14 @@ export default function Orientation() {
                 data = res.data.data;
                 if (!data[0]) {
                     setIsRuleFinish(true);
-                    getFirstRegion();
+                    setOptionList(regionInitList);
                 } else {
                     setOptionList(data);
                 }
             })
         } else {
             let len = regionSelected.length;
-            if (len>1 && item.region_code === regionSelected[len-1].region_code) {
+            if (len>0 && item.region_code === regionSelected[len-1].region_code) {
                 // 确定选择本级地区事项
                 setIsRegionFinish(true);
                 handleForTaskCode(item);
@@ -102,8 +103,9 @@ export default function Orientation() {
     const handleForTaskCode = (item) => {
         req = {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-            region_id: item.region_id      
+            region_code: item.region_code      
         }
+        console.log(req);
         GetItems(req).then(res => {
             history.push({
                 pathname: "/v1/taskResult/" + res.data.data[0].task_code,
@@ -127,16 +129,17 @@ export default function Orientation() {
         2. 无初始数据(直接打开或者刷新页面) -> 重定向首页
     */    
     useEffect(() => {
+        getRegionInit();
         if (location.state) {
             let tmpRuleSelected = [];
             let tmpRegionSelected = [];
-            let type = location.state.type;
+            let nav_type = location.state.nav_type;
 
-            if (type === 0) {
+            if (nav_type === 0) {
                 tmpRuleSelected = location.state.ruleSelected;
                 setRuleSelected(tmpRuleSelected);
                 req = {
-                    parentId: tmpRuleSelected[tmpRuleSelected.length-1].rule_id
+                    parentId: tmpRuleSelected[0].rule_id
                 }
                 GetRules(req).then(res => {
                     setOptionList(res.data.data);
@@ -151,10 +154,10 @@ export default function Orientation() {
                 setIsRuleFinish(true);
                 // 重复逻辑原因：规避hooks和请求的延时问题
                 // 逻辑同 handleClickStepRule()
-                if (type === 1) {
+                if (nav_type === 1) {
                     setRegionSelected([]);
                     if (index === tmpRuleSelected.length-1) {
-                        getFirstRegion();
+                        setOptionList(regionInitList);
                     } else {
                         setIsRuleFinish(false);
                         req = {
@@ -168,7 +171,7 @@ export default function Orientation() {
                     
                 }
                 // 逻辑同 handleClickStepRegion()
-                if (type === 2) {
+                if (nav_type === 2) {
                     req = {
                         rule_id: tmpRuleSelected[tmpRuleSelected.length-1].rule_id,
                         region_code: item.region_code
