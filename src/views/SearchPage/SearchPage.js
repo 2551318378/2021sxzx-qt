@@ -208,7 +208,7 @@
                         <div className={style.searchListContainer}>
                             {searchList.map((item)=>{
                                 return(
-                                    <SearchItem content={item.material} link={item.link} title={item.title} date={item.area + " " + item.date} handler={addOneClick}></SearchItem>
+                                    <SearchItem content={item.content} link={item.link} title={item.title} date={item.area + " " + item.date} handler={addOneClick}></SearchItem>
                                 )
                             })}
                         </div>
