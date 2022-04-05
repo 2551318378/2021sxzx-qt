@@ -1,49 +1,55 @@
-.container{
-  background-color: #ffffff;
-  border: 2px solid #677EB7;
-  width: 600px;
-  border-radius: 15px;
-  padding: 23px 20px 0px;
+.container {
+	background-color: #ffffff;
+	border: 2px solid #677eb7;
+	width: 600px;
+	border-radius: 15px;
+	padding: 23px 20px 0;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
 
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+.title {
+	font-weight: bolder;
+	font-size: 18px;
+}
 
+.score {
+	font-weight: bolder;
+	color: #536dad;
+	margin-top: 15px;
+	font-size: 35px;
 }
-.title{
-  font-weight: bolder;
-  font-size: 18px;
+
+.score::after {
+	content: '分';
+	font-size: initial;
+	color: initial;
+	font-weight: 500;
 }
-.score{
-  font-weight: bolder;
-  color: #536DAD;
-  margin-top: 15px;
-  font-size: 35px;
+
+.rightColumns {
+	display: flex;
+	flex-direction: column;
+	margin-left: 30px;
+	flex: 1;
 }
-.score::after{
-  content: '分';
-  font-size: initial;
-  color: initial;
-  font-weight: 500;
+
+.statistics {
+	height: 200px;
+	width: 100%;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
 }
-.rightColumns{
-  display: flex;
-  flex-direction: column;
-  margin-left: 30px;
-  flex: 1;
+
+.statistics .text {
+	width: 90px;
+	font-size: 12px;
+	margin-right: 15px;
 }
-.statistics{
-  height: 200px;
-  width: 100%;
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
+
+.rate {
+	color: #f59a23;
 }
-.statistics .text{
-  width: 90px;
-  font-size: 12px;
-  margin-right: 15px;
-}
-.rate{
-  color:#F59A23;
-}
+
