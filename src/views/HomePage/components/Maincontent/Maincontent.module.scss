@@ -1,14 +1,14 @@
 @import '../../../../assets/styles/variable.scss';
 
-$banner_pc_bg: url('../../../../assets/imgs/banner_pc_bg.jpg');
-$banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
+$bannerPC: url('../../../../assets/imgs/banner_pc_bg.jpg');
+$bannerMB: url('../../../../assets/imgs/banner_mb_bg.png');
 .hide {
     display: none;
 }
 .container {
     margin: 0 auto;
-    .banner_show {
-        .ind_or_ent {
+    .bannerShow {
+        .indOrEnt {
             display: flex;
             flex-direction: row;   
             div {
@@ -20,7 +20,7 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
             }
         }
     }
-    .business_show {
+    .businessShow {
         text-align: center;
         .classify {
             display: flex;
@@ -45,11 +45,11 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
 @media screen and (min-width: 401px) {
     .container {
         width: 1519px;
-        .banner_show {
+        .bannerShow {
             height: 328px;
             padding-left: 211px;
             padding-top: 56px;
-            background: $banner_pc_bg;
+            background: $bannerPC;
             background-size: 1519px;
             .slogan1 {
                 font-size: map-get($map: $homepage, $key: 'banner-font-1-pc');
@@ -59,7 +59,7 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
                 margin-top: 32px;
                 margin-bottom: 67px;
             }
-            .ind_or_ent {
+            .indOrEnt {
                 div {
                     width: 152px;
                     height: 42px;
@@ -78,7 +78,7 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
                 }
             }
         }
-        .business_show {
+        .businessShow {
             height: 535px;
             margin-top: 58px;
             .classify {
@@ -112,12 +112,11 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
                 padding: 0 163px;
                 div {
                     cursor: pointer;
-                    .outborder {
+                    .outerBorder {
                         width: 210px;
                         height: 210px;
                         border: 1px solid $gray-3;
-                        border-radius: 105px;
-                        
+                        border-radius: 105px;      
                         div {
                             margin: 6.5px;
                             height: 195px;
@@ -150,12 +149,12 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
 @media screen and (max-width: 400px) {
     .container {
         width: 375px;
-        .banner_show {
+        .bannerShow {
             width: 375px;
             height: 120px;
             padding-left: 11px;
             padding-top: 20px;
-            background: $banner_mb_bg;
+            background: $bannerMB;
             background-size: 375px;
             .slogan1 {
                 font-size: map-get($map: $homepage, $key: 'selection-font-1-mb');
@@ -166,7 +165,7 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
                 margin-bottom: 29px;
                 max-height: 100%;
             }
-            .ind_or_ent {
+            .indOrEnt {
                 div {
                     width: 85px;
                     height: 21px;
@@ -180,7 +179,7 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
                 }
             }
         }
-        .business_show {
+        .businessShow {
             height: 565px;
             padding-top: 33px;
             .classify {
@@ -206,7 +205,7 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
                 padding: 0 40px;
                 margin-top: 60px;
                 div {
-                    .outborder {
+                    .outerBorder {
                         width: 114px;
                         height: 114px;
                         border: 1px solid $gray-3;
@@ -228,12 +227,8 @@ $banner_mb_bg: url('../../../../assets/imgs/banner_mb_bg.png');
                         font-size: map-get($map: $homepage, $key: 'selection-font-2-mb');
                         margin-top: 10px;
                     }
-                }
-                
+                }             
             }
-        
-        }
-        
+        }   
     }
-
 }

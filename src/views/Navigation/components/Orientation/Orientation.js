@@ -45,7 +45,6 @@ export default function Orientation() {
             })
             setRuleSelected(ruleSelected.filter((_, i) => i <= index));
         }  
-
     }
 
     const handleClickStepRegion = (item, index) => {    
@@ -95,8 +94,7 @@ export default function Orientation() {
                     setOptionList(data);
                 })
             }
-        }
-        
+        } 
     }
 
     // 获取task_code并跳转
@@ -105,7 +103,6 @@ export default function Orientation() {
             rule_id: ruleSelected[ruleSelected.length-1].rule_id,
             region_code: item.region_code      
         }
-        console.log(req);
         GetItems(req).then(res => {
             history.push({
                 pathname: "/v1/taskResult/" + res.data.data[0].task_code,
@@ -115,7 +112,6 @@ export default function Orientation() {
                     }
                 })
             })      
-
     }
 
 
@@ -134,7 +130,6 @@ export default function Orientation() {
             let tmpRuleSelected = [];
             let tmpRegionSelected = [];
             let nav_type = location.state.nav_type;
-
             if (nav_type === 0) {
                 tmpRuleSelected = location.state.ruleSelected;
                 setRuleSelected(tmpRuleSelected);
@@ -185,7 +180,6 @@ export default function Orientation() {
         } else {
             history.push('/home');
         }
-        // eslint-disable-next-line
     }, []);
 
     return (

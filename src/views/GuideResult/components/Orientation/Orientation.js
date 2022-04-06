@@ -48,13 +48,9 @@ export default function Orientation() {
                 GetRegionPaths(req).then(res => {
                     setRegionSelected(res.data.data[regionCode]);
                 })
-            })
-            
-            
+            })    
         }
-        // eslint-disable-next-line
     }, []) 
-
 
     const handleClickStepRule = (item, index) => {
         history.push({

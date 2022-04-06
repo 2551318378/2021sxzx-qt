@@ -5,8 +5,9 @@ import { Link, useHistory } from 'react-router-dom'
 import { GetRules } from '../../../../api/navigationApi'
 
 export default function Maincontent() {
-    // const main = '广州人设';
+    // TODO: 修改标语主体
     const main = '';
+    // TODO: 修改事项总数
     const itemNum = '000';
     const history = useHistory();
     const [serviceObjectIndex, setServiceObjectIndex] = useState(0);
@@ -17,8 +18,12 @@ export default function Maincontent() {
     ]);
     const [FirstRuleList, setFirstRuleList] = useState([[]]);
 
+    const icLDBZ = Images.home.icLDBZ;
+    const icRSRC = Images.home.icRSRC;
+    const icSHBX = Images.home.icSHBX;
+    const icJYCY = Images.home.icJYCY;
     var picSrc;
-    
+
     /* 
         首页初始化：
     */
@@ -32,7 +37,6 @@ export default function Maincontent() {
             data = res.data.data;
             setFirstRuleList(data);  
         })
-        // eslint-disable-next-line
     }, [])
     
     const handleServiceObjClick = (index) => {
@@ -42,33 +46,37 @@ export default function Maincontent() {
     const handleFirstRulelick = (item) => {
         history.push({
             pathname: '/navigation',
-            state: { ruleSelected: [item], nav_type: 0, obj_type: serviceObjectList[serviceObjectIndex].obj_type }
+            state: { 
+                ruleSelected: [item], 
+                nav_type: 0, 
+                obj_type: serviceObjectList[serviceObjectIndex].obj_type 
+            }
         })
     }
 
     return (
         <div className={style.container}>
             {/* 图片横幅部分 */}
-            <div className={style.banner_show}>
+            <div className={style.bannerShow}>
                 <div className={style.slogan1}>{main} 为您解决事项咨询最后一公里问题</div>
                 <div className={style.slogan2}>{main}为您提供{itemNum}个事项咨询，打造一站式事项咨询平台</div>
-                <div className={style.ind_or_ent}>
+                <div className={style.indOrEnt}>
                     <Link to='#'>
                         <div className={style.individual}>
-                            <img src={Images.home.ic_gryw} alt='个人业务'></img>
+                            <img src={Images.home.icGRYW} alt='个人业务'></img>
                             个人业务
                         </div>
                     </Link>
                     <Link to='#'>
                         <div className={style.enterprise}>
-                            <img src={Images.home.ic_fryw} alt='法人业务'></img>
+                            <img src={Images.home.icFRYW} alt='法人业务'></img>
                             法人业务
                         </div>
                     </Link>
                 </div>
             </div>
             {/* 事项选择部分 */}
-            <div className={style.business_show}>
+            <div className={style.businessShow}>
                 {/* 第一级事项渲染 */}
                 <div className={style.classify}>
                     {
@@ -88,20 +96,20 @@ export default function Maincontent() {
                         FirstRuleList&&FirstRuleList.map((item, index) => {
                             switch (item.rule_name) {
                                 case '劳动保障':
-                                    picSrc = Images.home.ic_ldbz; break;
+                                    picSrc = icLDBZ; break;
                                 case '人事人才':
-                                    picSrc = Images.home.ic_rsrc; break;
+                                    picSrc = icRSRC; break;
                                 case '社会保险':
-                                    picSrc = Images.home.ic_shbx; break;
+                                    picSrc = icSHBX; break;
                                 case '就业创业':
-                                    picSrc = Images.home.ic_jycy; break;
+                                    picSrc = icJYCY; break;
                                 default:
                                     break;
                             }   
                             return (
                                 <div className={serviceObjectIndex === 0&&item.rule_name === '劳动保障'?style.hide:null} 
                                     onClick={handleFirstRulelick.bind(this, item)}>
-                                    <div className={style.outborder}>
+                                    <div className={style.outerBorder}>
                                         <div>
                                             <img src={picSrc}></img>
                                         </div>
