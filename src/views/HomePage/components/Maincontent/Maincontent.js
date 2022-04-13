@@ -22,6 +22,8 @@ export default function Maincontent() {
     const icRSRC = Images.home.icRSRC;
     const icSHBX = Images.home.icSHBX;
     const icJYCY = Images.home.icJYCY;
+    const bannerPC = Images.home.bannerPC;
+    const bannerMB = Images.home.bannerMB;
     var picSrc;
 
     /* 
