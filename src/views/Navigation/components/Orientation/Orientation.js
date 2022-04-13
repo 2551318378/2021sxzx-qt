@@ -22,7 +22,8 @@ export default function Orientation() {
 
     const getRegionInit = () => {
         req = {
-            region_level: [0,1]
+            // region_level: [0,1]
+            region_level: 0
         }
         GetRegions(req).then(res => {
             setRegionInitList(res.data.data);
@@ -153,7 +154,7 @@ export default function Orientation() {
                     setRegionSelected([]);
                     if (index === tmpRuleSelected.length-1) {
                         req = {
-                            region_level: [0,1]
+                            region_level: 0
                         }
                         GetRegions(req).then(res => {
                             setOptionList(res.data.data);

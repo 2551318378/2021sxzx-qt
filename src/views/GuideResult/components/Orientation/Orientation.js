@@ -26,33 +26,27 @@ export default function Orientation() {
         } else {
             console.log(location.pathname.substring(subStartIndex));
             let taskCode = location.pathname.substring(subStartIndex);
-            // 获取rule_id和region_code
+            // 获取rule_id和region_id
             req = {
                 task_code: taskCode
             }
             GetItems(req).then(res => {
                 let ruleId = res.data.data[0].rule_id;
-                let regionCode = res.data.data[0].region_code;
+                let regionId = res.data.data[0].region_id;
                 
                 req = {
                     rule_id: [ruleId]
                 }
                 GetRulePaths(req).then(res => {
-                    // 去除第一项“分类规则标准”
+                    // 去除第一项“人社局业务”
                     setRuleSelected(res.data.data[ruleId].filter((_, i) => i > 0));
                 })
 
                 req = {
-                    region_code: [regionCode]
+                    region_id: [regionId]
                 }
                 GetRegionPaths(req).then(res => {
-                    let data = res.data.data[regionCode];
-                    // 地区第一级为市或区
-                    if (data.length > 1) {
-                        setRegionSelected(data.filter((_, i) => i > 0));
-                    } else {
-                        setRegionSelected(data);
-                    }  
+                    setRegionSelected(res.data.data[regionId]);
                 })
             })    
         }
