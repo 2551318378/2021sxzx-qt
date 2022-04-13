@@ -46,7 +46,13 @@ export default function Orientation() {
                     region_code: [regionCode]
                 }
                 GetRegionPaths(req).then(res => {
-                    setRegionSelected(res.data.data[regionCode]);
+                    let data = res.data.data[regionCode];
+                    // 地区第一级为市或区
+                    if (data.length > 1) {
+                        setRegionSelected(data.filter((_, i) => i > 0));
+                    } else {
+                        setRegionSelected(data);
+                    }  
                 })
             })    
         }

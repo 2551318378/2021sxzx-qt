@@ -152,7 +152,12 @@ export default function Orientation() {
                 if (nav_type === 1) {
                     setRegionSelected([]);
                     if (index === tmpRuleSelected.length-1) {
-                        setOptionList(regionInitList);
+                        req = {
+                            region_level: [0,1]
+                        }
+                        GetRegions(req).then(res => {
+                            setOptionList(res.data.data);
+                        })
                     } else {
                         setIsRuleFinish(false);
                         req = {
