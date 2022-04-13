@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Table, Divider, Radio, Modal } from 'antd';
 import { Map, Marker, NavigationControl } from 'react-bmapgl';
+import { GetItemGuide } from '../../../../api/guideApi'
 
 export default function Guide() {
 
@@ -18,55 +19,92 @@ export default function Guide() {
 	const auditMaterialColunms = [
 		{
 			title: '序号',
-			dataIndex: 'MATERIAL_NAME',
-			key: 'MATERIAL_NAME',
+			dataIndex: 'materials_num',
+			key: 'materials_num',
 			render: (text, record, index) => (
 				<div>{index + 1}</div>
 			)
 		},
 		{
 			title: '材料名称',
-			dataIndex: 'material_name',
-			key: 'material_name'
+			dataIndex: 'materials_name',
+			key: 'materials_name'
 		},
 		{
 			title: '材料形式',
-			dataIndex: 'page_num',
-			key: 'page_num',
+			dataIndex: 'materials_form',
+			key: 'materials_form',
 			render: (text, record, index) => (
 				<>
-					<div>原件: {record.page_num}</div>
-					<div>复印件: {record.page_copynum}</div>
-					<div>{record.zzhdzb_text}</div>
+					<div>原件: {record.origin}</div>
+					<div>复印件: {record.copy}</div>
+					<div>{ getMaterialForm(record.material_form) }</div>
 				</>
 			)
 		},
 		{
 			title: '材料要求',
-			dataIndex: 'is_need_text',
-			key: 'is_need_text',
+			dataIndex: 'materials_req',
+			key: 'materials_req',
 			render: (text, record, index) => (
 				<>
-					<div>{record.is_need_text}</div>
+					<div>{getMaterialNecessity(record.material_necessity)}</div>
 					<div className={style.materialReqest} onClick={() => { showMaterialRequest(index) }}>其他要求</div>
 				</>
 			)
 		}
 	];
 
+	// useEffect(() => { 
+	// 	axios.get(pathname).then(res => {
+	// 		console.log(pathname)
+	// 		console.log(res.data)
+	// 		setData(res.data[0]);
+	// 		setLobbyInfo(res.data[0].audit_catalog_lobby[0]);
+	// 	})
+	// }, []);
+
 	useEffect(() => { 
-		axios.get(pathname).then(res => {
-			console.log(res.data)
-			setData(res.data[0]);
-            
-			setLobbyInfo(res.data[0].audit_catalog_lobby[0]);
+		GetItemGuide({"task_code": pathname.slice(15)}).then(res => {
+			console.log(res.data.data)
+			setData(res.data.data);
+			if(res.data.data.windows !== null){
+				setLobbyInfo(res.data.data.windows[0]);
+			}else{
+				setLobbyInfo(null);
+			}
+			
 		})
 	}, []);
+
+	const getMaterialForm = (index) =>{
+		switch(index){
+			case '1' : return "纸质";
+			case '2' : return "电子化";
+			case '3' : return "纸质/电子化";
+		}
+	}
+
+	const getMaterialNecessity = (index) =>{
+		switch(index){
+			case '1' : return "必要";
+			case '2' : return "非必要";
+			case '3' : return "容缺后补";
+		}
+	}
 
 	const showMaterialRequest = (index) => {
 		setMaterialIndex(index)
 		showModal()
 	};
+
+	const renderMaterial = () => {
+		if(data.submit_documents === null){
+			return <div>无</div>
+		}else{
+			return <Table className={style.audit_material} columns={auditMaterialColunms} dataSource={data.submit_documents} pagination={false} size='middle' />
+		}
+	}
 
 	const changeLobby = (lobbyList, lobbyIndex) => {
 		setLobbyInfo(lobbyList[lobbyIndex])
@@ -82,18 +120,41 @@ export default function Guide() {
 		}
 
 	};
-
-	const renderMaterialRequest = () => {
-		if (data.audit_material !== undefined && materialIndex !== -1) {
+	
+	const renderLobbyDetails = () => {
+		console.log(lobbyInfo)
+		if(lobbyInfo === null){
+			return <div>无线下办理窗口</div>
+		}else{
 			return <>
-				<div>材料类型: {data.audit_material[materialIndex].material_type_text}</div>
-				<div>材料形式: {data.audit_material[materialIndex].zzhdzb_text}</div>
-				<div>纸质材料规格: {data.audit_material[materialIndex].page_format}</div>
-				<div>是否免提交:
-					{data.audit_material[materialIndex].submissionrequired === "0" ? "否" : "是"}
+				<div className={style.lobby}>
+					<span className={style.lobbyInfo}>办理地点: </span>
+					<span>{lobbyInfo === undefined ? "无" : lobbyInfo.address}</span>
 				</div>
+				<div className={style.lobby}>
+					<span className={style.lobbyInfo}>咨询及投诉电话: </span>
+					<span>{lobbyInfo === undefined ? "无" : lobbyInfo.phone}</span>
+				</div>
+				<div className={style.lobby}>
+					<span className={style.lobbyInfo}>办公时间: </span>
+					<span>{lobbyInfo === undefined ? "无" : lobbyInfo.office_hour}</span>
+				</div>
+				<div>{ renderMap() }</div>
 			</>
 		}
+	}
+
+	const renderMaterialRequest = () => {
+		if (data.submit_documents !== undefined && materialIndex !== -1) {
+			/*data.submit_documents[materialIndex].materials_type*/
+			return <>
+				<div>材料类型: 这里有问题 </div>
+				<div>材料形式: { getMaterialForm(data.submit_documents[materialIndex].material_form) }</div>
+				<div>纸质材料规格: {data.submit_documents[materialIndex].page_format}</div>
+				<div>是否免提交: {data.submit_documents[materialIndex].submissionrequired === "0" ? "否" : "是"}
+				</div>
+			</>
+		}	
 	};
  
 	const showModal = () => {
@@ -111,7 +172,7 @@ export default function Guide() {
 	const handleAddress = (address) => {
 		var index = address?.indexOf('号');
 		var res =  address?.slice(0, index + 1);
-        return res
+        return res;
 	}
  
 
@@ -158,25 +219,10 @@ export default function Guide() {
 			<span className={style.button}>打印咨询结果</span>
 			<Divider />
 			<div className={style.subtitle}>申请材料</div>
-			<Table className={style.audit_material} columns={auditMaterialColunms} dataSource={data.audit_material} pagination={false} size='middle' />
+			{ renderMaterial() }
 			<div className={style.subtitle}>办理地点</div>
-			{renderLobby(data.audit_catalog_lobby)}
-
-			<>
-				<div className={style.lobby}>
-					<span className={style.lobbyInfo}>办理地点: </span>
-					<span>{lobbyInfo === undefined ? "无" : lobbyInfo.address}</span>
-				</div>
-				<div className={style.lobby}>
-					<span className={style.lobbyInfo}>咨询及投诉电话: </span>
-					<span>{lobbyInfo === undefined ? "无" : lobbyInfo.tel}</span>
-				</div>
-				<div className={style.lobby}>
-					<span className={style.lobbyInfo}>办公时间: </span>
-					<span>{lobbyInfo === undefined ? "无" : lobbyInfo.time}</span>
-				</div>
-				<div>{ renderMap() }</div>
-			</>
+			{ renderLobby(data.windows) }
+			{ renderLobbyDetails() }
 
 			<div className={style.subtitle}>网上办理流程</div>
 			<div className={style.wsbllc}>{data.wsbllc ? data.wsbllc : "无"}</div>
