@@ -44,26 +44,26 @@ export default function FooterInfo() {
                 <div className={style.relevantCode}>
                     <div className={`${style.dropdownWeb} ${style.dropdown}`}>
                         <div className={style.dropdownDesc}>
-                            <img src={Images.common.icQrcode} alt='二维码图标'></img> {mainName}官网
+                            <img src={Images.common.icQrcode}></img> {mainName}官网
                         </div>
                         <div className={`${style.webContent} ${style.content}`}>
-                            <img src={Images.common.icPlaceholder} alt={{mainName}+'官网二维码'}></img>
+                            <img src={Images.common.icPlaceholder}></img>
                         </div>
                     </div>
                     <div className={`${style.dropdownWechat} ${style.dropdown}`}>
                         <div className={style.dropdownDesc}>
-                            <img src={Images.common.icQrcode} alt='二维码图标'></img> {mainName}微信公众号
+                            <img src={Images.common.icQrcode}></img> {mainName}微信公众号
                         </div>
                         <div className={`${style.wechatContent} ${style.content}`}>
-                            <img src={Images.common.icPlaceholder} alt={{mainName}+'微信公众号二维码'}></img>
+                            <img src={Images.common.icPlaceholder}></img>
                         </div>
                     </div>
                     <div className={`${style.dropdownApp} ${style.dropdown}`}>
                         <div className={style.dropdownDesc}>
-                            <img src={Images.common.icQrcode} alt='二维码图标'></img> {appName}APP
+                            <img src={Images.common.icQrcode}></img> {appName}APP
                         </div>
                         <div className={`${style.appContent} ${style.content}`}>
-                            <img src={Images.common.icPlaceholder} alt={{appName}+'APP二维码'}></img>
+                            <img src={Images.common.icPlaceholder}></img>
                         </div>
                     </div>
                 </div>
@@ -72,12 +72,12 @@ export default function FooterInfo() {
             
             <div className={style.copyright}>
                 <div className={style.crContainer}>
-                    <img src={Images.common.icZFWZZC} alt='政府网站找错'></img>
-                    <img src={Images.common.icDZJG} alt='党政机关标志'></img>
+                    <img src={Images.common.icZFWZZC}></img>
+                    <img src={Images.common.icDZJG}></img>
                     <div className={style.crInfo}>
                         <div>{ crHint1 }</div>
                         <div>
-                            <img src={Images.common.icYGWA} alt='粤公网标志'></img>
+                            <img src={Images.common.icYGWA}></img>
                             { crHint2 }   
                         </div>
                     </div>
