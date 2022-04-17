@@ -22,9 +22,13 @@ export default function Maincontent() {
     const icRSRC = Images.home.icRSRC;
     const icSHBX = Images.home.icSHBX;
     const icJYCY = Images.home.icJYCY;
-    const bannerPC = Images.home.bannerPC;
-    const bannerMB = Images.home.bannerMB;
+    const bannerPC = 'url(' + Images.home.bannerPC + ')';
+    const bannerMB = 'url(' + Images.home.bannerMB + ')';
+    const banner = document.getElementById('banner');
+
+    var w;
     var picSrc;
+    var bgSrc = bannerPC;
 
     /* 
         首页初始化：
@@ -41,6 +45,18 @@ export default function Maincontent() {
         })
     }, [])
     
+    window.onresize = () => {
+        w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        if (w > 400 && bgSrc != bannerPC) {
+            bgSrc = bannerPC;
+            banner.style.backgroundImage = bgSrc;
+        }
+        if (w <= 400 && bgSrc != bannerMB) {
+            bgSrc = bannerMB;
+            banner.style.backgroundImage = bgSrc;
+        }
+    }
+
     const handleServiceObjClick = (index) => {
         setServiceObjectIndex(index);
     }
@@ -59,7 +75,7 @@ export default function Maincontent() {
     return (
         <div className={style.container}>
             {/* 图片横幅部分 */}
-            <div className={style.bannerShow}>
+            <div className={style.bannerShow} id='banner'>
                 <div className={style.slogan1}>{main} 为您解决事项咨询最后一公里问题</div>
                 <div className={style.slogan2}>{main}为您提供{itemNum}个事项咨询，打造一站式事项咨询平台</div>
                 <div className={style.indOrEnt}>

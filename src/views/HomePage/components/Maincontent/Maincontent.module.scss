@@ -1,7 +1,5 @@
 @import '../../../../assets/styles/variable.scss';
 
-$bannerPC: url('../../../../assets/imgs/banner_pc_bg.jpg');
-$bannerMB: url('../../../../assets/imgs/banner_mb_bg.png');
 .hide {
     display: none;
 }
@@ -49,7 +47,6 @@ $bannerMB: url('../../../../assets/imgs/banner_mb_bg.png');
             height: 328px;
             padding-left: 211px;
             padding-top: 56px;
-            background: $bannerPC;
             background-size: 1519px;
             .slogan1 {
                 font-size: map-get($map: $homepage, $key: 'banner-font-1-pc');
@@ -154,7 +151,6 @@ $bannerMB: url('../../../../assets/imgs/banner_mb_bg.png');
             height: 120px;
             padding-left: 11px;
             padding-top: 20px;
-            background: $bannerMB;
             background-size: 375px;
             .slogan1 {
                 font-size: map-get($map: $homepage, $key: 'selection-font-1-mb');
