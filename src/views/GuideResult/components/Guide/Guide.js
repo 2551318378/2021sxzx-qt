@@ -49,7 +49,7 @@ export default function Guide() {
 			render: (text, record, index) => (
 				<>
 					<div>{getMaterialNecessity(record.material_necessity)}</div>
-					<div className={style.materialReqest} onClick={() => { showMaterialRequest(index) }}>其他要求</div>
+					<div className={style.materialRequest} onClick={() => { showMaterialRequest(index) }}>其他要求</div>
 				</>
 			)
 		}
@@ -90,6 +90,14 @@ export default function Guide() {
 			case '1' : return "必要";
 			case '2' : return "非必要";
 			case '3' : return "容缺后补";
+		}
+	}
+
+	const getMaterialType = (index) =>{
+		switch(index){
+			case '1' : return "证件证书证明";
+			case '2' : return "申请表格文书";
+			case '3' : return "其他";
 		}
 	}
 
@@ -147,12 +155,12 @@ export default function Guide() {
 	const renderMaterialRequest = () => {
 		if (data.submit_documents !== undefined && materialIndex !== -1) {
 			/*data.submit_documents[materialIndex].materials_type*/
+			var tmp = data.submit_documents[materialIndex];
 			return <>
-				<div>材料类型: 这里有问题 </div>
-				<div>材料形式: { getMaterialForm(data.submit_documents[materialIndex].material_form) }</div>
-				<div>纸质材料规格: {data.submit_documents[materialIndex].page_format}</div>
-				<div>是否免提交: {data.submit_documents[materialIndex].submissionrequired === "0" ? "否" : "是"}
-				</div>
+				<div className={ tmp.materials_type ? null : style.detailRequest }>材料类型: { getMaterialType(data.submit_documents[materialIndex].materials_type) } </div>
+				<div className={ tmp.material_form ? null : style.detailRequest }>材料形式: { getMaterialForm(data.submit_documents[materialIndex].material_form) }</div>
+				<div className={ tmp.page_format ? null : style.detailRequest }>纸质材料规格: { data.submit_documents[materialIndex].page_format }</div>
+				<div className={ tmp.submission_required ? null : style.detailRequest }>是否免提交: { data.submit_documents[materialIndex].submissionrequired === "0" ? "否" : "是" }</div>
 			</>
 		}	
 	};
@@ -182,14 +190,6 @@ export default function Guide() {
 			myGeo.getPoint(handleAddress(lobbyInfo?.address),function(point){
 				if(point){
 					setLobbyLocation(point);
-					console.log("原地址" + lobbyInfo?.address)
-					console.log("正编码得到经纬度", point)
-					myGeo.getLocation(point, function(result){      
-						if (result){      
-							console.log("逆编码得到地址", result.address);    
-						}      
-					});
-					
 				}else{
 					alert('您选择的地址没有解析到结果！');
 				}
