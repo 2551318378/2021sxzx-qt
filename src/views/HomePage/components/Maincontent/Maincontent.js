@@ -65,13 +65,13 @@ export default function Maincontent() {
                 <div className={style.indOrEnt}>
                     <Link to='#'>
                         <div className={style.individual}>
-                            <img src={Images.home.icGRYW} alt='个人业务'></img>
+                            <img src={Images.home.icGRYW}></img>
                             个人业务
                         </div>
                     </Link>
                     <Link to='#'>
                         <div className={style.enterprise}>
-                            <img src={Images.home.icFRYW} alt='法人业务'></img>
+                            <img src={Images.home.icFRYW}></img>
                             法人业务
                         </div>
                     </Link>

@@ -33,7 +33,7 @@ export default function SearchBar() {
         <div className={style.outerShadow}>     
             <div className={style.container}>
                 <Link to='/home'>
-                    <img src={Images.common.icPlaceholder} alt='logo' className={style.logo}></img>
+                    <img src={Images.common.icPlaceholder} className={style.logo}></img>
                 </Link>
                 <Link to='/home'>
                     <div className={style.homepage}>首页</div>
@@ -59,7 +59,6 @@ export default function SearchBar() {
                         onChange={e => handleChangeWord(e)}
                         onKeyDown={e => handleEnterSearch(e)}/>
                     <img 
-                        alt='搜索按钮'
                         src={Images.common.icSearch} 
                         className={style.searchBtn}
                         onClick={handleClickSearchBtn}/>
