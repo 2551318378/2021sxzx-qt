@@ -15,51 +15,50 @@ export default function Orientation() {
     const [ruleSelected, setRuleSelected] = useState([]);
     const [regionSelected, setRegionSelected] = useState([]);
     const [optionList, setOptionList] = useState([]);
-    const [regionInitList, setRegionInitList] = useState([]);
 
     var req = {};
     var data = [];
 
     const getRegionInit = () => {
         req = {
-            // region_level: [0,1]
             region_level: 0
         }
         GetRegions(req).then(res => {
-            setRegionInitList(res.data.data);
+            setOptionList(res.data.data);
         })
     }
 
 
-    const handleClickStepRule = (item, index) => {
+    const handleClickStepRule = async (mainRule, isReturn, item, index) => {
+        setOptionList([]);
         setRegionSelected([]);
         setIsRegionFinish(false);
-        if (index === ruleSelected.length-1 && isRuleFinish) {
-            setOptionList(regionInitList);
+        // isReturn区分是否回退：处理回退setIsRuleFinish异步
+        if (index === mainRule.length-1 && (isRuleFinish || isReturn)) {
+            getRegionInit();
         } else {
             setIsRuleFinish(false);
             req = {
                 parentId: item.rule_id
             }
-            GetRules(req).then(res => {
+            setRuleSelected(mainRule.filter((_, i) => i <= index));
+            await GetRules(req).then(res => {
                 setOptionList(res.data.data);
             })
-            setRuleSelected(ruleSelected.filter((_, i) => i <= index));
         }  
     }
 
-    const handleClickStepRegion = (item, index) => {    
-        setRegionSelected([]);
+    const handleClickStepRegion = async (mainRegion, mainRule, item, index) => {    
+        setOptionList([]);
         setIsRegionFinish(false);
         req = {
-            rule_id: ruleSelected[ruleSelected.length-1].rule_id,
+            rule_id: mainRule[mainRule.length-1].rule_id,
             region_code: item.region_code
         }
-        GetChildRegionsByRuleAndRegion(req).then(res => {
-            data = res.data.data;
-            setOptionList(data);
-        })
-        setRegionSelected(regionSelected.filter((_, i) => i <= index));
+        setRegionSelected(mainRegion.filter((_, i) => i <= index));
+        await GetChildRegionsByRuleAndRegion(req).then(res => {
+            setOptionList(res.data.data);
+        })   
     }
 
     const handleClickOption = (item) => {
@@ -73,7 +72,7 @@ export default function Orientation() {
                 data = res.data.data;
                 if (!data[0]) {
                     setIsRuleFinish(true);
-                    setOptionList(regionInitList);
+                    getRegionInit();
                 } else {
                     setOptionList(data);
                 }
@@ -126,7 +125,6 @@ export default function Orientation() {
         2. 无初始数据(直接打开或者刷新页面) -> 重定向首页
     */    
     useEffect(() => {
-        getRegionInit();
         if (location.state) {
             let tmpRuleSelected = [];
             let tmpRegionSelected = [];
@@ -145,42 +143,14 @@ export default function Orientation() {
                 tmpRegionSelected = location.state.regionSelected;
                 let item = location.state.clickItem;
                 let index = location.state.clickIndex;
+                setIsRuleFinish(true);
                 setRuleSelected(tmpRuleSelected);
                 setRegionSelected(tmpRegionSelected);
-                setIsRuleFinish(true);
-                // 重复逻辑原因：规避hooks和请求的延时问题
-                // 逻辑同 handleClickStepRule()
                 if (nav_type === 1) {
-                    setRegionSelected([]);
-                    if (index === tmpRuleSelected.length-1) {
-                        req = {
-                            region_level: 0
-                        }
-                        GetRegions(req).then(res => {
-                            setOptionList(res.data.data);
-                        })
-                    } else {
-                        setIsRuleFinish(false);
-                        req = {
-                            parentId: item.rule_id
-                        }
-                        GetRules(req).then(res => {
-                            setOptionList(res.data.data);
-                        })
-                        setRuleSelected(tmpRuleSelected.filter((_, i) => i <= index));
-                    }  
-                    
+                    handleClickStepRule(tmpRuleSelected, true, item, index);        
                 }
-                // 逻辑同 handleClickStepRegion()
                 if (nav_type === 2) {
-                    req = {
-                        rule_id: tmpRuleSelected[tmpRuleSelected.length-1].rule_id,
-                        region_code: item.region_code
-                    }
-                    GetChildRegionsByRuleAndRegion(req).then(res => {
-                        setOptionList(res.data.data);
-                    })
-                    setRegionSelected(tmpRegionSelected.filter((_, i) => i <= index));
+                    handleClickStepRegion(tmpRegionSelected, tmpRuleSelected, item, index);
                 }
             }  
         } else {
@@ -197,7 +167,7 @@ export default function Orientation() {
                     ruleSelected&&ruleSelected.map((item, index) => {
                         return (
                             <div className={style.selectedBox} key={index} 
-                                onClick={handleClickStepRule.bind(this, item, index)}>
+                                onClick={handleClickStepRule.bind(this, ruleSelected, false, item, index)}>
                                 <div className={style.outer}>
                                     <div className={style.desc}>
                                         { item.rule_name }
@@ -213,7 +183,7 @@ export default function Orientation() {
                         if (isRuleFinish) {
                             return (
                                 <div className={style.selectedBox} key={index} 
-                                    onClick={handleClickStepRegion.bind(this, item, index)}>
+                                    onClick={handleClickStepRegion.bind(this, regionSelected, ruleSelected, item, index)}>
                                     <div className={style.outer}>
                                         <div className={style.desc}>
                                             { item.region_name }
