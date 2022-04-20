@@ -16,7 +16,95 @@ export default function Maincontent() {
         { rule_name: '法人业务', obj_type: '[2,3,4]'},
         { rule_name: '事业单位业务', obj_type: '[5,6,9]'}
     ]);
-    const [FirstRuleList, setFirstRuleList] = useState([[]]);
+    // const [FirstRuleList, setFirstRuleList] = useState([[]]);
+    const [FirstRuleList, setFirstRuleList] = useState([
+        {
+            creator: {
+                id: "62386b2b1e90ec7f7e958138",
+                name: "全知全能的开发人员",
+                department_name: "办公室"
+            },
+            _id: "625fbf817dcfbf22f1d11ca3",
+            create_time: 1650442112897,
+            rule_id: "1",
+            rule_name: "人事人才",
+            parentId: "0",
+            children: [
+                "2",
+                "5",
+                "8",
+                "25",
+                "26",
+                "31"
+            ],
+            rule_path: "人社局业务/人事人才/"
+        },
+        {
+            creator: {
+                id: "62386b2b1e90ec7f7e958138",
+                name: "全知全能的开发人员",
+                department_name: "办公室"
+            },
+            _id: "625fbf817dcfbf22f1d11cc6",
+            create_time: 1650442112897,
+            rule_id: "36",
+            rule_name: "就业创业",
+            parentId: "0",
+            children: [
+                "37",
+                "40",
+                "49",
+                "50",
+                "51",
+                "52",
+                "53",
+                "57",
+                "58"
+            ],
+            rule_path: "人社局业务/就业创业/"
+        },
+        {
+            creator: {
+                id: "62386b2b1e90ec7f7e958138",
+                name: "全知全能的开发人员",
+                department_name: "办公室"
+            },
+            _id: "625fbf817dcfbf22f1d11ce1",
+            create_time: 1650442112897,
+            rule_id: "63",
+            rule_name: "社会保险",
+            parentId: "0",
+            children: [
+                "64",
+                "70",
+                "79",
+                "82"
+            ],
+            rule_path: "人社局业务/社会保险/"
+        },
+        {
+            creator: {
+                id: "62386b2b1e90ec7f7e958138",
+                name: "全知全能的开发人员",
+                department_name: "办公室"
+            },
+            _id: "625fbf817dcfbf22f1d11cf9",
+            create_time: 1650442112897,
+            rule_id: "87",
+            rule_name: "劳动保障",
+            parentId: "0",
+            children: [
+                "88",
+                "89",
+                "97",
+                "98",
+                "99",
+                "100"
+            ],
+            rule_path: "人社局业务/劳动保障/"
+        }
+    ]);
+
 
     const icLDBZ = Images.home.icLDBZ;
     const icRSRC = Images.home.icRSRC;
@@ -34,15 +122,15 @@ export default function Maincontent() {
         首页初始化：
     */
     useEffect(() => {
-        let data = [];
-        let req;
-        req = {
-            parentId : '0'
-        }
-        GetRules(req).then(res => {
-            data = res.data.data;
-            setFirstRuleList(data);  
-        })
+        // let data = [];
+        // let req;
+        // req = {
+        //     parentId : '0'
+        // }
+        // GetRules(req).then(res => {
+        //     data = res.data.data;
+        //     setFirstRuleList(data);  
+        // })
     }, [])
     
     window.onresize = () => {
