@@ -4,7 +4,7 @@
     import style from "../SearchPage/SearchPage.module.scss";
     import SearchItem from "./components/SearchItem";
     import HotList from "./components/HotList";
-    import {Input, Radio, AutoComplete, Button, message} from 'antd';
+    import {Input, Radio, AutoComplete, Button, message, Pagination} from 'antd';
     // import { Select } from 'antd';
     import SearchBar from '../components/SearchBar/SearchBar'
     import FooterInfo from '../components/FooterInfo/FooterInfo'
@@ -64,6 +64,22 @@
                 area: '广州市'
             }
         ])
+        const [showSearchList,setShowSearchList]=useState([
+            {
+                title:'岭南英杰工程”后备人才变动登记',
+                link:'#/v1/taskResult/11440100696927671X344211190900001',
+                content:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
+                date: '2021-11-22 16:56:22',
+                area: '广州市'
+            },
+            {
+                title:'出版专业技术人员职业资格（初级、中级）考试报名',
+                link:'#/v1/taskResult/11440100696927671X344211173600001',
+                content:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
+                date: '2021-10-15 18:54:21',
+                area: '广州市'
+            }
+        ])
         const [hotList,setHotList]=useState([
         ])
         const [inputValue,setInputValue]=useState('')
@@ -93,7 +109,7 @@
             GetSearchWord(data).then(res=>{
                 let keywordRes=res.data.data
                 let final=[]
-                if(keywordRes != null) {
+                if(keywordRes != null && keywordRes.length>0) {
                     keywordRes.map(item=>{final.push({value:item})})
                     console.log(final)
                     setKeywordList(final)
@@ -120,8 +136,9 @@
                 let searchRes=res.data.data
 
                 searchRes=washSearchData(searchRes)
-                console.log(searchRes)
+                console.log("search:",searchRes)
                 setSearchList(searchRes)
+                setShowSearchList(searchRes.slice(0,10))
             })
 
         }
@@ -149,6 +166,11 @@
                 console.log(res)
             })
 
+        }
+
+        const changePageNumber=(pageNumber)=>{
+            let show=searchList.slice(10*(pageNumber-1),10*pageNumber)
+            setShowSearchList(show)
         }
 
         function useDidUpdateEffect(fn, inputs) {  //初次渲染不执行的useEffect
@@ -206,7 +228,7 @@
                     </div>
                     <div className={style.mainContainer}>
                         <div className={style.searchListContainer}>
-                            {searchList.map((item)=>{
+                            {showSearchList.map((item)=>{
                                 return(
                                     <SearchItem content={item.content} link={item.link} title={item.title} date={item.area + " " + item.date} handler={addOneClick}></SearchItem>
                                 )
@@ -215,6 +237,9 @@
                         <div className={style.hotListContainer}>
                             <HotList wordList={hotList} handler={handleHotList}></HotList>
                         </div>
+                    </div>
+                    <div>
+                        <Pagination showQuickJumper showSizeChanger={false} defaultCurrent={1} total={searchList.length} onChange={changePageNumber}/>
                     </div>
                 </div>
             </div>
