@@ -21,7 +21,7 @@ export default function Orientation() {
 
     const getRegionInit = () => {
         req = {
-            region_level: 0
+            region_level: [0]
         }
         GetRegions(req).then(res => {
             setOptionList(res.data.data);
@@ -39,7 +39,7 @@ export default function Orientation() {
         } else {
             setIsRuleFinish(false);
             req = {
-                parentId: item.rule_id
+                parentId: [item.rule_id]
             }
             setRuleSelected(mainRule.filter((_, i) => i <= index));
             await GetRules(req).then(res => {
@@ -52,8 +52,8 @@ export default function Orientation() {
         setOptionList([]);
         setIsRegionFinish(false);
         req = {
-            rule_id: mainRule[mainRule.length-1].rule_id,
-            region_code: item.region_code
+            rule_id: [mainRule[mainRule.length-1].rule_id],
+            region_code: [item.region_code]
         }
         setRegionSelected(mainRegion.filter((_, i) => i <= index));
         await GetChildRegionsByRuleAndRegion(req).then(res => {
@@ -66,7 +66,7 @@ export default function Orientation() {
         if (!isRuleFinish) {
             setRuleSelected([...ruleSelected, item]);
             req = {
-                parentId: item.rule_id
+                parentId: [item.rule_id]
             }
             GetRules(req).then(res => {
                 data = res.data.data;
@@ -86,8 +86,8 @@ export default function Orientation() {
             } else {
                 setRegionSelected([...regionSelected, item]);
                 req = {
-                    rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-                    region_code: item.region_code
+                    rule_id: [ruleSelected[ruleSelected.length-1].rule_id],
+                    region_code: [item.region_code]
                 }
                 GetChildRegionsByRuleAndRegion(req).then(res => {
                     data = res.data.data;
@@ -100,10 +100,12 @@ export default function Orientation() {
     // 获取task_code并跳转
     const handleForTaskCode = (item) => {
         req = {
-            rule_id: ruleSelected[ruleSelected.length-1].rule_id,
-            region_code: item.region_code      
+            rule_id: [ruleSelected[ruleSelected.length-1].rule_id],
+            region_code: [item.region_code]      
         }
+        console.log("req: ", req);
         GetItems(req).then(res => {
+            console.log("res.data.data: ", res.data.data[0]);
             history.push({
                 pathname: "/v1/taskResult/" + res.data.data[0].task_code,
                 state: { 
@@ -133,7 +135,7 @@ export default function Orientation() {
                 tmpRuleSelected = location.state.ruleSelected;
                 setRuleSelected(tmpRuleSelected);
                 req = {
-                    parentId: tmpRuleSelected[0].rule_id
+                    parentId: [tmpRuleSelected[0].rule_id]
                 }
                 GetRules(req).then(res => {
                     setOptionList(res.data.data);

@@ -20,7 +20,6 @@ export default {
         qrcodeApp: imgPath + 'qrcode_app.jpg',       // 穗好办APP二维码
         qrcodeWeb: imgPath + 'qrcode_web.png',       // 人社局官网二维码
         // qrcodeWechat: imgPath + ''     // 人社局微信公众号二维码
-       
     },
 
     // 首页
@@ -32,6 +31,10 @@ export default {
         icSHBX: imgPath + 'ic_shbx.png',       // 社会保险图标
         icJYCY: imgPath + 'ic_jycy.png',        // 就业创业图标
         bannerPC: imgPath + 'banner_pc.jpg',
-        bannerMB: imgPath + 'banner_mb.png'
+        bannerMB: imgPath + 'banner_mb.png',
+        testImg: [
+            require('./imgs/banner_mb.png').default, 
+            imgPath + 'ic_shbx.png'
+        ]
     }
 }
