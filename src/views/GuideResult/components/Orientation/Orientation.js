@@ -28,7 +28,7 @@ export default function Orientation() {
             let taskCode = location.pathname.substring(subStartIndex);
             // 获取rule_id和region_id
             req = {
-                task_code: taskCode
+                task_code: [taskCode]
             }
             GetItems(req).then(res => {
                 let ruleId = res.data.data[0].rule_id;

@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './SearchBar.module.scss'
 import { Link, useHistory } from 'react-router-dom'
 import { message } from 'antd'
 import { Images } from '../../../assets'
+import { GetImages } from '../../../api/imageApi'
 
 export default function SearchBar() {
     const history = useHistory();
@@ -29,6 +30,25 @@ export default function SearchBar() {
             message.error('请输入咨询关键词');
         }
     }
+
+    const loadImg = (imgName) => {
+        let req = {
+            name: imgName
+        }
+        GetImages(req).then(res => {
+            console.log(res);
+            // var buf = res.data.data;
+            // var reader = new FileReader();
+            // buffer-> arraybuffer -> blob
+            // var b = new Blob([buf.buffer], {type:"img/png"});
+            // reader.readAsDataURL(res.data.data);
+        })
+    }
+
+    useEffect(() => {
+        loadImg('ic_logo.png');
+    }, [])
+
     return (
         <div className={style.outerShadow}>     
             <div className={style.container}>
