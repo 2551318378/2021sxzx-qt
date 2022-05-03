@@ -5,4 +5,10 @@ name = "javascript"
 enabled = true
 
   [analyzers.meta]
+  module_system = "es-modules"
+  environment = [
+    "browser",
+  ]
+
   plugins = ["react"]
+  style_guide = "standard"
