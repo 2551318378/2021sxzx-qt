@@ -31,29 +31,43 @@ export default function SearchBar() {
         }
     }
 
-    const loadImg = (imgName) => {
+    const loadImg = async (imgName) => {
         let req = {
             name: imgName
         }
-        GetImages(req).then(res => {
-            console.log(res);
-            // var buf = res.data.data;
-            // var reader = new FileReader();
-            // buffer-> arraybuffer -> blob
-            // var b = new Blob([buf.buffer], {type:"img/png"});
-            // reader.readAsDataURL(res.data.data);
+        await GetImages(req).then(res => {
+            var buf = new Buffer(res.data);
+            console.log(buf);
+            var b = new Blob([buf.buffer], {type: 'image/png'});
+            console.log(b);
+            var reader = new FileReader();
+            
+            reader.onload = () => {
+                console.log('onload: ', reader);
+                // createImg(reader.result);
+            }
+            reader.readAsDataURL(b);
         })
     }
 
+    const createImg = (url) => {
+        var img = document.createElement('img');
+        img.src = url;
+        document.body.appendChild(img);
+    }
+
     useEffect(() => {
-        loadImg('ic_logo.png');
+        // loadImg('ic_logo.png');
+        // console.log('1111');
+        // console.log(localStorage['ic_logo.png']);
+        // createImg(localStorage['ic_logo.png']);
     }, [])
 
     return (
         <div className={style.outerShadow}>     
             <div className={style.container}>
                 <Link to='/home'>
-                    <img src={Images.common.icPlaceholder} className={style.logo}></img>
+                    <img src={Images.common.icLogo} className={style.logo}></img>
                 </Link>
                 <Link to='/home'>
                     <div className={style.homepage}>首页</div>
