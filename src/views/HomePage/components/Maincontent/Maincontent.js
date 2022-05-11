@@ -105,18 +105,16 @@ export default function Maincontent() {
         }
     ]);
 
-
     const icLDBZ = Images.home.icLDBZ;
     const icRSRC = Images.home.icRSRC;
     const icSHBX = Images.home.icSHBX;
     const icJYCY = Images.home.icJYCY;
     const bannerPC = 'url(' + Images.home.bannerPC + ')';
     const bannerMB = 'url(' + Images.home.bannerMB + ')';
-    const banner = document.getElementById('banner');
+    const [bgSrc, setBgSrc] = useState(bannerPC);
 
     var w;
     var picSrc;
-    var bgSrc = bannerPC;
 
     /* 
         首页初始化：
@@ -136,12 +134,10 @@ export default function Maincontent() {
     window.onresize = () => {
         w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         if (w > 400 && bgSrc != bannerPC) {
-            bgSrc = bannerPC;
-            banner.style.backgroundImage = bgSrc;
+            setBgSrc(bannerPC);
         }
         if (w <= 400 && bgSrc != bannerMB) {
-            bgSrc = bannerMB;
-            banner.style.backgroundImage = bgSrc;
+            setBgSrc(bannerMB);
         }
     }
 

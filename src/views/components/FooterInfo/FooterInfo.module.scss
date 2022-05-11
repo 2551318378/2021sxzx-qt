@@ -121,6 +121,7 @@
 }
 @media screen and (max-width: 400px) {
     .container {
+        display: none;
         .contact {
             display: none;
         }
