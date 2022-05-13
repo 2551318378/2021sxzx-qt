@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Comment from './components/Comment/Comment.js'
 import style from './GuideResult.module.scss'
 import Guide from './components/Guide/Guide.js'
@@ -10,12 +10,13 @@ import SlideCS from '../components/SlideCS/SlideCS.js'
 
 
 export default function CommentPage() {
+    const [guideData,setGuideData]=useState()
   return (
     <div className={style.Container}>
       <SearchBar></SearchBar>
       <Orientation></Orientation>
-      <Guide></Guide>
-      <Comment></Comment>
+      <Guide setGuide={setGuideData}></Guide>
+      <Comment guideData={guideData}></Comment>
       <FooterInfo></FooterInfo>
       <SlideCS></SlideCS>
     </div>

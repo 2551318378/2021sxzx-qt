@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Rate, Input, message, Tag } from 'antd'
+import {Rate, Input, message, Tag, Col, Row} from 'antd'
 
 import style from './Comment.module.scss'
 import axios from '../../../../api/http'
@@ -9,7 +9,7 @@ const { TextArea } = Input
 
 const desc = ['非常不满意', '不满意', '基本满意', '满意', '非常满意']
 
-export default function Comment() {
+export default function Comment(props) {
 	const dispatch = useDispatch()
 
 	const [starValue, setStarValue] = useState(5)
@@ -46,7 +46,7 @@ export default function Comment() {
 					content: comment,
 					idc_type: '居民身份证',
 					score: starValue,
-					item_id: '430425200107050375X51564654',
+					item_id: props.guideData._id,
 				})
 				.then((res) => {
 					message.success('评论提交成功！')
@@ -58,7 +58,25 @@ export default function Comment() {
 					console.log(res)
 				})
 	}
-
+	const privateCommit=()=>{
+		axios
+			.post('/v1/comment', {
+				show_status: 0,
+				check_status: 0,
+				content: comment,
+				score: starValue,
+				item_id: props.guideData._id,
+			})
+			.then((res) => {
+				message.success('评论提交成功！')
+				dispatch({ type: 'UPDATE' })
+				setComment('')
+				setStarValue(5)
+			})
+			.catch((res) => {
+				console.log(res)
+			})
+	}
 	const fillTest = (e) => {
 		e.preventDefault()
 		setComment(comment + e.target.innerText)
@@ -100,9 +118,15 @@ export default function Comment() {
 						onChange={updateComment}
 					/>
 					{/* <div className={style.tips}>温馨提示：该评议只对办事指南内容是否规范、准确、清晰、合理等方面进行评议。</div> */}
-					<div className={`${style.btn} ${style.commit}`} onClick={commit}>
-						提&nbsp;&nbsp;交
+
+					<div className={`${style.btn} ${style.commit}`} onClick={privateCommit}>
+						匿名提交
 					</div>
+					<div className={`${style.btn} ${style.commit}`} onClick={commit}>
+						实名提交
+					</div>
+
+
 				</div>
 			</div>
 		</div>
