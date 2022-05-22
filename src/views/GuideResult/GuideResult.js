@@ -14,8 +14,8 @@ export default function CommentPage() {
   return (
     <div className={style.Container}>
       <SearchBar></SearchBar>
-      <Orientation></Orientation>
-      <Guide setGuide={setGuideData}></Guide>
+      <Orientation setGuide={setGuideData}></Orientation>
+      <Guide></Guide>
       <Comment guideData={guideData}></Comment>
       <FooterInfo></FooterInfo>
       <SlideCS></SlideCS>

@@ -68,7 +68,6 @@ export default function Guide(props) {
 		GetItemGuide({"task_code": pathname.slice(15)}).then(res => {
 			console.log(res.data.data)
 			setData(res.data.data);
-			props.setGuide(res.data.data)
 			if(res.data.data.windows !== null){
 				setLobbyInfo(res.data.data.windows[0]);
 			}else{
