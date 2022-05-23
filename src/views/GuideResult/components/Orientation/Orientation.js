@@ -4,7 +4,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 import { GetItems, GetRegionPaths, GetRulePaths } from '../../../../api/navigationApi'
 import { Spin } from 'antd'
 
-export default function Orientation() {
+export default function Orientation(props) {
     const hint = '您属于情况：';
     const subStartIndex = '/v1/taskResult/'.length;
     const location = useLocation();
@@ -33,7 +33,7 @@ export default function Orientation() {
             GetItems(req).then(res => {
                 let ruleId = res.data.data[0].rule_id;
                 let regionId = res.data.data[0].region_id;
-                
+                props.setGuide(res.data.data[0])
                 req = {
                     rule_id: [ruleId]
                 }

@@ -119,10 +119,10 @@ export default function Comment(props) {
 					/>
 					{/* <div className={style.tips}>温馨提示：该评议只对办事指南内容是否规范、准确、清晰、合理等方面进行评议。</div> */}
 
-					<div className={`${style.btn} ${style.commit}`} onClick={privateCommit}>
+					<div className={`${style.btn} ${style.commit}`} onClick={commit}>
 						匿名提交
 					</div>
-					<div className={`${style.btn} ${style.commit}`} onClick={commit}>
+					<div className={`${style.btn} ${style.commit}`} onClick={privateCommit}>
 						实名提交
 					</div>
 
