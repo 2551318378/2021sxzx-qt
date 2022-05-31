@@ -4,7 +4,7 @@
     import style from "../SearchPage/SearchPage.module.scss";
     import SearchItem from "./components/SearchItem";
     import HotList from "./components/HotList";
-    import {Input, Radio, AutoComplete, Button, message, Pagination} from 'antd';
+    import {Input, Radio, AutoComplete, Button, message, Pagination, Modal} from 'antd';
     // import { Select } from 'antd';
     import SearchBar from '../components/SearchBar/SearchBar'
     import FooterInfo from '../components/FooterInfo/FooterInfo'
@@ -47,6 +47,8 @@
         const [sortValue, setSortValue] = useState('score')
         const [contentValue, setContentValue] = useState('all')
         const [timeValue, setTimeValue] = useState('all')
+        const [areaModalVisible, setAreaModalVisible] = useState(false)
+        const [areaModalData, setAreaModalData] = useState({area:[]})
         const location=useLocation()
         const [searchList,setSearchList]=useState([
             {
@@ -70,14 +72,14 @@
                 link:'#/v1/taskResult/11440100696927671X344211190900001',
                 content:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
                 date: '2021-11-22 16:56:22',
-                area: '广州市'
+                area: []
             },
             {
                 title:'出版专业技术人员职业资格（初级、中级）考试报名',
                 link:'#/v1/taskResult/11440100696927671X344211173600001',
                 content:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
                 date: '2021-10-15 18:54:21',
-                area: '广州市'
+                area: []
             }
         ])
         const [hotList,setHotList]=useState([
@@ -134,8 +136,8 @@
 
             GetSearchRes(data).then((res)=>{
                 let searchRes=res.data.data
-
-                searchRes=washSearchData(searchRes)
+                //console.log(searchRes)
+                //searchRes=washSearchData(searchRes)
                 console.log("search:",searchRes)
                 setSearchList(searchRes)
                 setShowSearchList(searchRes.slice(0,10))
@@ -173,6 +175,24 @@
             setShowSearchList(show)
         }
 
+        const getAreaData=(data)=>{
+            setAreaModalData(data)
+            setAreaModalVisible(true)
+        }
+
+        const handleAreaModalOk=()=>{
+            setAreaModalVisible(false)
+        }
+
+        const handleAreaModalCancel=()=>{
+            setAreaModalVisible(false)
+        }
+
+        const handleClickItem=(link,title)=>{
+            addOneClick(title)
+            window.open(link, '_self');
+        }
+
         function useDidUpdateEffect(fn, inputs) {  //初次渲染不执行的useEffect
             const didMountRef = useRef(false);
             useEffect(() => {
@@ -202,48 +222,61 @@
             })
         },[])
         return (
-            <div className={style.container}>
-            <SearchBar></SearchBar>
-            <div className={style.SearchPageContainer}>
-                <div className={style.content}>
-                    <Input.Group compact className='inputGroup'>
-                        <span className='inputTitle'>全站搜索:</span>
-                        <AutoComplete
-                            className='autoComplete'
-                            placeholder="请输入搜索关键词"
-                            options={keywordList}
-                            size="large"
-                            onChange={inputOnChange}
-                            value={inputValue}/>
-                        <Button className='inputButton' size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
+            <>
+                <div className={style.container}>
+                    <SearchBar></SearchBar>
+                    <div className={style.SearchPageContainer}>
+                        <div className={style.content}>
+                            <Input.Group compact className='inputGroup'>
+                                <span className='inputTitle'>全站搜索:</span>
+                                <AutoComplete
+                                    className='autoComplete'
+                                    placeholder="请输入搜索关键词"
+                                    options={keywordList}
+                                    size="large"
+                                    onChange={inputOnChange}
+                                    value={inputValue}/>
+                                <Button className='inputButton' size="large" type="primary" onClick={e=>{handleSearch(inputValue)}}>搜索</Button>
 
-                    </Input.Group>
-                    <div className='searchOptionContainer'>
-                        <div className='subContainer'><Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
-                                buttonStyle="solid" className='searchOption'/></div>
-                        <div className='subContainer'><Radio.Group options={contentOptions} onChange={contentOnChange} value={contentValue} optionType="button"
-                                buttonStyle="solid" className='searchOption'/></div>
-                        <div className='subContainer'><Radio.Group options={timeOptions} onChange={timeOnChange} value={timeValue} optionType="button"
-                                buttonStyle="solid" className='searchOption'/></div>
-                    </div>
-                    <div className={style.mainContainer}>
-                        <div className={style.searchListContainer}>
-                            {showSearchList.map((item)=>{
-                                return(
-                                    <SearchItem content={item.content} link={item.link} title={item.title} date={item.area + " " + item.date} handler={addOneClick}></SearchItem>
-                                )
-                            })}
+                            </Input.Group>
+                            <div className='searchOptionContainer'>
+                                <div className='subContainer'><Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
+                                                                           buttonStyle="solid" className='searchOption'/></div>
+                                <div className='subContainer'><Radio.Group options={contentOptions} onChange={contentOnChange} value={contentValue} optionType="button"
+                                                                           buttonStyle="solid" className='searchOption'/></div>
+                                <div className='subContainer'><Radio.Group options={timeOptions} onChange={timeOnChange} value={timeValue} optionType="button"
+                                                                           buttonStyle="solid" className='searchOption'/></div>
+                            </div>
+                            <div className={style.mainContainer}>
+                                <div className={style.searchListContainer}>
+                                    {showSearchList.map((item)=>{
+                                        return(
+                                            <SearchItem data={item} handler={addOneClick} setAreaData={getAreaData}></SearchItem>
+                                        )
+                                    })}
+                                </div>
+                                <div className={style.hotListContainer}>
+                                    <HotList wordList={hotList} handler={handleHotList}></HotList>
+                                </div>
+                            </div>
+                            <div>
+                                <Pagination showQuickJumper showSizeChanger={false} defaultCurrent={1} total={searchList.length} onChange={changePageNumber}/>
+                            </div>
                         </div>
-                        <div className={style.hotListContainer}>
-                            <HotList wordList={hotList} handler={handleHotList}></HotList>
-                        </div>
                     </div>
-                    <div>
-                        <Pagination showQuickJumper showSizeChanger={false} defaultCurrent={1} total={searchList.length} onChange={changePageNumber}/>
-                    </div>
+                    <FooterInfo></FooterInfo>
                 </div>
-            </div>
-            <FooterInfo></FooterInfo>
-            </div>
+                <Modal title="请选择办事情景" visible={areaModalVisible} onOk={handleAreaModalOk} onCancel={handleAreaModalCancel}>
+                    {areaModalData.area.map(item=>{
+                        return(
+                            <>
+                                <Button onClick={()=>{handleClickItem(item.link,areaModalData.title)}}>{item.name}</Button>
+                            </>
+                        )
+                    })}
+                </Modal>
+            </>
+
+
         )
     }

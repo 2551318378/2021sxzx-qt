@@ -14,7 +14,7 @@ export default function Comment(props) {
 
 	const [starValue, setStarValue] = useState(5)
 	const [comment, setComment] = useState('')
-
+	const [commentBtnDisabled,setCommentBtnDisabled]=useState(false)
 	const [optionList, setOptionList] = useState([
 		'办理条件非常准确',
 		'申请流程非常清晰',
@@ -38,6 +38,7 @@ export default function Comment(props) {
 		setComment(e.target.value)
 	}
 	const commit = () => {
+			setCommentBtnDisabled(true)
 			axios
 				.post('/v1/comment', {
 					idc: '320425200107050375',
@@ -59,6 +60,7 @@ export default function Comment(props) {
 				})
 	}
 	const privateCommit=()=>{
+		setCommentBtnDisabled(true)
 		axios
 			.post('/v1/comment', {
 				show_status: 0,
@@ -119,10 +121,10 @@ export default function Comment(props) {
 					/>
 					{/* <div className={style.tips}>温馨提示：该评议只对办事指南内容是否规范、准确、清晰、合理等方面进行评议。</div> */}
 
-					<div className={`${style.btn} ${style.commit}`} onClick={commit}>
+					<div className={commentBtnDisabled?`${style.btn} ${style.commit}  ${style.disabled}`:`${style.btn} ${style.commit}`} onClick={commit}>
 						匿名提交
 					</div>
-					<div className={`${style.btn} ${style.commit}`} onClick={privateCommit}>
+					<div className={commentBtnDisabled?`${style.btn} ${style.commit}  ${style.disabled}`:`${style.btn} ${style.commit}`} onClick={privateCommit}>
 						实名提交
 					</div>
 
