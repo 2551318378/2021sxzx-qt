@@ -174,9 +174,14 @@
             setAreaModalVisible(false)
         }
 
-        const handleClickItem=(link,title)=>{
-            addOneClick(title)
-            window.open(link, '_self');
+        const handleClickItem=(item,title)=>{
+            if (item.children.area.length==0){
+                addOneClick(title)
+                window.open(item.link, '_self');
+            }else{
+                setAreaModalData(item.children)
+            }
+
         }
 
         function useDidUpdateEffect(fn, inputs) {  //初次渲染不执行的useEffect
@@ -256,7 +261,7 @@
                     {areaModalData.area.map(item=>{
                         return(
                             <>
-                                <Button onClick={()=>{handleClickItem(item.link,areaModalData.title)}}>{item.name}</Button>
+                                <Button onClick={()=>{handleClickItem(item,areaModalData.title)}}>{item.name}</Button>
                             </>
                         )
                     })}

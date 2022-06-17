@@ -2,9 +2,13 @@ import style from './SearchItem.module.scss'
 import {Button} from "antd";
 export default function SearchItem(props) {
 
-    const handleClickItem=(link,title)=>{
-        props.handler(title)
-        window.open(link, '_self');
+    const handleClickItem=(item,title)=>{
+        if (item.children.area.length==0){
+            props.handler(title)
+            window.open(item.link, '_self');
+        }else{
+            props.setAreaData(item.children)
+        }
     }
     return (
         <div className={style.container}>
@@ -29,7 +33,7 @@ export default function SearchItem(props) {
                                 key={item}
                                 onClick={() => {
                                     handleClickItem(
-                                        item.link,
+                                        item,
                                         props.data.title
                                     );
                                 }}
