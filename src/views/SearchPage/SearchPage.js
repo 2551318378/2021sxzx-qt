@@ -115,8 +115,8 @@
             let data={
                 keyword:value,
 
+                searchMode:"score",
                 contentMode:contentValue,
-                searchMode:sortValue,
                 timeFilter:timeValue
             }
 
@@ -231,8 +231,8 @@
 
                             </Input.Group>
                             <div className='searchOptionContainer'>
-                                <div className='subContainer'><Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
-                                                                           buttonStyle="solid" className='searchOption'/></div>
+                                {/* <div className='subContainer'><Radio.Group options={sortOptions} onChange={sortOnChange} value={sortValue} optionType="button"
+                                                                           buttonStyle="solid" className='searchOption'/></div> */}
                                 <div className='subContainer'><Radio.Group options={contentOptions} onChange={contentOnChange} value={contentValue} optionType="button"
                                                                            buttonStyle="solid" className='searchOption'/></div>
                                 <div className='subContainer'><Radio.Group options={timeOptions} onChange={timeOnChange} value={timeValue} optionType="button"
