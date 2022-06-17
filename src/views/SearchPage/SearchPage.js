@@ -50,38 +50,24 @@
         const [areaModalVisible, setAreaModalVisible] = useState(false)
         const [areaModalData, setAreaModalData] = useState({area:[]})
         const location=useLocation()
-        const [searchList,setSearchList]=useState([
+        const [searchList, setSearchList] = useState([
             {
-                title:'岭南英杰工程”后备人才变动登记',
-                link:'#/v1/taskResult/11440100696927671X344211190900001',
-                content:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
-                date: '2021-11-22 16:56:22',
-                area: '广州市'
+                title: "请输入咨询关键词",
+                link: "",
+                content: "",
+                date: "",
+                area: "",
             },
+        ]);
+        const [showSearchList, setShowSearchList] = useState([
             {
-                title:'出版专业技术人员职业资格（初级、中级）考试报名',
-                link:'#/v1/taskResult/11440100696927671X344211173600001',
-                content:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
-                date: '2021-10-15 18:54:21',
-                area: '广州市'
-            }
-        ])
-        const [showSearchList,setShowSearchList]=useState([
-            {
-                title:'岭南英杰工程”后备人才变动登记',
-                link:'#/v1/taskResult/11440100696927671X344211190900001',
-                content:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
-                date: '2021-11-22 16:56:22',
-                area: []
+                title: "请输入咨询关键词",
+                link: "",
+                content: "",
+                date: "",
+                area: [],
             },
-            {
-                title:'出版专业技术人员职业资格（初级、中级）考试报名',
-                link:'#/v1/taskResult/11440100696927671X344211173600001',
-                content:"1.劳动能力鉴定（确认）申请表收取原件（正本）1份1、A4规格；2.申请人签名或单位盖章……",
-                date: '2021-10-15 18:54:21',
-                area: []
-            }
-        ])
+        ]);
         const [hotList,setHotList]=useState([
         ])
         const [inputValue,setInputValue]=useState('')
