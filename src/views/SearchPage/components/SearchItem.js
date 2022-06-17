@@ -1,17 +1,49 @@
 import style from './SearchItem.module.scss'
+import {Button} from "antd";
 export default function SearchItem(props) {
 
+    const handleClickItem=(item,title)=>{
+        if (item.children.area.length==0){
+            props.handler(title)
+            window.open(item.link, '_self');
+        }else{
+            props.setAreaData(item.children)
+        }
+    }
     return (
-        <div className={style.container} >
-            <div className={style.title} onClick={e=>{props.handler(props.title)}}>
-                <a href={props.link}>{props.title}</a>
+        <div className={style.container}>
+            <div
+                className={style.title}
+                onClick={() => {
+                    props.setAreaData(props.data);
+                }}
+            >
+                {props.data.title}
             </div>
             <div className={style.content}>
-                {props.content}
+                <div>
+                    上级目录：
+                    {props.data.parent}
+                </div>
+                <div>
+                    可办地区：
+                    {props.data.area.map((item) => {
+                        return (
+                            <Button
+                                key={item}
+                                onClick={() => {
+                                    handleClickItem(
+                                        item,
+                                        props.data.title
+                                    );
+                                }}
+                            >
+                                {item.name}
+                            </Button>
+                        );
+                    })}
+                </div>
             </div>
-            <div className={style.date}>
-                {props.date}
-            </div>  
         </div>
-    )
+    );
 }

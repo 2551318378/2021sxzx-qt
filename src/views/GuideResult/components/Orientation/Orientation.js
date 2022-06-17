@@ -4,7 +4,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 import { GetItems, GetRegionPaths, GetRulePaths } from '../../../../api/navigationApi'
 import { Spin } from 'antd'
 
-export default function Orientation() {
+export default function Orientation(props) {
     const hint = '您属于情况：';
     const subStartIndex = '/v1/taskResult/'.length;
     const location = useLocation();
@@ -20,20 +20,24 @@ export default function Orientation() {
         2. 其他情况(只有task_code -> 获取事项列表)
     */
     useEffect(() => {
+        let taskCode = location.pathname.substring(subStartIndex);
+        // 获取rule_id和region_id
+        req = {
+            task_code: [taskCode]
+        }
         if (location.state) {
             setRuleSelected(location.state.ruleSelected);
             setRegionSelected(location.state.regionSelected);
+            GetItems(req).then(res => {
+                props.setGuide(res.data.data[0])
+            })
+
         } else {
             console.log(location.pathname.substring(subStartIndex));
-            let taskCode = location.pathname.substring(subStartIndex);
-            // 获取rule_id和region_id
-            req = {
-                task_code: [taskCode]
-            }
             GetItems(req).then(res => {
                 let ruleId = res.data.data[0].rule_id;
                 let regionId = res.data.data[0].region_id;
-                
+                props.setGuide(res.data.data[0])
                 req = {
                     rule_id: [ruleId]
                 }
@@ -48,16 +52,16 @@ export default function Orientation() {
                 GetRegionPaths(req).then(res => {
                     setRegionSelected(res.data.data[regionId]);
                 })
-            })    
+            })
         }
-    }, []) 
+    }, [])
 
     const handleClickStepRule = (item, index) => {
         history.push({
             pathname: '/navigation',
-            state: { 
-                nav_type: 1, 
-                ruleSelected: ruleSelected, 
+            state: {
+                nav_type: 1,
+                ruleSelected: ruleSelected,
                 regionSelected: regionSelected,
                 clickItem: item,
                 clickIndex: index
@@ -69,15 +73,15 @@ export default function Orientation() {
         if (index !== regionSelected.length-1) {
             history.push({
                 pathname: '/navigation',
-                state: { 
-                    nav_type: 2, 
-                    ruleSelected: ruleSelected, 
+                state: {
+                    nav_type: 2,
+                    ruleSelected: ruleSelected,
                     regionSelected: regionSelected,
                     clickItem: item,
                     clickIndex: index
                 }
             })
-        }  
+        }
     }
 
     return (
@@ -102,8 +106,8 @@ export default function Orientation() {
                 {
                     regionSelected&&regionSelected.map((item, index) => {
                         return (
-                            <div className={style.selectedBox} 
-                                key={index}>
+                            <div className={style.selectedBox}
+                                 key={index}>
                                 <div className={style.outer} onClick={handleClickStepRegion.bind(this, item, index)}>
                                     <div className={style.desc}>
                                         { item.region_name }

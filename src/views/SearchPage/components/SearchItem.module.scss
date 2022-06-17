@@ -9,11 +9,9 @@
     font-size: 20px;
     color: #027DB4;
     font-weight: 700;
+    cursor: pointer;
   }
   .content{
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
   }
   .date{
     margin-top: 10px;
@@ -36,6 +34,7 @@
       font-size: 20px;
       color: #027DB4;
       font-weight: 700;
+      cursor: pointer;
     }
     .content{
       overflow: hidden;

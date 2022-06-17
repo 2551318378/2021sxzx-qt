@@ -7,7 +7,7 @@ import { Table, Divider, Radio, Modal } from 'antd';
 import { Map, Marker, NavigationControl } from 'react-bmapgl';
 import { GetItemGuide } from '../../../../api/guideApi'
 
-export default function Guide() {
+export default function Guide(props) {
 
 	const { pathname } = useLocation();
 	const [data, setData] = useState({});

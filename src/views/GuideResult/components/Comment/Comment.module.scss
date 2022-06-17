@@ -99,6 +99,10 @@
         .commit{
           margin-top: 25px;
         }
+        .disabled{
+          cursor: no-drop;
+          pointer-events: none;
+        }
         .btn:hover{
           background: $theme-color;
         }

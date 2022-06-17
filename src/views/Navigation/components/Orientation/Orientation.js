@@ -21,7 +21,7 @@ export default function Orientation() {
 
     const getRegionInit = () => {
         req = {
-            region_level: [0]
+            parentId: ['']
         }
         GetRegions(req).then(res => {
             setOptionList(res.data.data);
